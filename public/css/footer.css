@@ -1,0 +1,40 @@
+.footer {
+    height: 400px;
+    background-color: white;
+}
+
+.footer-inner {
+display: flex;
+flex-direction: row;
+width: 1500px;
+height: 325px;
+margin: auto;
+}
+
+.footer-nav,
+.footer-socials,
+.footer-contact {
+    flex-grow: 1;
+    flex-basis: 0;
+    width: 33%;
+    padding-right: 30px;
+    padding-left: 30px;
+}
+
+.footer-nav,
+.footer-socials {
+    border-right: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.footer-nav ul {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    padding: unset;
+    justify-content: space-evenly;
+}
+
+.footer-nav ul a {
+    text-decoration: none;
+    color: black;
+}

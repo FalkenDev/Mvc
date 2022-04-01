@@ -1,0 +1,22 @@
+{# templates/inc/header.html.twig #}
+<!doctype html>
+<meta charset="utf-8">
+
+<link rel="stylesheet" href="css/header.css">
+<link rel="stylesheet" href="css/footer.css">
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/typography.css">
+<link rel="icon" type="image/x-icon" href="img/favicon.ico">
+<title>Mvc - Kafa21</title>
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=2.0;">
+
+<header class="Nav">
+    <ul>
+        <li><a href="{{ path("home") }}">Home</a></li>
+        <li><a href="{{ path("about") }}">About</a></li>
+        <li><a href="{{ path("report") }}">Report</a></li>
+    </ul>
+    <div class="logo">
+        <img src="img/FalkenDevLogo.png"  alt="logo">
+    </div>
+</header>
