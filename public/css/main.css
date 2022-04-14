@@ -9,3 +9,53 @@ section {
     min-height: 600px;
     width: 600px;
 }
+
+.deck-section {
+    width: 1200px;
+    margin: auto;
+}
+.deck {
+    display: flex;
+    flex-wrap: wrap;
+}
+.card-display {
+    border: 1px solid black;
+    height: 150px;
+    width: 100px;
+    margin: 5px;
+}
+
+.suite-right,
+.value-right { 
+    margin-right: 8px;
+    transform: rotate(-180deg);
+}
+
+
+.suite-main {
+    font-size: 80px;
+    text-align: center;
+    height: 68px; 
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+
+.value-left,
+.suite-left {
+    margin-left: 8px;
+}
+
+.value-left {
+    margin-top: 5px;
+}
+
+.♠,
+.♣ {
+    color: black;
+}
+
+.♦,
+.♥ {
+    color: red;
+}
+
