@@ -1,0 +1,12 @@
+{% include "inc/header.html.twig" %}
+<body>
+    <section class="home-card">
+        <h1>Kort-sidan</h1>
+        <ul>
+        <li><a href="{{ path("deck") }}">Show Deck</a></li>
+        <li><a href="{{ path("about") }}">Shuffle Deck</a></li>
+        <li><a href="{{ path("report") }}">Draw cards</a></li>
+    </ul>
+    </section>
+    {% include "inc/footer.html.twig" %}
+</body>
