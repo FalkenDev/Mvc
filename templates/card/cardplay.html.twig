@@ -1,0 +1,27 @@
+{% include "inc/header.html.twig" %}
+<body>
+    <section class="deck-section">
+        {% block content %}
+        <h1>The Whole Deck</h1>
+        <h2>Cards left: {{ draws }}</h2>
+        <div class="player">
+        {% for i in  1..numPlayers %}
+            <h2>Player {{ i }}</h2>
+            <div class="deck">
+                {% for card in pHands[i - 1] %}
+                    <div class="card-display {{card.get_suite}}">
+                        <div class="value-left">{{ card.get_value() }}</div>
+                        <div class="suite-left">{{ card.get_suite() }}</div>
+                        <div class="suite-main">{{ card.get_suite() }}</div>
+                        <div class="suite-right">{{ card.get_suite() }}</div>
+                        <div class="value-right">{{ card.get_value() }}</div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+        </div>
+        {% endblock %}
+    </section>
+
+    {% include "inc/footer.html.twig" %}
+</body>
