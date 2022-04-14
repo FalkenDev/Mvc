@@ -1,0 +1,25 @@
+{% include "inc/header.html.twig" %}
+<body>
+    <section class="deck-section">
+        {% block content %}
+        <h1>Draw a card from the deck</h1>
+        <h2> Antal kort kvar: {{ draws }}</h2>
+        <h2>you gor card:</h2>
+        <div class="deck">
+            {% for card in deck %}
+                <div class="card-display {{ card.get_suite }}">
+                    <div class="value-left">{{ card.get_value }}</div>
+                    <div class="suite-left">{{ card.get_suite }}</div>
+                    <div class="suite-main">{{ card.get_suite }}</div>
+                    <div class="suite-right">{{ card.get_suite }}</div>
+                    <div class="value-right">{{ card.get_value }}</div>
+                </div>
+            {% endfor %}
+        </div>
+
+
+        {% endblock %}
+    </section>
+
+    {% include "inc/footer.html.twig" %}
+</body>
