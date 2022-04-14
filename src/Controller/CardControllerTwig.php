@@ -45,6 +45,13 @@ class CardControllerTwig extends AbstractController
      */
     public function shuffle(): Response
     {
-        return $this->render('card/shuffle.html.twig');
+        $die = new \App\Card\Deck();
+        $die->decks();
+        $die = $die->shuffle_deck();
+        $data = [
+            'title' => "Deck of cards",
+            'deck' => $die
+        ];
+        return $this->render('card/shuffle.html.twig', $data);
     }
 }
