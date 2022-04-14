@@ -25,4 +25,10 @@ class Deck
     {
         return $this->deck;
     }
+
+    public function shuffle_deck(): array
+    {
+        shuffle($this->deck);
+        return $this->deck;
+    }
 }
