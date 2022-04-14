@@ -2,7 +2,7 @@
 <body>
     <section class="deck-section">
         {% block content %}
-        <h1>The Whole Deck</h1>
+        <h1>The Whole Deck As Shuffled</h1>
         <div class="deck">
             {% for card in deck %}
             <div class="card-display {{card.get_suite}}">
