@@ -2,13 +2,13 @@
 <body>
     <section class="deck-section">
         {% block content %}
-        <h1>The Whole Deck</h1>
+        <h1>{{ title }}</h1>
         <div class="deck">
             {% for card in deck %}
             <div class="card-display {{card.get_suite}}">
                 <div class="value-left">{{ card.get_value() }}</div>
                 <div class="suite-left">{{ card.get_suite() }}</div>
-                <div class="suite-main">{{ card.get_suite() }}</div>
+                <div class="suite-main main-{{ card.get_suite }}">{{ card.get_suite() }}</div>
                 <div class="suite-right">{{ card.get_suite() }}</div>
                 <div class="value-right">{{ card.get_value() }}</div>
             </div>
