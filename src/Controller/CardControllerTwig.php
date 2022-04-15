@@ -27,7 +27,7 @@ class CardControllerTwig extends AbstractController
         $die = new \App\Card\Deck();
         $die = $die->show_deck();
         $data = [
-            'title' => "Deck of cards",
+            'title' => "Whole deck",
             'deck' => $die
         ];
         return $this->render('card/deck.html.twig', $data);
@@ -57,7 +57,6 @@ class CardControllerTwig extends AbstractController
         $session->set("draw", $draw);
 
         $data = [
-            'title' => "Deck of cards",
             'deck' => $draw,
             'draws' => count($die->show_deck())
         ];
@@ -76,7 +75,6 @@ class CardControllerTwig extends AbstractController
         if (count($die->show_deck()) < $numDraw )
         {
             $data = [
-                'title' => "Deck of cards",
                 'deck' => $session->get("draw"),
                 'draws' => count($die->show_deck())
             ];
@@ -88,7 +86,6 @@ class CardControllerTwig extends AbstractController
         $session->set("draw", $draw);
 
         $data = [
-            'title' => "Deck of cards",
             'deck' => $draw,
             'draws' => count($die->show_deck())
         ];
@@ -106,7 +103,6 @@ class CardControllerTwig extends AbstractController
         $die = $session->get("deck") ?? new \App\Card\Deck();
         $die = $die->shuffle_deck();
         $data = [
-            'title' => "Deck of cards",
             'deck' => $die
         ];
         return $this->render('card/shuffle.html.twig', $data);
@@ -129,11 +125,28 @@ class CardControllerTwig extends AbstractController
         };
 
         $data = [
-            'title' => "Deck of cards",
             'numPlayers' => $players,
             'pHands' => $pHands,
             'draws' => count($die->show_deck())
         ];
         return $this->render('card/cardplay.html.twig', $data);
+    }
+
+    /**
+     * @Route("/card/deck2", name="deckWithJoker")
+     */
+    public function deck2(): Response
+    {
+        $die = new \App\Card\DeckWith2Jokers();
+        $joker = $die->add2Joker();
+        $die = $die->show_deck();
+        for ($i = 0; $i < 2; $i++) {
+            array_push($die, $joker[$i]);
+        }
+        $data = [
+            'title' => "Whole deck with 2 jokers",
+            'deck' => $die
+        ];
+        return $this->render('card/deck.html.twig', $data);
     }
 }
