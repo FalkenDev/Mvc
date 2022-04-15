@@ -58,4 +58,14 @@ section {
 .♥ {
     color: red;
 }
+.♠.♥.♣.♦ {
+    color: black;
+}
+.main-♠.♥.♣.♦ {
+    font-size: 24px;
+    width: 50px;
+    margin: auto;
+    padding-top: 5px;
+    color: black;
+}
 
