@@ -27,7 +27,7 @@ section {
 
 .suite-right,
 .value-right { 
-    margin-right: 8px;
+    margin-right: 9px;
     transform: rotate(-180deg);
 }
 
@@ -42,7 +42,7 @@ section {
 
 .value-left,
 .suite-left {
-    margin-left: 8px;
+    margin-left: 9px;
 }
 
 .value-left {
