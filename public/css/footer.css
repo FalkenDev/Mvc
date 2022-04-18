@@ -1,14 +1,15 @@
 .footer {
+    border-top: 1px solid black;
     height: 400px;
     background-color: white;
 }
 
 .footer-inner {
-display: flex;
-flex-direction: row;
-width: 1500px;
-height: 325px;
-margin: auto;
+    display: flex;
+    flex-direction: row;
+    width: 1500px;
+    height: 325px;
+    margin: auto;
 }
 
 .footer-nav,
