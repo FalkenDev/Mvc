@@ -1,0 +1,28 @@
+{% include "inc/header.html.twig" %}
+<body class="body-bj-color">
+    <h2 class="bj-title">Blackjack</h2>
+    <section class="blackjack-table">
+        <div class="dealer-section">
+            <h2>Dealer</h2>
+            <div class="dealer-cards div-card">
+            
+            </div>
+            <div class="points">
+                <p>Dealer have: () points</p>
+            </div>
+        </div>
+        <div class="player-section">
+            <h2>Player</h2>
+            <div class="player-cards div-card">
+
+            </div>
+            <div class="points">
+                <p>You have: () points</p>
+            </div>
+            <input type="submit" name="hit" value="Hit">
+            <input type="submit" name="stand" value="Stand">
+        </div>
+    </section>
+
+    {% include "inc/footer.html.twig" %}
+</body>
