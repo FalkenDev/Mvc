@@ -1,0 +1,55 @@
+.body-bj-color {
+    background:linear-gradient(180deg, #2D6748 0%, rgba(61, 237, 33, 0.55) 49.48%, #327350 100%);
+}
+
+.blackjack-info {
+    height: 650px;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    padding: 20px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    background-color:greenyellow;
+}
+
+.blackjack-info h2 {
+    text-align: center;
+    font-size: 40px;
+}
+
+.blackjack-info p {
+    text-align: left;
+    font-size: 20px;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.startbtn {
+    border: 1px solid black;
+    background: white;
+    padding: 15px 30px 15px 30px;
+    font-size: 20px;
+    text-decoration: none;
+    color: black;
+}
+
+.blackjack-table {
+    margin-bottom: 50px;
+    background:linear-gradient(180deg, #2D6748 0%, rgba(61, 237, 33, 0.55) 49.48%, #327350 100%);
+    height: 800px;
+    width: 1600px;
+    border: 1px solid black;
+    text-align: center;
+}
+
+.bj-title {
+    text-align: center;
+    font-size: 40px;
+}
+
+.dealer-section {
+    height: 50%;
+}
+
+.div-card {
+    height: 200px;
+}
