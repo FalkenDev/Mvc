@@ -50,16 +50,28 @@ class GameControllerTwig extends AbstractController
 
         // Get sessions if not exists then give the variable a empty array
         $playerHand = $session->get("playerHand") ?? [];
+        $playerScore = $die->returnScore($playerHand);
+        $bust = $die->checkBust($playerScore);
+
         $dealerHand = $session->get("dealerHand") ?? [];
-        print_r($dealerHand);
-        print_r($die->returnScore($playerHand));
+        $dealerScore = $die->returnScore($dealerHand);
+        print_r($dealerScore);
+        print_r($playerScore);
+
+        $winner = $session->get("winner") ?? "";
+        $this->addFlash("Winner", $winner);
+        if($bust) {
+            $this->addFlash("Bust", "You have BUST, Dealer wins!");
+        }
 
         $data = [
             'playerHand' => $playerHand,
-            'playerScore' => $die->returnScore($playerHand),
+            'playerScore' => $playerScore,
             'dealerHand'=> $dealerHand,
-            'dealerScore' => $die->returnScore($dealerHand),
+            'dealerScore' => $dealerScore,
             'draws' => count($die->show_deck()),
+            'stand' => $session->get("stand") ?? false,
+            'bust' => $bust
         ];
 
         return $this->render('game/game.html.twig', $data);
@@ -92,7 +104,9 @@ class GameControllerTwig extends AbstractController
         if($hit) {
             $playerHand = $die->drawCardToPlayer(1);
         } elseif ($stand) {
-            $dealerHand = $die->drawStandDealer();  
+            $dealerHand = $die->drawStandDealer();
+            $session->set("winner", $die->checkWinner($playerHand, $dealerHand));
+            $session->set("stand", true);
         }
 
         // Set all the sessions
