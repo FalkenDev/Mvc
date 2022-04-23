@@ -2,26 +2,78 @@
 <body class="body-bj-color">
     <h2 class="bj-title">Blackjack</h2>
     <section class="blackjack-table">
+        <h2> Antal kort kvar: {{ draws }}</h2>
+        {% block content %}
         <div class="dealer-section">
             <h2>Dealer</h2>
-            <div class="dealer-cards div-card">
-            
+            <div class="dealer-cards bj-div-card deck bj-card">
+                {% for card in dealerHand %}
+                    <div class="card-display {{card.get_suite}}">
+                        <div class="value-left bj-left-card">{{ card.get_value() }}</div>
+                        <div class="suite-left bj-left-card">{{ card.get_suite() }}</div>
+                        <div class="suite-main main-{{ card.get_suite }} bj-main-card">{{ card.get_suite() }}</div>
+                        <div class="suite-right bj-right-card">{{ card.get_suite() }}</div>
+                        <div class="value-right bj-right-card">{{ card.get_value() }}</div>
+                    </div>
+                {% endfor %}
             </div>
             <div class="points">
-                <p>Dealer have: () points</p>
+                {% if dealerScore[0] is same as(dealerScore[1]) or dealerScore[0] is same as(21) %}
+                    <p>Dealer have: {{dealerScore[0]}} points</p>
+                {% elseif dealerScore[0] > dealerScore[1] and dealerScore[0] > 21 %}
+                    <p>Dealer have: {{dealerScore[1]}} points</p>
+                {% else %}
+                    <p>Dealer have: {{dealerScore[0]}}/{{dealerScore[1]}} points</p>
+                {% endif %}
             </div>
+        </div>
+        <div class="result">
+            {{ include('game/flash-message.html.twig') }}
         </div>
         <div class="player-section">
             <h2>Player</h2>
-            <div class="player-cards div-card">
-
+            <div class="player-cards bj-div-card deck bj-card">
+                {% for card in playerHand %}
+                    <div class="card-display {{card.get_suite}}">
+                        <div class="value-left bj-left-card">{{ card.get_value() }}</div>
+                        <div class="suite-left bj-left-card">{{ card.get_suite() }}</div>
+                        <div class="suite-main main-{{ card.get_suite }} bj-main-card">{{ card.get_suite() }}</div>
+                        <div class="suite-right bj-right-card">{{ card.get_suite() }}</div>
+                        <div class="value-right bj-right-card">{{ card.get_value() }}</div>
+                    </div>
+                {% endfor %}
             </div>
             <div class="points">
-                <p>You have: () points</p>
+                {% if playerScore[0] is same as(playerScore[1]) or playerScore[0] is same as(21) %}
+                    <p>You have: {{playerScore[0]}} points</p>
+                {% elseif playerScore[0] > playerScore[1] and playerScore[0] > 21 %}
+                    <p>You have: {{playerScore[1]}} points</p>
+                {% else %}
+                    <p>You have: {{playerScore[0]}}/{{playerScore[1]}} points</p>
+                {% endif %}
             </div>
-            <input type="submit" name="hit" value="Hit">
-            <input type="submit" name="stand" value="Stand">
+            <form method="post">
+                {% if stand is same as(true) or bust is same as(true) %}
+                    <input type="submit" name="hit" value="Hit" disabled>
+                    <input type="submit" name="stand" value="Stand" disabled>
+                {% elseif playerScore[0] is same as(21) or playerScore[1] is same as(21) %}
+                    <input type="submit" name="hit" value="Hit" disabled>
+                    <input type="submit" name="stand" value="Stand">
+                {% elseif playerScore[0] is same as(0) %}
+                    <input type="submit" name="hit" value="Hit">
+                    <input type="submit" name="stand" value="Stand" disabled>
+                {% else %}
+                    <input type="submit" name="hit" value="Hit">
+                    <input type="submit" name="stand" value="Stand">
+                {% endif %}
+                {% if stand is same as(true) or playerScore[0] > 21 or playerScore[1] > 21 %}
+                    <input type="submit" name="clear" value="Restart">
+                {% else %}
+                    <input type="submit" name="clear" value="Restart" disabled>
+                {% endif %}
+            </form>
         </div>
+        {% endblock %}
     </section>
 
     {% include "inc/footer.html.twig" %}
