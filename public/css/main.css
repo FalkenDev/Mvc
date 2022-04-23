@@ -70,3 +70,28 @@ section {
     color: black;
 }
 
+.bj-card {
+    justify-content: center;
+}
+
+.bj-left-card{
+    margin-left: -70px;
+}
+
+.bj-right-card{
+    margin-right: -70px;
+}
+
+.bj-main-card {
+    margin-right: 2px;
+}
+
+input {
+    width: 100px;
+    height: 35px;
+}
+
+.bj-div-card {
+    height: 162px;
+}
+
