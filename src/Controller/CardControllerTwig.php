@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -42,8 +43,7 @@ class CardControllerTwig extends AbstractController
     ): Response {
         $numDraw = 1;
         $die = $session->get("deck") ?? new \App\Card\Deck();
-        if (count($die->show_deck()) < 1)
-        {
+        if (count($die->show_deck()) < 1) {
             $data = [
                 'title' => "Deck of cards",
                 'deck' => $session->get("draw"),
@@ -72,8 +72,7 @@ class CardControllerTwig extends AbstractController
         SessionInterface $session
     ): Response {
         $die = $session->get("deck") ?? new \App\Card\Deck();
-        if (count($die->show_deck()) < $numDraw )
-        {
+        if (count($die->show_deck()) < $numDraw) {
             $data = [
                 'deck' => $session->get("draw"),
                 'draws' => count($die->show_deck())
