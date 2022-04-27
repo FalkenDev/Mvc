@@ -14,7 +14,6 @@ class Deck
     {
         $this->deck = $deck;
         foreach ($this->suits as $suit) {
-
             foreach ($this->values as $value) {
                 $this->deck[] = new Cards($value, $suit);
             }
@@ -36,8 +35,7 @@ class Deck
     public function draw(int $numDraw)
     {
         $random_card = array_rand($this->deck, $numDraw);
-        for ($i = 1; $i <= $numDraw; $i++)
-        {
+        for ($i = 1; $i <= $numDraw; $i++) {
             if (is_array($random_card)) {
                 $card[] = $this->deck[$random_card[$i - 1]];
                 unset($this->deck[$random_card[$i - 1]]);

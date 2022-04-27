@@ -13,16 +13,17 @@ class Cards
     {
         $this->value = $value;
         $this->suite = $suits;
-        
     }
 
     // Get value function
-    public function get_value() : string {
+    public function get_value(): string
+    {
         return $this->value;
     }
-    
+
     // Get suite function
-    public function get_suite() : string {
+    public function get_suite(): string
+    {
         return $this->suite;
     }
 }

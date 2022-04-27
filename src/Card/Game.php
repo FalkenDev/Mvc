@@ -10,35 +10,44 @@ class Blackjack extends Deck
     private array $dealerHand = [];
     private array $playerHand = [];
 
-    // Buiding the deck from the variables insert into the deck
+    /**
+     * Draws card to dealer if player hit stand button
+     */
     public function __construct()
     {
         parent::__construct();
     }
 
-    public function drawCardToPlayer(int $amount) {
+    /**
+     * Draws card to dealer if player hit stand button
+     */
+    public function drawCardToPlayer(int $amount)
+    {
         // Draws card to player
         $card = parent::draw($amount);
-        print_r($card);
         array_push($this->playerHand, $card[0]);
         return $this->playerHand;
     }
 
-    public function drawCardToDealer(int $amount) {
+    /**
+     * Draws card to dealer if player hit stand button
+     */
+    public function drawCardToDealer(int $amount)
+    {
         // Draws card to dealer
         $card = parent::draw($amount);
         array_push($this->dealerHand, $card[0]);
         return $this->dealerHand;
     }
 
-    /*
+    /**
      * Draws card to dealer if player hit stand button
      */
-    public function drawStandDealer() {
+    public function drawStandDealer()
+    {
         $scoreList = $this->returnScore($this->dealerHand);
         $AceScore = 0;
-        if ($scoreList[0] === $scoreList[1])
-        {
+        if ($scoreList[0] === $scoreList[1]) {
             $prevCardValue;
             $score = $scoreList[0];
             while ($score < 17) {
@@ -49,7 +58,7 @@ class Blackjack extends Deck
                 $scoreListNew = $this->returnScore($this->dealerHand);
                 if ($cardValue === "A" and $score > 10) {
                     $AceScore = -10;
-                } elseif($prevCardValue === "A" and $score > 10) {
+                } elseif ($prevCardValue === "A" and $score > 10) {
                     $AceScore = -10;
                 } else {
                     $AceScore = 0;
@@ -59,12 +68,10 @@ class Blackjack extends Deck
             }
 
             if ($scoreListNew[0] > 21 and $scoreListNew[1] < 21) {
-                $prevCardValue;
                 $score1 = $scoreList[1];
                 while ($score1 < 17) {
                     $card = parent::draw(1);
                     $cardValue = $card[0]->get_value();
-                    $prevCardValue = $cardValue;
                     array_push($this->dealerHand, $card[0]);
                     $scoreListNew = $this->returnScore($this->dealerHand);
                     $score1 = $scoreListNew[1];
@@ -94,10 +101,11 @@ class Blackjack extends Deck
         return $this->dealerHand;
     }
 
-    /*
+    /**
      * Get total score for the hand and returns it
      */
-    public function returnScore($hand) {
+    public function returnScore($hand)
+    {
         $points = 0;
         $aces = 0;
         foreach ($hand as $card) {
@@ -117,10 +125,11 @@ class Blackjack extends Deck
         return [$points, $pointsIfAce];
     }
 
-    /*
+    /**
      * Returns total points minus 10 (ace is 1 point in this function)
      */
-    public function returnScoreAce($score, $amountAce) {
+    public function returnScoreAce($score, $amountAce)
+    {
         for ($x = 0; $x < $amountAce; $x++) {
             $score += -10;
         }
@@ -128,11 +137,12 @@ class Blackjack extends Deck
         return $score;
     }
 
-    /*
+    /**
      * Check if both score is over 21.
      * Returns true if both is over 21 else false
      */
-    public function checkBust($score) {
+    public function checkBust($score)
+    {
         $bust = false;
         if ($score[0] > 21 and $score[1] > 21) {
             $bust = true;
@@ -141,11 +151,12 @@ class Blackjack extends Deck
         return $bust;
     }
 
-    /*
+    /**
      * Check if a hand have ace in it.
      * Returns true if it has else false.
      */
-    public function hasAce($hand) {
+    public function hasAce($hand)
+    {
         $hasAce = false;
         foreach ($hand as $card) {
             $cardValue = $card->get_value();
@@ -157,11 +168,12 @@ class Blackjack extends Deck
         return $hasAce;
     }
 
-    /*
+    /**
      * Check who is the winner.
      * Checking both if has aces or no aces.
      */
-    public function checkWinner($player, $dealer) {
+    public function checkWinner($player, $dealer)
+    {
         $playerScore = $this->returnScore($player);
         $playerHasAce = $this->hasAce($player);
         $playerSecondScore = false;
@@ -171,13 +183,13 @@ class Blackjack extends Deck
         $dealerSecondScore = false;
 
         if ($dealerHasAce) {
-            if($dealerScore[0] > 21) {
+            if ($dealerScore[0] > 21) {
                 $dealerSecondScore = true;
             }
         }
 
         if ($playerHasAce) {
-            if($playerScore[0] > 21) {
+            if ($playerScore[0] > 21) {
                 $playerSecondScore = true;
             }
         }

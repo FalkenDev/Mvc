@@ -11,7 +11,8 @@ class DeckWith2Jokers extends Deck
         parent::__construct();
     }
 
-    public function add2Joker() {
+    public function add2Joker()
+    {
         $array = [];
         for ($i = 1; $i < 3; $i++) {
             $card = new Cards("Joker", "♠ ♥ ♣ ♦");
