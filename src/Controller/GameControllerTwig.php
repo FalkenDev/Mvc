@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -60,7 +61,7 @@ class GameControllerTwig extends AbstractController
 
         $winner = $session->get("winner") ?? "";
         $this->addFlash("Winner", $winner);
-        if($bust) {
+        if ($bust) {
             $this->addFlash("Bust", "You have BUST, Dealer wins!");
         }
 
@@ -101,7 +102,7 @@ class GameControllerTwig extends AbstractController
         $dealerHand = $session->get("dealerHand") ?? $die->drawCardToDealer(1);
 
         // Buttons ( If press hit or stand )
-        if($hit) {
+        if ($hit) {
             $playerHand = $die->drawCardToPlayer(1);
         } elseif ($stand) {
             $dealerHand = $die->drawStandDealer();
@@ -115,7 +116,7 @@ class GameControllerTwig extends AbstractController
         $session->set("blackjack", $die);
 
         // Temporary
-        if($clear) {
+        if ($clear) {
             $session->clear();
         }
 
