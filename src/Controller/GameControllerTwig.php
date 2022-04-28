@@ -56,8 +56,6 @@ class GameControllerTwig extends AbstractController
 
         $dealerHand = $session->get("dealerHand") ?? [];
         $dealerScore = $die->returnScore($dealerHand);
-        print_r($dealerScore);
-        print_r($playerScore);
 
         $winner = $session->get("winner") ?? "";
         $this->addFlash("Winner", $winner);
