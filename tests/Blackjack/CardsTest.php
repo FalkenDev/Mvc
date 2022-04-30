@@ -10,8 +10,11 @@ use PHPUnit\Framework\TestCase;
 class CardsTest extends TestCase
 {
     /**
-     * Construct object and verify that the object has the expected
-     * properties, use no arguments.
+     * Test to construct a card work.
+     * Input value 2 and suite ♥ into Cards
+     *
+     * Look up if $die is an instance of \App\Card\Cards.
+     * Look up if $resValue and $resSuite is a string from get_value and get_suite method.
      */
     public function testCreateCard()
     {
