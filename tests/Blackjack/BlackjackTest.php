@@ -60,9 +60,8 @@ class BlackjackTest extends TestCase
         // Gives score 13 and have 1 ace
         $totalScoreAfterAce = $die->returnScoreAce($score, $ace);
 
-        // Test if score 
+        // Test if score
         $this->assertLessThan(13, $totalScoreAfterAce);
-
     }
 
     public function testReturnScoreWorks()

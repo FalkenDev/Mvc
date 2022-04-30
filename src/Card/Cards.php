@@ -4,7 +4,7 @@ namespace App\Card;
 
 /**
  * Cards Class.
- * 
+ *
  * @author Kasper Falk
  * @access public
  */
@@ -15,10 +15,10 @@ class Cards
 
     /**
      * Constructing card from value and suits
-     * 
+     *
      * @param string $value The card value.
      * @param string $suits The card suite.
-     * 
+     *
      * @return void
      */
     public function __construct(string $value, string $suits)
@@ -29,7 +29,7 @@ class Cards
 
     /**
      * Gets the card value
-     * 
+     *
      * @return string $value
      */
     public function get_value(): string
@@ -39,7 +39,7 @@ class Cards
 
     /**
      * Gets the card suite
-     * 
+     *
      * @return string $suite
      */
     public function get_suite(): string

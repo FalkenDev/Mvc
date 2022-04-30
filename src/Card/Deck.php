@@ -4,7 +4,7 @@ namespace App\Card;
 
 /**
  * Deck Class.
- * 
+ *
  * @author Kasper Falk
  * @access private
  */
@@ -17,14 +17,12 @@ class Deck
     /**
      * Buiding the deck from the variables insert into the deck
      * Calling Cards class to build the cards.
-     * 
-     * @param array $deck
-     * 
+     *
      * @return void
      */
-    public function __construct(array $deck = [])
+    public function __construct()
     {
-        $this->deck = $deck;
+        $this->deck = [];
         foreach ($this->suits as $suit) {
             foreach ($this->values as $value) {
                 $this->deck[] = new Cards($value, $suit);
@@ -34,7 +32,7 @@ class Deck
 
     /**
      * Show the whole deck (pack of cards).
-     * 
+     *
      * @return array $deck
      */
     public function show_deck(): array
@@ -44,7 +42,7 @@ class Deck
 
     /**
      * Shuffle the deck.
-     * 
+     *
      * @return array $deck Shuffled deck.
      */
     public function shuffle_deck(): array
@@ -55,9 +53,9 @@ class Deck
 
     /**
      * draw a card from the deck.
-     * 
+     *
      * @param int $numDraw Amount of cards to draw
-     * @return array $card.
+     * @return array $card
      */
     public function draw(int $numDraw)
     {
@@ -71,6 +69,7 @@ class Deck
                 unset($this->deck[$random_card]);
             }
         }
-        return $card;
+
+        return $card ?? [];
     }
 }

@@ -4,7 +4,7 @@ namespace App\Card;
 
 /**
  * Blackjack Class.
- * 
+ *
  * Inherits from Deck class.
  * @author Kasper Falk
  * @access private
@@ -12,7 +12,6 @@ namespace App\Card;
 class Blackjack extends Deck
 {
     private array $deck = [];
-
     private array $dealerHand = [];
     private array $playerHand = [];
 
@@ -20,7 +19,7 @@ class Blackjack extends Deck
      * Construct method.
      * Creating pack of cards for Blackjack game.
      * Using Deck class construction.
-     * 
+     *
      * @return void
      */
     public function __construct()
@@ -31,9 +30,9 @@ class Blackjack extends Deck
     /**
      * Draws card to player.
      * draw method is from Deck class.
-     * 
+     *
      * @param int $amount Amount cards to draw.
-     * @return $playerHand
+     * @return $this->playerHand
      */
     public function drawCardToPlayer(int $amount)
     {
@@ -46,9 +45,9 @@ class Blackjack extends Deck
     /**
      * Draws card to dealer.
      * draw method is from Deck class.
-     * 
+     *
      * @param int $amount Amount cards to draw.
-     * @return $dealerHand
+     * @return $this->dealerHand
      */
     public function drawCardToDealer(int $amount)
     {
@@ -61,15 +60,15 @@ class Blackjack extends Deck
     /**
      * Draws cards to dealer if player hit stand button.
      * Draws cards until dealer have 17 or more in total score
-     * 
-     * @return $dealerHand
+     *
+     * @return $this->dealerHand
      */
     public function drawStandDealer()
     {
         $scoreList = $this->returnScore($this->dealerHand);
         $AceScore = 0;
         if ($scoreList[0] === $scoreList[1]) {
-            $prevCardValue;
+            $prevCardValue = "";
             $score = $scoreList[0];
             while ($score < 17) {
                 $card = parent::draw(1);
@@ -87,15 +86,16 @@ class Blackjack extends Deck
                 $score = $scoreListNew[0];
                 $score += $AceScore;
             }
-
-            if ($scoreListNew[0] > 21 and $scoreListNew[1] < 21) {
-                $score1 = $scoreList[1];
-                while ($score1 < 17) {
-                    $card = parent::draw(1);
-                    $cardValue = $card[0]->get_value();
-                    array_push($this->dealerHand, $card[0]);
-                    $scoreListNew = $this->returnScore($this->dealerHand);
-                    $score1 = $scoreListNew[1];
+            if (isset($scoreListNew[0]) and isset($scoreListNew[1])) {
+                if ($scoreListNew[0] > 21 and $scoreListNew[1] < 21) {
+                    $score1 = $scoreList[1];
+                    while ($score1 < 17) {
+                        $card = parent::draw(1);
+                        $cardValue = $card[0]->get_value();
+                        array_push($this->dealerHand, $card[0]);
+                        $scoreListNew = $this->returnScore($this->dealerHand);
+                        $score1 = $scoreListNew[1];
+                    }
                 }
             }
         } else {
@@ -153,10 +153,10 @@ class Blackjack extends Deck
      * Get total score for the hand.
      * Ace ("A") in this method is worth 1 points.
      * @see method returnScore ( Ace worth 11 points )
-     * 
+     *
      * @param int $score Total score of hand (Ace is worth 11 points).
      * @param int $amountAce Amount aces ("A") in the hand.
-     * 
+     *
      * @return int $score Returns total score - 10 points for each aces in the hand.
      */
     public function returnScoreAce($score, $amountAce)
@@ -171,9 +171,9 @@ class Blackjack extends Deck
     /**
      * Check if both scores in array is over 21.
      * Returns true if both is over 21 else false.
-     * 
+     *
      * @param array $score The hands totalpoints.
-     * 
+     *
      * @return boolean $bust True = bust and False = not bust.
      */
     public function checkBust($score)
@@ -188,9 +188,8 @@ class Blackjack extends Deck
 
     /**
      * Check if a hand have ace in it.
-     * 
-     * @param $hand The hand with cards.
-     * 
+     *
+     * @param array $hand
      * @return boolean $hasAce Returns true if it has ace in hand else false.
      */
     public function hasAce($hand)
@@ -209,20 +208,20 @@ class Blackjack extends Deck
     /**
      * Check who is the winner.
      * Checking both if has aces or no aces.
-     * 
-     * @param $player Player hand with cards
-     * @param $dealer Dealer hand with cards
-     * 
+     *
+     * @param array $playerHand Player hand with cards
+     * @param array $dealerHand Dealer hand with cards
+     *
      * @return string
      */
-    public function checkWinner($player, $dealer)
+    public function checkWinner($playerHand, $dealerHand)
     {
-        $playerScore = $this->returnScore($player);
-        $playerHasAce = $this->hasAce($player);
+        $playerScore = $this->returnScore($playerHand);
+        $playerHasAce = $this->hasAce($playerHand);
         $playerSecondScore = false;
 
-        $dealerScore = $this->returnScore($dealer);
-        $dealerHasAce = $this->hasAce($dealer);
+        $dealerScore = $this->returnScore($dealerHand);
+        $dealerHasAce = $this->hasAce($dealerHand);
         $dealerSecondScore = false;
 
         if ($dealerHasAce) {
