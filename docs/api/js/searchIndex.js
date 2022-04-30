@@ -73,17 +73,17 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Card\\DeckWith2Jokers",
             "name": "DeckWith2Jokers",
-            "summary": "Deck\u0020Class.",
+            "summary": "Deck2\u0020Class.",
             "url": "classes/App-Card-DeckWith2Jokers.html"
         },                {
             "fqsen": "\\App\\Card\\DeckWith2Jokers\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "Buiding\u0020the\u0020deck\u0020from\u0020the\u0020variables\u0020insert\u0020into\u0020the\u0020deck\nCalling\u0020Cards\u0020class\u0020to\u0020build\u0020the\u0020cards.",
+            "summary": "Construct\u0020method.",
             "url": "classes/App-Card-DeckWith2Jokers.html#method___construct"
         },                {
             "fqsen": "\\App\\Card\\DeckWith2Jokers\u003A\u003Aadd2Joker\u0028\u0029",
             "name": "add2Joker",
-            "summary": "",
+            "summary": "Adding\u00202\u0020jokers\u0020into\u0020deck",
             "url": "classes/App-Card-DeckWith2Jokers.html#method_add2Joker"
         },                {
             "fqsen": "\\App\\Controller\\CardControllerTwig",
