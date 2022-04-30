@@ -113,7 +113,6 @@ class GameControllerTwig extends AbstractController
         $session->set("dealerHand", $dealerHand);
         $session->set("blackjack", $die);
 
-        // Temporary
         if ($clear) {
             $session->clear();
         }
