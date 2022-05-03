@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1651287028">
-  <project timestamp="1651287028">
+<coverage generated="1651507613">
+  <project timestamp="1651507613">
     <file name="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\src\Card\Blackjack.php">
       <class name="App\Card\Blackjack" namespace="global">
-        <metrics complexity="52" methods="9" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="102" coveredstatements="64" elements="111" coveredelements="70"/>
+        <metrics complexity="52" methods="9" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="102" coveredstatements="65" elements="111" coveredelements="72"/>
       </class>
       <line num="25" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="9"/>
       <line num="27" type="stmt" count="9"/>
@@ -59,22 +59,22 @@
       <line num="117" type="stmt" count="0"/>
       <line num="118" type="stmt" count="0"/>
       <line num="122" type="stmt" count="1"/>
-      <line num="131" type="method" name="returnScore" visibility="public" complexity="4" crap="4.07" count="3"/>
+      <line num="131" type="method" name="returnScore" visibility="public" complexity="4" crap="4" count="3"/>
       <line num="133" type="stmt" count="3"/>
       <line num="134" type="stmt" count="3"/>
       <line num="135" type="stmt" count="3"/>
       <line num="136" type="stmt" count="3"/>
       <line num="138" type="stmt" count="3"/>
       <line num="139" type="stmt" count="3"/>
-      <line num="141" type="stmt" count="2"/>
-      <line num="142" type="stmt" count="2"/>
-      <line num="143" type="stmt" count="0"/>
-      <line num="144" type="stmt" count="0"/>
+      <line num="141" type="stmt" count="1"/>
+      <line num="142" type="stmt" count="1"/>
+      <line num="143" type="stmt" count="1"/>
+      <line num="144" type="stmt" count="1"/>
       <line num="148" type="stmt" count="3"/>
       <line num="149" type="stmt" count="3"/>
       <line num="162" type="method" name="returnScoreAce" visibility="public" complexity="2" crap="2" count="4"/>
       <line num="164" type="stmt" count="4"/>
-      <line num="165" type="stmt" count="1"/>
+      <line num="165" type="stmt" count="2"/>
       <line num="168" type="stmt" count="4"/>
       <line num="179" type="method" name="checkBust" visibility="public" complexity="3" crap="3" count="2"/>
       <line num="181" type="stmt" count="2"/>
@@ -88,7 +88,7 @@
       <line num="200" type="stmt" count="2"/>
       <line num="201" type="stmt" count="1"/>
       <line num="205" type="stmt" count="2"/>
-      <line num="217" type="method" name="checkWinner" visibility="public" complexity="22" crap="76.02" count="1"/>
+      <line num="217" type="method" name="checkWinner" visibility="public" complexity="22" crap="89.47" count="1"/>
       <line num="219" type="stmt" count="1"/>
       <line num="220" type="stmt" count="1"/>
       <line num="221" type="stmt" count="1"/>
@@ -115,8 +115,8 @@
       <line num="255" type="stmt" count="0"/>
       <line num="256" type="stmt" count="0"/>
       <line num="257" type="stmt" count="0"/>
-      <line num="261" type="stmt" count="1"/>
-      <metrics loc="264" ncloc="189" classes="1" methods="9" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="102" coveredstatements="64" elements="111" coveredelements="70"/>
+      <line num="261" type="stmt" count="0"/>
+      <metrics loc="264" ncloc="189" classes="1" methods="9" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="102" coveredstatements="65" elements="111" coveredelements="72"/>
     </file>
     <file name="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\src\Card\Cards.php">
       <class name="App\Card\Cards" namespace="global">
@@ -308,6 +308,6 @@
       </class>
       <metrics loc="12" ncloc="12" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
-    <metrics files="9" loc="783" ncloc="571" classes="8" methods="33" coveredmethods="13" conditionals="0" coveredconditionals="0" statements="220" coveredstatements="83" elements="253" coveredelements="96"/>
+    <metrics files="9" loc="783" ncloc="571" classes="8" methods="33" coveredmethods="14" conditionals="0" coveredconditionals="0" statements="220" coveredstatements="84" elements="253" coveredelements="98"/>
   </project>
 </coverage>
