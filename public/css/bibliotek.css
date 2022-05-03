@@ -1,0 +1,71 @@
+.createbook
+{
+    width: 1200px;
+    margin: auto;
+}
+
+.bookform {
+    width: 1200px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.bookform label {
+    width: 400px;
+    margin: auto;
+    margin-top: 5px;
+    margin-bottom: -35px;
+}
+
+.bookform input{
+    width: 400px;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.readbook {
+    width: 1200px;
+}
+.bibliotek-store {
+    display: flex;
+    margin: auto;
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
+
+.book {
+    width: 219px;
+}
+
+.book input {
+    margin-top: 10px;
+    width: 100%;
+}
+
+
+.add-book {
+    margin: auto;
+    width: 300px;
+}
+
+.add-book input {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 300px;
+    height: 50px;
+    background-color: rgb(179, 206, 138);
+}
+
+.return-book {
+    margin: auto;
+    width: 300px;
+}
+
+.return-book input {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 300px;
+    height: 50px;
+    background-color: rgb(236, 232, 187);
+}
