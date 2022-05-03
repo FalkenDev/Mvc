@@ -1,0 +1,19 @@
+{% include "inc/header.html.twig" %}
+<body>
+    <section class="readbook">
+        <h1>Visa alla böcker</h1>
+        <div class="bibliotek-store">
+            {% for book in bibliotek %}
+                <div class="book">
+                    <div class="book-image"><img src="{{book.urlbild}}" width="219px" height="278px"></div>
+                    <div class="book-title">Titel: {{book.titel}}</div>
+                    <a href="/bibliotek/read/{{book.id}}"><input type="submit" value="Visa mer"></a>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="add-book">
+            <a href="/bibliotek/create"><input type="submit" value="Lägg till böcker"></a>
+        </div>
+    </section>
+    {% include "inc/footer.html.twig" %}
+</body>

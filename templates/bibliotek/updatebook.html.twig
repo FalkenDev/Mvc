@@ -1,0 +1,24 @@
+{% include "inc/header.html.twig" %}
+<body>
+    <section class="createbook">
+        <form method="POST" class="bookform">
+            <label for="name">ID</label><br>
+            <input type="text" name="id" value={{book.id}} readonly><br>
+
+            <label for="name">Bokens titel</label><br>
+            <input type="text" name="titel" value={{book.titel}} required><br>
+
+            <label for="name">Bokens författare</label><br>
+            <input type="text" name="forfattare" value={{book.forfattare}} required><br>
+
+            <label for="name">Bokens ISBN</label><br>
+            <input type="text" name="isbn"  value={{book.isbn}} required><br>
+
+            <label for="name">Bokens bild url</label><br>
+            <input type="text" name="urlbild" value={{book.urlbild}} required>
+
+            <input type="submit" value="Submit">
+        </form>
+    </section>
+    {% include "inc/footer.html.twig" %}
+</body>

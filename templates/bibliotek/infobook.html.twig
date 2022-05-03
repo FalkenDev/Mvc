@@ -1,0 +1,21 @@
+{% include "inc/header.html.twig" %}
+<body>
+    <section class="readbook">
+        <h1>Visa alla böcker</h1>
+        <div class="bibliotek-store">
+            <div class="book">
+                <div class="book-image"><img src="{{book.urlbild}}" width="204px" height="268px"></div>
+                <div class="book-title">Id: {{book.id}}</div>
+                <div class="book-title">Titel: {{book.titel}}</div>
+                <div class="book-forfattare">Författare: {{book.forfattare}}</div>
+                <div class="book-isbn">ISBN: {{book.isbn}}</div>
+                <a href="/bibliotek/update/{{book.id}}"><input type="submit" value="Update book"></a>
+                <a href="/bibliotek/delete/{{book.id}}"><input type="submit" value="Delete book"></a>
+            </div>
+        </div>
+        <div class="return-book">
+            <a href="/bibliotek/read"><input type="submit" value="Gå till alla böcker"></a>
+        </div>
+    </section>
+    {% include "inc/footer.html.twig" %}
+</body>

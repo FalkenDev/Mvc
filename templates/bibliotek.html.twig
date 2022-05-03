@@ -1,0 +1,13 @@
+{# templates/about.html.twig #}
+{% include "inc/header.html.twig" %}
+<body>
+    <section class="bibliotek">
+        <h1>Välkommen till mitt bibliotek</h1>
+        <ul>
+            <li><a href="{{ path("bibliotek-read-all") }}">Läs in alla böcker</a></li>
+            <li><a href="{{ path("bibliotek-create") }}">Skapa böcker</a></li>
+            <li><a href="{{ path("app_bibliotek") }}">BibliotekKontrollern</a></li>
+        </ul>
+    </section>
+    {% include "inc/footer.html.twig" %}
+</body>
