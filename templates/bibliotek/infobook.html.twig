@@ -9,12 +9,12 @@
                 <div class="book-title">Titel: {{book.titel}}</div>
                 <div class="book-forfattare">Författare: {{book.forfattare}}</div>
                 <div class="book-isbn">ISBN: {{book.isbn}}</div>
-                <a href="/bibliotek/update/{{book.id}}"><input type="submit" value="Update book"></a>
-                <a href="/bibliotek/delete/{{book.id}}"><input type="submit" value="Delete book"></a>
+                <a href="/~kafa21/dbwebb-kurser/mvc/me/report/public/bibliotek/update/{{book.id}}"><input type="submit" value="Update book"></a>
+                <a href="/~kafa21/dbwebb-kurser/mvc/me/report/public/bibliotek/delete/{{book.id}}"><input type="submit" value="Delete book"></a>
             </div>
         </div>
         <div class="return-book">
-            <a href="/bibliotek/read"><input type="submit" value="Gå till alla böcker"></a>
+            <a href="/~kafa21/dbwebb-kurser/mvc/me/report/public/bibliotek/read"><input type="submit" value="Gå till alla böcker"></a>
         </div>
     </section>
     {% include "inc/footer.html.twig" %}
