@@ -80,8 +80,7 @@ class BibliotekController extends AbstractController
     public function readOne(
         ManagerRegistry $doctrine,
         int $id
-    ): Response
-    {
+    ): Response {
         $entityManager = $doctrine->getManager();
         $book = $entityManager->getRepository(Bibliotek::class)->find($id);
         $data = [
@@ -125,14 +124,14 @@ class BibliotekController extends AbstractController
 
         if (!$book) {
             throw $this->createNotFoundException(
-                'No book found in Biblioteket id '.$id
+                'No book found in Biblioteket id ' . $id
             );
         }
 
         $data = [
             'book' => $book
         ];
-    
+
         return $this->render('bibliotek/updatebook.html.twig', $data);
     }
 
@@ -150,13 +149,13 @@ class BibliotekController extends AbstractController
     ): Response {
         $entityManager = $doctrine->getManager();
         $book = $entityManager->getRepository(Bibliotek::class)->find($id);
-    
+
         $book->setTitel($request->request->get('titel'));
         $book->setForfattare($request->request->get('forfattare'));
         $book->setIsbn($request->request->get('isbn'));
         $book->setUrlbild($request->request->get('urlbild'));
         $entityManager->flush();
-    
+
         return $this->redirectToRoute('bibliotek-read-all');
     }
 
@@ -173,16 +172,16 @@ class BibliotekController extends AbstractController
     ): Response {
         $entityManager = $doctrine->getManager();
         $book = $entityManager->getRepository(Bibliotek::class)->find($id);
-    
+
         if (!$book) {
             throw $this->createNotFoundException(
-                'No book found in Biblioteket for id '.$id
+                'No book found in Biblioteket for id ' . $id
             );
         }
-    
+
         $entityManager->remove($book);
         $entityManager->flush();
-    
+
         return $this->redirectToRoute('bibliotek-read-all');
     }
 }
