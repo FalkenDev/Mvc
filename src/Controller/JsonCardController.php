@@ -21,7 +21,7 @@ class JsonCardControllerTwig
             'deck' => $die
         ];
 
-        //$response = new Response();
+
         $response = new JsonResponse($data);
         $response->setEncodingOptions($response->getEncodingOptions() | JSON_UNESCAPED_UNICODE);
         $response->headers->set('Content-Type', 'application/json');
