@@ -66,7 +66,7 @@ class GameControllerTwig extends AbstractController
         $data = [
             'playerHand' => $playerHand,
             'playerScore' => $playerScore,
-            'dealerHand'=> $dealerHand,
+            'dealerHand' => $dealerHand,
             'dealerScore' => $dealerScore,
             'draws' => count($die->show_deck()),
             'stand' => $session->get("stand") ?? false,
