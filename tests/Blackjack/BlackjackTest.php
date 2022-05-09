@@ -63,8 +63,12 @@ class BlackjackTest extends TestCase
         $res = $die->drawStandDealer();
         $this->assertGreaterThanOrEqual(2, count($res));
 
-        $dealerScore = $die->returnScore($res);
-        $this->assertGreaterThanOrEqual(17, $dealerScore[0]);
+        $dealerScore = $die->getOneScore($die->returnScore($res));
+        if($dealerScore === 1) {
+            $this->assertGreaterThanOrEqual(1, $dealerScore);
+        } else {
+            $this->assertGreaterThanOrEqual(17, $dealerScore);
+        }
     }
 
     /**
@@ -100,6 +104,20 @@ class BlackjackTest extends TestCase
     }
 
     /**
+     * Test getOneScore method returns a int when insert a array with 2 elements of points.
+     * Insert 23 and 18 in array to method getOneScore.
+     * Expect method to return 18 and not 23.
+     * Look up if $res is equal to 18.
+     */
+    public function testGetOneScore()
+    {
+        $die = new Blackjack();
+        $res = $die->getOneScore([23, 18]);
+        $this->assertEquals(18, $res);
+
+    }
+
+    /**
      * Test checkBust method work.
      * Input array [22, 22] into checkBust method.
      *
@@ -109,23 +127,6 @@ class BlackjackTest extends TestCase
     {
         $die = new Blackjack();
         $res = $die->checkBust([22, 22]);
-        $this->assertTrue($res);
-    }
-
-    /**
-     * Test hasAce method work.
-     * Draw 3 cards then push a ace ("A") into the $cardHand array.
-     * Input $cardHand into hasAce method.
-     *
-     * Look up $res is true.
-     */
-    public function testHasAce()
-    {
-        $die = new Blackjack();
-        $cardHand = $die->draw(3);
-        $ace = new Cards("A", "♥");
-        array_push($cardHand, $ace);
-        $res = $die->hasAce($cardHand);
         $this->assertTrue($res);
     }
 
