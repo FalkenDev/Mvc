@@ -60,59 +60,148 @@
                     <img src="{{ asset("img/coupling.png") }}" alt="Coupling" width="800px"></b>
         <br>
         </div>
-        <h2>Phpmetrics</h2>
-        <h3><li>Complexity</li></h3>
-        <img src="{{ asset("img/metricsimg/complex.png") }}" alt="Complexity" width="1600px">
-        <p>Som vi ser på bilden så är komplexiteten för Blackjack klassen väldigt mycket då man ska generellt hålla sig till 10. 
-        n stor del till varför komplexiteten är så stor i Blackjack klassen är pågrund av att jag använder mig utav väldigt mycket if-statser och
-        while loopar för arr räkna ut poängen och dra kort till dealern / banken tills hen har fått 17 eller högre.</p>
-        <p>Man hade kunnat minska på komplexiteten men hade nog fortfarande varit ganska högt då det behövs en del if-satser och loopar för detta metoder i klassen.</p>
-        <br>
-        <h3><li>Coupling</li></h3>
-        <img src="{{ asset("img/metricsimg/afferent.png") }}" alt="Complexity" width="1600px">
-        <p>Klassen Deck har mest ingående kopplingar (4st) då jag använder Deck i exempelvis DeckWith2Jokers och Blackjack klassen istället för att skapa metoder som redan finns. Detta gör att klasserna som ärver / har Deck
-        är väldigt beroende men också sårbara på grund av att om något skulle ändras i Deck klassen så följer det med för de andra klasserna.</p>
-        <p>Med detta kan vi då se att man få vara extra försiktig med att ändra i Deck klassen för att inte förstöra de klasserna som använder Deck klassen</p>
-        <br>
-        <img src="{{ asset("img/metricsimg/efferent.png") }}" alt="Complexity" width="1600px">
-        <p>I utgående kopplingar kan man se att både bibliotek och card kontrollerna har 7st utgående kopplingar. Alltså 7st klasser som kontrollerna använder sig utav. Detta är pågrund
-        av att kontrollerna innehåller klasser där klasserna ochså har utgående klasser. Exempelvis på detta är card kontrollern som använder sig utav Deck och DeckWith2Jokers klasserna.
-        Inne i dessa klasser så ärver de andra klasser och gör att card kontrollern är väldigt beroende av alla klasser och får därför ett högre EC värde.</p>
-        <br>
-        <h3><li>Coverage</li></h3>
-        <img src="{{ asset("img/metricsimg/tests.png") }}" alt="Complexity" width="1600px">
-        <p>Längst upp i bilden kan man se att jag har skapat 3 test klasser och inom dessa klasser så finns det samanlagt 20 assertions. Även står det att 12 klasser är inte testade som utgör 80% av alla klasser i mitt projekt inne i "src" mappen</p>
-        <p>Lite längre ner i bilden ser vi de klasser som inte är testade som har antingen hög Cyklomatisk nummer eller stor risk för buggar som behövs testas.
-        <p>Hade jag gjort tester för de klasserna som inte är testade så hade mätvädrena varit mycket bättre och risker med kvalitetssäkringen mindre.</p>
-        <p></p>
-        <img src="{{ asset("img/metricsimg/tests1.png") }}" alt="Complexity" width="1200px">
-        <p>På den andra bilden kan vi se vilka klasser som är testade genom att kolla på "Called by these classes" sektionen. Här kan vi se att Blackjack klassen är hämtad 44 gånger och Cards klassen 1 gång i BlackjackTest klassen</p>
-        <p>Vi ser även att Cards klassen även hämtats 1 gång i CardsTest klassen medans Deck klassen är hämtad 6 gånger i DeckTest klassen</p>
-        <p>Dessa klasser är testade och gör att risker med kvalitetssäkringen inte är så hög jämförelse med att de inte hade varit testade</p>
-        <h3><li>Cohesion</li></h3>
-        <img src="{{ asset("img/metricsimg/cohesion.png") }}" alt="Complexity" width="600px">
-        <p>På bilden kan vi se att de flesta klasserna har värde 1 på LCOM (Lack of cohesion of methods) och är väldigt bra då det betyder att de har bara 1 ansvarsområde. Men vi kan även se att till exempel BlackJack klassen har värde 2. Detta hade kunnats dela upp i 2st olika klasser för att ansvarsområdet inte ska vara med än 1.</p>
-        <h3><li>Code size and Volume</li></h3>
-        <img src="{{ asset("img/metricsimg/linescode.png") }}" alt="Complexity" width="1600px">
-        <p>Inne i PHPMetrics på Lines of code kan vi se att BibliotekController och Blackjack klassen har väldigt mycket kodrader utan tomma rader. Detta anses som stora klasser och har en stor risk att vara besvärligt att utveckla samt underhålla pågrund av att det är mycket kod som gör att utvecklarna har svårt att läsa samt förstå vad metoderna gör.</p>
-        <br>
-        <h2>Scrutinizer</h2>
-        <img src="{{ asset("img/scrut/bjscrut.png") }}" alt="Complexity" width="800px">
-        <p>På bilden kan vi se att blackjack klassens complexitet är 52 och anses på Scrutinizer väldigt högt som vi även såg i phpmetrics men också test coverage är ganska låg på 64.85% av 100%</p>
-        <p>Dessa 2 saker är svagheter som kan förbättras. Dels att försöka minska komplexiteten men ochså försöka testa all sin kod så den når än 100% test coverage</p>
-        <br>
-        <img src="{{ asset("img/scrut/crapscore1.png") }}" alt="Complexity" width="800px">
-        <p>Inne i blackjack klassen på metoden checkWinner så är CRAP Score på 82.5%. Denna metoden visar då på att den är väldigt känslig, har en hög komplexitet och finns en stor risk med koden när man inne och ändrar. Detta säger att det behövs mer testning på denna metoden för att CRAP score ska bli lägre pågrund av att komplexiteten är så hög i metoden.</p>
-        <p>Även för metoden drawStandDealer i Blackjack klassen så är CRAP score också väldigt hög på 47%</p>
-        <p>Med detta somsagt så är dessa 2 metoder stora svagheter för i klassen Blackjack som behövs förbättras för att metoderna inte ska vara för stor risk när det är så stor komplexitet</p>
-        <br>
-        <h2>Förbättringar</h2>
-        <p>Jag hade tänkt att förbättra Blackjack::checkWinner() metoden med att göra en metod som kollar om [0] och [1] i arrayen från metoden returnScore är lika och iså fall returnera bara ett element och om det finns 2 olika tal i elementen så ska metoden kolla vilken av elementen som är högst men under 21 och returnera det så man får bara ett element i arrayen i stället för 2 och slipper jämföra både första och andra elementen i arrayen för att veta vem som har vunnit. Detta hjälper med att det blir mindre komplexitet och kommer inte vara lika svår kod att testa samt att CRAP Scoren kommer att minska på grund av att det blir mindre komplexitet.</p>
-        <p>Den andra förbättringen jag tänkte göra är att försöka minska komplexiteten och CRAP score för metoden drawStandDealer(). Planen är att försöka ändra min kod och göra metoden mindre samt inte lika komplex.</p>
-        <p>Den tredje förbättringen jag hade tänkt göra är att försöka få test coveragen högre för klassen Blackjack. Jag kommer att gå igenom vilka delar av koden inte är testade och försöka testa den koden. Även kommer jag göra en test för metoderna som jag tog upp i första och andra förbättringarna.</p>
-        <br>
+        <div class="phpmetrics">
+            <h2>Phpmetrics</h2>
+                <h3><li>Complexity</li></h3>
+                    <img src="{{ asset("img/metricsimg/complex.png") }}" alt="Complexity" width="1600px">
+                    <p>Som vi ser på bilden så är komplexiteten för Blackjack klassen väldigt mycket då man ska generellt hålla sig till 10. 
+                    n stor del till varför komplexiteten är så stor i Blackjack klassen är pågrund av att jag använder mig utav väldigt mycket if-statser och
+                    while loopar för arr räkna ut poängen och dra kort till dealern / banken tills hen har fått 17 eller högre.</p>
+                    <p>Man hade kunnat minska på komplexiteten men hade nog fortfarande varit ganska högt då det behövs en del if-satser och loopar för detta metoder i klassen.</p>
+                    <br>
+                <h3><li>Coupling</li></h3>
+                    <img src="{{ asset("img/metricsimg/afferent.png") }}" alt="Complexity" width="1600px">
+                    <p>Klassen Deck har mest ingående kopplingar (4st) då jag använder Deck i exempelvis DeckWith2Jokers och Blackjack klassen istället för att skapa metoder som redan finns. Detta gör att klasserna som ärver / har Deck
+                    är väldigt beroende men också sårbara på grund av att om något skulle ändras i Deck klassen så följer det med för de andra klasserna.</p>
+                    <p>Med detta kan vi då se att man få vara extra försiktig med att ändra i Deck klassen för att inte förstöra de klasserna som använder Deck klassen</p>
+                    <br>
+                    <img src="{{ asset("img/metricsimg/efferent.png") }}" alt="Complexity" width="1600px">
+                    <p>I utgående kopplingar kan man se att både bibliotek och card kontrollerna har 7st utgående kopplingar. Alltså 7st klasser som kontrollerna använder sig utav. Detta är pågrund
+                    av att kontrollerna innehåller klasser där klasserna ochså har utgående klasser. Exempelvis på detta är card kontrollern som använder sig utav Deck och DeckWith2Jokers klasserna.
+                    Inne i dessa klasser så ärver de andra klasser och gör att card kontrollern är väldigt beroende av alla klasser och får därför ett högre EC värde.</p>
+                    <br>
+                <h3><li>Coverage</li></h3>
+                    <img src="{{ asset("img/metricsimg/tests.png") }}" alt="Complexity" width="1600px">
+                    <p>Längst upp i bilden kan man se att jag har skapat 3 test klasser och inom dessa klasser så finns det samanlagt 20 assertions. Även står det att 12 klasser är inte testade som utgör 80% av alla klasser i mitt projekt inne i "src" mappen</p>
+                    <p>Lite längre ner i bilden ser vi de klasser som inte är testade som har antingen hög Cyklomatisk nummer eller stor risk för buggar som behövs testas.
+                    <p>Hade jag gjort tester för de klasserna som inte är testade så hade mätvädrena varit mycket bättre och risker med kvalitetssäkringen mindre.</p>
+                    <img src="{{ asset("img/metricsimg/tests1.png") }}" alt="Complexity" width="1200px">
+                    <p>På den andra bilden kan vi se vilka klasser som är testade genom att kolla på "Called by these classes" sektionen. Här kan vi se att Blackjack klassen är hämtad 44 gånger och Cards klassen 1 gång i BlackjackTest klassen</p>
+                    <p>Vi ser även att Cards klassen även hämtats 1 gång i CardsTest klassen medans Deck klassen är hämtad 6 gånger i DeckTest klassen</p>
+                    <p>Dessa klasser är testade och gör att risker med kvalitetssäkringen inte är så hög jämförelse med att de inte hade varit testade</p>
+                <h3><li>Cohesion</li></h3>
+                    <img src="{{ asset("img/metricsimg/cohesion.png") }}" alt="Complexity" width="600px">
+                    <p>På bilden kan vi se att de flesta klasserna har värde 1 på LCOM (Lack of cohesion of methods) och är väldigt bra då det betyder att de har bara 1 ansvarsområde. Men vi kan även se att till exempel BlackJack klassen har värde 2. Detta hade kunnats dela upp i 2st olika klasser för att ansvarsområdet inte ska vara med än 1.</p>
+                <h3><li>Code size and Volume</li></h3>
+                    <img src="{{ asset("img/metricsimg/linescode.png") }}" alt="Complexity" width="1600px">
+                    <p>Inne i PHPMetrics på Lines of code kan vi se att BibliotekController och Blackjack klassen har väldigt mycket kodrader utan tomma rader. Detta anses som stora klasser och har en stor risk att vara besvärligt att utveckla samt underhålla pågrund av att det är mycket kod som gör att utvecklarna har svårt att läsa samt förstå vad metoderna gör.</p>
+                    <br>
+        </div>
+        <div class="scrutinizer">
+            <h2>Scrutinizer</h2>
+                <img src="{{ asset("img/scrut/bjscrut.png") }}" alt="Complexity" width="800px">
+                <p>På bilden kan vi se att blackjack klassens complexitet är 52 och anses på Scrutinizer väldigt högt som vi även såg i phpmetrics men också test coverage är ganska låg på 64.85% av 100%</p>
+                <p>Dessa 2 saker är svagheter som kan förbättras. Dels att försöka minska komplexiteten men ochså försöka testa all sin kod så den når än 100% test coverage</p>
+                <br>
+                <img src="{{ asset("img/scrut/crapscore1.png") }}" alt="Complexity" width="800px">
+                <p>Inne i blackjack klassen på metoden checkWinner så är CRAP Score på 82.5%. Denna metoden visar då på att den är väldigt känslig, har en hög komplexitet och finns en stor risk med koden när man inne och ändrar. Detta säger att det behövs mer testning på denna metoden för att CRAP score ska bli lägre pågrund av att komplexiteten är så hög i metoden.</p>
+                <p>Även för metoden drawStandDealer i Blackjack klassen så är CRAP score också väldigt hög på 47%</p>
+                <p>Med detta somsagt så är dessa 2 metoder stora svagheter för i klassen Blackjack som behövs förbättras för att metoderna inte ska vara för stor risk när det är så stor komplexitet</p>
+                <br>
+        </div>
+        <div class="improvements">
+            <h2>Förbättringar</h2>
+                <img src="{{ asset("img/scrut/bjscrut.png") }}" alt="Complexity" width="800px">
+                <img src="{{ asset("img/scrut/crapscore1.png") }}" alt="Complexity" width="800px">
+                <p>Jag hade tänkt att förbättra Blackjack::checkWinner() metoden med att göra en metod som kollar om [0] och [1] i arrayen från metoden returnScore är lika och iså fall returnera bara ett element och om det finns 2 olika tal i elementen så ska metoden kolla vilken av elementen som är högst men under 21 och returnera det så man får bara ett element i arrayen i stället för 2 och slipper jämföra både första och andra elementen i arrayen för att veta vem som har vunnit. Detta hjälper med att det blir mindre komplexitet och kommer inte vara lika svår kod att testa samt att CRAP Scoren kommer att minska på grund av att det blir mindre komplexitet.</p>
+                <p>Den andra förbättringen jag tänkte göra är att försöka minska komplexiteten och CRAP score för metoden drawStandDealer(). Planen är att försöka ändra min kod och göra metoden mindre samt inte lika komplex.</p>
+                <p>Den tredje förbättringen jag hade tänkt göra är att försöka få test coveragen högre för klassen Blackjack. Jag kommer att gå igenom vilka delar av koden inte är testade och försöka testa den koden. Även kommer jag göra en test för metoderna som jag tog upp i första och andra förbättringarna.</p>
+                <br>
+                    <h3>Efter förbättringar</h3>
+                        <img src="{{ asset("img/scrut/afterscrut1.png") }}" alt="Complexity" width="800px">
+                        <img src="{{ asset("img/scrut/aftercheck.png") }}" alt="Complexity" width="800px">
+                        <img src="{{ asset("img/scrut/afterdraw.png") }}" alt="Complexity" width="800px">
+            <table class="fl-table">
+                <tr>
+                    <th>När</th>
+                    <th>Klass / metod</th>
+                    <th>Betyg</th>
+                    <th>Komplexitet</th>
+                    <th>Total lines</th>
+                    <th>Test Coverage</th>
+                    <th>CRAP Score</th>
+                </tr>
+                <tr class="before">
+                    <td>Före</td>
+                    <td>Blackjack</td>
+                    <td class="grade-b">B</td>
+                    <td>52</td>
+                    <td>250</td>
+                    <td>64.85%</td>
+                    <td>-</td>
+                </tr>
+                <tr class="after">
+                    <td>Efter</td>
+                    <td>Blackjack</td>
+                    <td class="grade-a">A</td>
+                    <td>22</td>
+                    <td>178</td>
+                    <td>93.22%</td>
+                    <td>-</td>
+                </tr>
+                <tr class="before">
+                    <td>Före</td>
+                    <td>Blackjack::checkWinner()</td>
+                    <td class="grade-d">D</td>
+                    <td>22</td>
+                    <td>27</td>
+                    <td>-</td>
+                    <td>82.5</td>
+                </tr>
+                <tr class="after">
+                    <td>Efter</td>
+                    <td>Blackjack::checkWinner()</td>
+                    <td class="grade-a">A</td>
+                    <td>2</td>
+                    <td>10</td>
+                    <td>-</td>
+                    <td>2.0185</td>
+                </tr>
+                <tr class="before">
+                    <td>Före</td>
+                    <td>Blackjack::drawStandDealer()</td>
+                    <td class="grade-c">C</td>
+                    <td>15</td>
+                    <td>45</td>
+                    <td>-</td>
+                    <td>47.13</td>
+                </tr>
+                <tr class="after">
+                    <td>Efter</td>
+                    <td>Blackjack::drawStandDealer()</td>
+                    <td class="grade-a">A</td>
+                    <td>3</td>
+                    <td>11</td>
+                    <td>-</td>
+                    <td>3.0123</td>
+                </tr>
+            </table>
+            <p>Som vi kan se har Blackjack klassen och checkWinner() och drawStandDealer() fått väldigt stora förbättringar i mätvärdena på scrutinizer</p>
+            <br>
+            <h3>PHPMetrics Före</h3>
+            <p>Man kan även se att förbättringar har skett i phpmetrics före och efter</p>
+            <img src="{{ asset("img/metricsimg/beforecode.png") }}" alt="Complexity" width="1600px">
+            <img src="{{ asset("img/metricsimg/beforecode1.png") }}" alt="Complexity" width="1600px">
+            <h3>PHPMetrics Efter</h3>
+            <img src="{{ asset("img/metricsimg/afterCodeVol.png") }}" alt="Complexity" width="1600px">
+            <img src="{{ asset("img/metricsimg/afterComplex.png") }}" alt="Complexity" width="1600px">
+        </div>
         <h2>Diskussion</h2>
-        <p></p>
+        <p>Jag konstruerade om hela checkWinner() och drawStandDealer() metoderna för att göra de mer läsbara och bättre kod. Jag tog också bort lite metoder som jag inte längre hade användning för.</p>
+        <p>Jag skapade också en metod som heter getOneScore som returnerar bara ett poäng av 2 poäng element där den tar den poäng som har högst värde men inte över 21 och om båda poängen är över 21 så returnerar den 1. Denna metoden använde jag mig för båda de 2 metoderna och
+        kunde då förenkla min metoder</p>
+        <p>Jag la också in nya tester för metoderna och code coverage höjdes från 64.85% till 93.22%.</p>
+        <p>Jag tror verkligen på att man kan jobba aktivt med kodkvalitet på detta sätt. Detta har hjälp mig väldigt mycket med både att lära mig vad som är bra och dålig kod samt hitta de problemen jag inte har insett tidigare. Även har detta hjälpt mig att kunna förenkla de kod som har varit väldigt komplext och inte så läsbar. De stora fördelar med att jobba med kodkvalitet på detta sätt vad jag anser är att man hittar problemen i rätt tid medan jag kodar än att inse det senare när jag kanske använder mig utav metoderna till andra metoder. Man lär sig även väldigt mycket hur man skriver ”bra kod” på grund av att man vill fixa problemen som man får och försöka få så bra poäng på allt som möjligt. Jag ser inga nackdelar med detta då detta hjälp mig väldigt mycket.</p>
         <br>
     </section>
     {% include "inc/footer.html.twig" %}
