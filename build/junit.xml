@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="" tests="13" assertions="20" errors="0" warnings="0" failures="0" skipped="0" time="0.040675">
+    <testsuite name="Project Test Suite" tests="13" assertions="20" errors="0" warnings="0" failures="0" skipped="0" time="0.040675">
+      <testsuite name="App\Card\BlackjackTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Blackjack\BlackjackTest.php" tests="9" assertions="13" errors="0" warnings="0" failures="0" skipped="0" time="0.029216">
+        <testcase name="testCreateDeckForBlackjack" class="App\Card\BlackjackTest" classname="App.Card.BlackjackTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Blackjack\BlackjackTest.php" line="17" assertions="2" time="0.014594"/>
+        <testcase name="testPlayerGetsCards" class="App\Card\BlackjackTest" classname="App.Card.BlackjackTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Blackjack\BlackjackTest.php" line="31" assertions="1" time="0.003606"/>
+        <testcase name="testDealerGetsCards" class="App\Card\BlackjackTest" classname="App.Card.BlackjackTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Blackjack\BlackjackTest.php" line="43" assertions="1" time="0.000697"/>
+        <testcase name="testDrawStandDealerWorks" class="App\Card\BlackjackTest" classname="App.Card.BlackjackTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Blackjack\BlackjackTest.php" line="59" assertions="4" time="0.005103"/>
+        <testcase name="testReturnScoreAceWorks" class="App\Card\BlackjackTest" classname="App.Card.BlackjackTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Blackjack\BlackjackTest.php" line="80" assertions="1" time="0.001458"/>
+        <testcase name="testReturnScoreWorks" class="App\Card\BlackjackTest" classname="App.Card.BlackjackTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Blackjack\BlackjackTest.php" line="98" assertions="1" time="0.000673"/>
+        <testcase name="testGetOneScore" class="App\Card\BlackjackTest" classname="App.Card.BlackjackTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Blackjack\BlackjackTest.php" line="112" assertions="1" time="0.000586"/>
+        <testcase name="testCheckBustWorks" class="App\Card\BlackjackTest" classname="App.Card.BlackjackTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Blackjack\BlackjackTest.php" line="126" assertions="1" time="0.001163"/>
+        <testcase name="testCheckWinnerRetrurnsString" class="App\Card\BlackjackTest" classname="App.Card.BlackjackTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Blackjack\BlackjackTest.php" line="140" assertions="1" time="0.001337"/>
+      </testsuite>
+      <testsuite name="App\Card\CardsTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Blackjack\CardsTest.php" tests="1" assertions="3" errors="0" warnings="0" failures="0" skipped="0" time="0.000441">
+        <testcase name="testCreateCard" class="App\Card\CardsTest" classname="App.Card.CardsTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Blackjack\CardsTest.php" line="19" assertions="3" time="0.000441"/>
+      </testsuite>
+      <testsuite name="App\Card\DeckTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Blackjack\DeckTest.php" tests="3" assertions="4" errors="0" warnings="0" failures="0" skipped="0" time="0.011018">
+        <testcase name="testCreateDeck" class="App\Card\DeckTest" classname="App.Card.DeckTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Blackjack\DeckTest.php" line="18" assertions="2" time="0.000568"/>
+        <testcase name="testShuffleDeck" class="App\Card\DeckTest" classname="App.Card.DeckTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Blackjack\DeckTest.php" line="34" assertions="1" time="0.009782"/>
+        <testcase name="testDrawDeck" class="App\Card\DeckTest" classname="App.Card.DeckTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Blackjack\DeckTest.php" line="48" assertions="1" time="0.000668"/>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testsuites>
