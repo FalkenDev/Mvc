@@ -58,65 +58,20 @@ class Blackjack extends Deck
     }
 
     /**
-     * Draws cards to dealer if player hit stand button.
-     * Draws cards until dealer have 17 or more in total score
+     * Draws cards to dealer if player pushed stand button.
+     * Draws cards until dealer have 17 or more in score
      *
      * @return $this->dealerHand
      */
-    public function drawStandDealer()
-    {
-        $scoreList = $this->returnScore($this->dealerHand);
-        $AceScore = 0;
-        if ($scoreList[0] === $scoreList[1]) {
-            $prevCardValue = "";
-            $score = $scoreList[0];
-            while ($score < 17) {
-                $card = parent::draw(1);
-                $cardValue = $card[0]->get_value();
-                $prevCardValue = $cardValue;
-                array_push($this->dealerHand, $card[0]);
-                $scoreListNew = $this->returnScore($this->dealerHand);
-                if ($cardValue === "A" and $score > 10) {
-                    $AceScore = -10;
-                } elseif ($prevCardValue === "A" and $score > 10) {
-                    $AceScore = -10;
-                } else {
-                    $AceScore = 0;
-                }
-                $score = $scoreListNew[0];
-                $score += $AceScore;
-            }
-            if (isset($scoreListNew[0]) and isset($scoreListNew[1])) {
-                if ($scoreListNew[0] > 21 and $scoreListNew[1] < 21) {
-                    $score1 = $scoreList[1];
-                    while ($score1 < 17) {
-                        $card = parent::draw(1);
-                        $cardValue = $card[0]->get_value();
-                        array_push($this->dealerHand, $card[0]);
-                        $scoreListNew = $this->returnScore($this->dealerHand);
-                        $score1 = $scoreListNew[1];
-                    }
-                }
-            }
-        } else {
-            $score = $scoreList[0];
-            while ($score < 17) {
-                $card = parent::draw(1);
-                $cardValue = $card[0]->get_value();
-                array_push($this->dealerHand, $card[0]);
-                $scoreListNew = $this->returnScore($this->dealerHand);
-                $score = $scoreListNew[0];
-            }
-
-            if ($score > 21) {
-                $score1 = $scoreList[1];
-                while ($score1 < 17) {
-                    $card = parent::draw(1);
-                    $cardValue = $card[0]->get_value();
-                    array_push($this->dealerHand, $card[0]);
-                    $scoreList = $this->returnScore($this->dealerHand);
-                    $score1 = $scoreList[1];
-                }
+    public function drawStandDealer() {
+        $dealerScore = $this->getOneScore($this->returnScore($this->dealerHand));
+        while ($dealerScore < 17) {
+            $card = parent::draw(1);
+            $cardValue = $card[0]->get_value();
+            array_push($this->dealerHand, $card[0]);
+            $dealerScore = $this->getOneScore($this->returnScore($this->dealerHand));
+            if ($dealerScore === 1) {
+                return $this->dealerHand;
             }
         }
         return $this->dealerHand;
@@ -169,6 +124,33 @@ class Blackjack extends Deck
     }
 
     /**
+     * Get only one score
+     * Returns hight score that are under 21.
+     * If both score in array is over 21 then return 1
+     * @param array $score The hands totalpoints in array.
+     */
+    public function getOneScore($score) {
+        $totalScore = 0;
+        if ($score[0] === $score[1]) {
+            if ($score[0] > 21) {
+                return 1;
+            }
+
+            return $score[0];
+
+        } elseif ($score[0] <= 21) {
+            return $score[0];
+
+        } else {
+            if($score[1] > 21) {
+                return 1;
+            } else {
+                return $score[1];
+            }
+        }
+    }
+
+    /**
      * Check if both scores in array is over 21.
      * Returns true if both is over 21 else false.
      *
@@ -187,25 +169,6 @@ class Blackjack extends Deck
     }
 
     /**
-     * Check if a hand have ace in it.
-     *
-     * @param array $hand
-     * @return boolean $hasAce Returns true if it has ace in hand else false.
-     */
-    public function hasAce($hand)
-    {
-        $hasAce = false;
-        foreach ($hand as $card) {
-            $cardValue = $card->get_value();
-            if ($cardValue === "A") {
-                $hasAce = true;
-            }
-        }
-
-        return $hasAce;
-    }
-
-    /**
      * Check who is the winner.
      * Checking both if has aces or no aces.
      *
@@ -216,48 +179,13 @@ class Blackjack extends Deck
      */
     public function checkWinner($playerHand, $dealerHand)
     {
-        $playerScore = $this->returnScore($playerHand);
-        $playerHasAce = $this->hasAce($playerHand);
-        $playerSecondScore = false;
+        $playerScore = $this->getOneScore($this->returnScore($playerHand));
 
-        $dealerScore = $this->returnScore($dealerHand);
-        $dealerHasAce = $this->hasAce($dealerHand);
-        $dealerSecondScore = false;
+        $dealerScore = $this->getOneScore($this->returnScore($dealerHand));
 
-        if ($dealerHasAce) {
-            if ($dealerScore[0] > 21) {
-                $dealerSecondScore = true;
-            }
-        }
-
-        if ($playerHasAce) {
-            if ($playerScore[0] > 21) {
-                $playerSecondScore = true;
-            }
-        }
-
-        if ($this->checkBust($dealerScore)) {
+        if ($playerScore > $dealerScore) {
             return "You have WON against the dealer!";
         }
-
-        if ($playerSecondScore and $dealerSecondScore) {
-            if ($playerScore[1] > $dealerScore[1] and $playerScore[1] <= 21) {
-                return "You have WON against the dealer!";
-            }
-        } elseif ($playerSecondScore == false and $dealerSecondScore == false) {
-            if ($playerScore[0] > $dealerScore[0] and $playerScore[0] <= 21) {
-                return "You have WON against the dealer!";
-            }
-        } elseif ($playerSecondScore == false and $dealerSecondScore) {
-            if ($playerScore[0] > $dealerScore[1] and $playerScore[0] <= 21) {
-                return "You have WON against the dealer!";
-            }
-        } elseif ($playerSecondScore and $dealerSecondScore == false) {
-            if ($playerScore[1] > $dealerScore[0] and $playerScore[1] <= 21) {
-                return "You have WON against the dealer!";
-            }
-        }
-
-        return"You have LOST against the dealer!";
+        return "You have LOST against the dealer!";
     }
 }
