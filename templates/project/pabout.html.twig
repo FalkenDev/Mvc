@@ -1,0 +1,68 @@
+{% include "inc/projheader.html.twig" %}
+<body>
+    <section class="project-about">
+    <h1>About</h1>
+    <div class="project-container">
+        <div class="project-main">
+            <div class="about-game">
+                <h2>Projekt</h2>
+
+                <p>Jag har vallt att göra spelet Texas hold'em poker med stilen live casino.</p>
+
+                <p>När spelaren första gången går in på poker så kommer spelaren få 2500 mynt att börja med.</p>
+
+                <p>Varje spel börjar med att spelaren placerar ett bet (”ante”).  Man kan endast lägga in 50 mynt i ante per runda. (Saldot spelaren har kan hittas längst ner i vänsta hörnet.</p>
+
+                <p>Dealer ger två kort till spelaren och 1 kort till sig själv medans dealerns sista kort kommer i slutet av spelet.</p>
+
+                <p>Tre gemensamma kort - som kan användas av både spelaren och dealerns hand  - placeras sedan mitt på bordet som används för att bilda den bästa femkortshanden.</p>
+
+                <p>Sedan lägger dealern en insats som motsvarar den dubbla summan av spelarens ante (50 mynt), och spelare har då alternativen <strong>fold</strong> - d.v.s.
+                lägga sig och ge upp anten och inte längre delta i handen - eller <strong>call</strong>, d.v.s. matcha dealerns insats (50 mynt till, sammanlagt 100 mynt) för att syna.
+                Om en spelare synar så delar dealern ut ytterligare två gemensamma kort och därefter tar dealern ett till kort till sin hand (sammanlagt 2 kort på dealerns hand). Sedan vinner den bästa femkortshanden.</p>
+
+                <p>Dealern måste ha <strong>minst par i fyror</strong> för att ha en kvalificerande hand Om dealern inte kvalificerar sig, får du tillbaka insatsen för din syn. Du vinner om din femkortshand slår dealerns hand.
+                Synade satsningar betalas 1 mot 1, även kallat “jämna pengar”). Ante utbetalas enligt olika odds beroende på spelarens vinnande hand, enligt följande:</p>
+                <table>
+                    <tr>
+                        <th>Hand</th>
+                        <th>Odds för ante</th>
+                    </tr>
+                    <tr>
+                        <td>Royal Flush</td>
+                        <td>100 mot 1</td>
+                    </tr>
+                    <tr>
+                        <td>Färgstege</td>
+                        <td>20 mot 1</td>
+                    </tr>
+                    <tr>
+                        <td>Fyrtal</td>
+                        <td>10 mot 1</td>
+                    </tr>
+                    <tr>
+                        <td>Kåk</td>
+                        <td>3 mot 1</td>
+                    </tr>
+                    <tr>
+                        <td>Färg</td>
+                        <td>2 mot 1</td>
+                    </tr>
+                    <tr>
+                        <td>Stege eller mindre</td>
+                        <td>1 mot 1</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="aside">
+            <h2>Länkar</h2>
+            <li><a href="{{ path("project-about") }}">Länk till dokumentationen phpdoc</a></li>
+            <li><a href="{{ path("project-about") }}">Länk till rapporten från phpmetrics</a></li>
+            <li><a href="https://github.com/FalkenDev/Mvc">Länk till ditt GitHub</a></li>
+            <li><a href="https://scrutinizer-ci.com/g/FalkenDev/Mvc/">Länk till Scrutinizer</a></li>
+        </div>
+    </div>
+    </section>
+    {% include "inc/projfooter.html.twig" %}
+</body>
