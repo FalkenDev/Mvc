@@ -1,0 +1,22 @@
+<!doctype html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{{ asset("css/header.css") }}"/>
+    <link rel="stylesheet" href="{{ asset("css/footer.css") }}"/>
+    <link rel="stylesheet" href="{{ asset("css/main.css") }}"/>
+    <link rel="stylesheet" href="{{ asset("css/project/main.css") }}"/>
+    <link rel="icon" href="{{ asset("favicon.ico") }}">
+    <title>Mvc Slutprojekt - Kafa21</title>
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=2.0;">
+</head>
+<header class="Nav">
+    <ul>
+        <li><a href="{{ path("home") }}">Home</a></li>
+        <li><a href="{{ path("project-home") }}">Project Home</a></li>
+        <li><a href="{{ path("project-about") }}">Project About</a></li>
+        <li><a href="{{ path("report") }}">Poker</a></li>
+    </ul>
+    <div class="logo">
+        <img src="{{ asset("img/FalkenDevLogo.png") }}" alt="logo">
+    </div>
+</header>
