@@ -1,0 +1,44 @@
+.project-about {
+    width: 1600px;
+    margin: auto;
+}
+
+.project-about h1 {
+    text-align: center;
+    font-size: 35px;
+}
+
+.project-container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.project-main {
+    order: 2;
+    width: 1300px;
+}
+
+.aside {
+    order: 1;
+    width: 300px;
+    margin-left: 20px;
+    border: 1px solid black;
+}
+
+.aside h2 {
+    font-size: 20px;
+    margin-left: 10px;
+}
+
+.aside li {
+    margin-left: 10px;
+}
+
+.aside li a {
+    text-decoration: none;
+}
+
+.aside li a:hover {
+    text-decoration: underline;
+}
