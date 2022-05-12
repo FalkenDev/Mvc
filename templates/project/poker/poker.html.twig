@@ -1,23 +1,30 @@
-{% include "inc/header.html.twig" %}
+{% include "inc/projheader.html.twig" %}
 <body class="body-poker-color">
-    <h2 class="poker-title">Poker Texas hold'em</h2>
     <section class="poker-table">
+    <h2 class="poker-title">Poker Texas hold'em</h2>
         <div class="dealer-section">
             <h2>Dealer</h2>
             <div class="dealer-cards poker-div-card deck poker-card">
-                {% for card in dealerHand %}
-                    <div class="card-display {{card.get_suite}}">
-                        <div class="value-left left-card">{{ card.get_value() }}</div>
-                        <div class="suite-left left-card">{{ card.get_suite() }}</div>
-                        <div class="suite-main main-{{ card.get_suite }} main-card">{{ card.get_suite() }}</div>
-                        <div class="suite-right right-card">{{ card.get_suite() }}</div>
-                        <div class="value-right right-card">{{ card.get_value() }}</div>
-                    </div>
-                {% endfor %}
+                {% if board|length is same as 3 %}
+                    {% set times = 2 %}
+                    {% for i in range(1, times) %}
+                        <div class="card-display backside"></div>
+                    {% endfor %}
+                {% else %}
+                    {% for card in dealerHand %}
+                        <div class="card-display {{card.get_suite}}">
+                            <div class="value-left left-card">{{ card.get_value() }}</div>
+                            <div class="suite-left left-card">{{ card.get_suite() }}</div>
+                            <div class="suite-main main-{{ card.get_suite }} main-card">{{ card.get_suite() }}</div>
+                            <div class="suite-right right-card">{{ card.get_suite() }}</div>
+                            <div class="value-right right-card">{{ card.get_value() }}</div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
             </div>
         </div>
         <div class="board-section">
-            <div class="dealer-cards poker-div-card deck poker-card">
+            <div class="dealer-cards poker-div-card deck poker-card board">
                 {% for card in board %}
                     <div class="card-display {{card.get_suite}}">
                         <div class="value-left left-card">{{ card.get_value() }}</div>
@@ -27,6 +34,12 @@
                         <div class="value-right right-card">{{ card.get_value() }}</div>
                     </div>
                 {% endfor %}
+                {% if board|length is same as 3 %}
+                    {% set times = 2 %}
+                    {% for i in range(1, times) %}
+                        <div class="card-display backside"></div>
+                    {% endfor %}
+                {% endif %}
             </div>
         </div>
         <div class="player-section">
@@ -42,14 +55,29 @@
                         </div>
                     {% endfor %}
                 </div>
+                <form method="POST">
                 <div class="pay-section">
-                    <input class="button-pay" type="submit" name="call-display" value="CALL">
-                    <input class="button-pay" type="submit" name="ante" value="ANTE">
+                    {% if board|length is same as 5 %}
+                        <div class="button-pay">
+                            <div class="pokerchip blue"></div>
+                        </div>
+                        <div class="button-pay">
+                            <div class="pokerchip blue"></div>
+                        </div>
+                    {% elseif playerHand|length is same as 2 %}
+                        <div class="button-pay">
+                            <div class="pokerchip blue"></div>
+                        </div>
+                        <input class="button-pay" type="submit" name="call" value="CALL">
+                    {% else %}
+                        <input class="button-pay" type="submit" name="ante" value="ANTE">
+                        <input class="button-pay" type="submit" name="call" value="CALL">
+                    {% endif %}
                 </div>
                 <div class="button-section">
-                    <input class="button-options" type="submit" name="call-display" value="CALL">
-                    <input class="button-options" type="submit" name="ante" value="FOLD">
+                    <input class="button-options" type="submit" name="fold" value="FOLD">
                 </div>
+                </form>
             </div>
             <div class="player-left">
                 <div class="player-score-board">
@@ -59,15 +87,18 @@
                 </div>
                 <div class="balanceWinContainer">
                     <div class="balance">
-                        <h3>{{balance}}</h3>
+                        <h3>BALANCE</h3>
+                        <p>{{balance}}</p>
                     </div>
                     <div class="win">
-                        <h3>{{winBalance}}</h3>
+                        <h3>WIN</h3>
+                        <p>{{winBalance}}</p>
                     </div>
                 </div>
             </div>
+            <h3 class="betsize">Betsize: 50</h3>
         </div>
     </section>
 
-    {% include "inc/footer.html.twig" %}
+    {% include "inc/projfooter.html.twig" %}
 </body>
