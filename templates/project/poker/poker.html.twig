@@ -1,0 +1,73 @@
+{% include "inc/header.html.twig" %}
+<body class="body-poker-color">
+    <h2 class="poker-title">Poker Texas hold'em</h2>
+    <section class="poker-table">
+        <div class="dealer-section">
+            <h2>Dealer</h2>
+            <div class="dealer-cards poker-div-card deck poker-card">
+                {% for card in dealerHand %}
+                    <div class="card-display {{card.get_suite}}">
+                        <div class="value-left left-card">{{ card.get_value() }}</div>
+                        <div class="suite-left left-card">{{ card.get_suite() }}</div>
+                        <div class="suite-main main-{{ card.get_suite }} main-card">{{ card.get_suite() }}</div>
+                        <div class="suite-right right-card">{{ card.get_suite() }}</div>
+                        <div class="value-right right-card">{{ card.get_value() }}</div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="board-section">
+            <div class="dealer-cards poker-div-card deck poker-card">
+                {% for card in board %}
+                    <div class="card-display {{card.get_suite}}">
+                        <div class="value-left left-card">{{ card.get_value() }}</div>
+                        <div class="suite-left left-card">{{ card.get_suite() }}</div>
+                        <div class="suite-main main-{{ card.get_suite }} main-card">{{ card.get_suite() }}</div>
+                        <div class="suite-right right-card">{{ card.get_suite() }}</div>
+                        <div class="value-right right-card">{{ card.get_value() }}</div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="player-section">
+            <div class="player-middle">
+                <div class="player-cards poker-div-card deck poker-card">
+                    {% for card in playerHand %}
+                        <div class="card-display {{card.get_suite}}">
+                            <div class="value-left left-card">{{ card.get_value() }}</div>
+                            <div class="suite-left left-card">{{ card.get_suite() }}</div>
+                            <div class="suite-main main-{{ card.get_suite }} main-card">{{ card.get_suite() }}</div>
+                            <div class="suite-right right-card">{{ card.get_suite() }}</div>
+                            <div class="value-right right-card">{{ card.get_value() }}</div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="pay-section">
+                    <input class="button-pay" type="submit" name="call-display" value="CALL">
+                    <input class="button-pay" type="submit" name="ante" value="ANTE">
+                </div>
+                <div class="button-section">
+                    <input class="button-options" type="submit" name="call-display" value="CALL">
+                    <input class="button-options" type="submit" name="ante" value="FOLD">
+                </div>
+            </div>
+            <div class="player-left">
+                <div class="player-score-board">
+                    <h2>Player</h2>
+                    <div class="cards-score"></div>
+                    <h3>{{playerScore}}</h3>
+                </div>
+                <div class="balanceWinContainer">
+                    <div class="balance">
+                        <h3>{{balance}}</h3>
+                    </div>
+                    <div class="win">
+                        <h3>{{winBalance}}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% include "inc/footer.html.twig" %}
+</body>
