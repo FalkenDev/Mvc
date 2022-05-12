@@ -32,15 +32,4 @@ class ProjectController extends AbstractController
         return $this->render('project/pabout.html.twig');
     }
 
-    /**
-     * @Route(
-     *      "/proj/reset",
-     *      name="project-reset-database",
-     *      methods={"GET","HEAD"}
-     * )
-     */
-    public function resetDatabase(): Response
-    {
-        return $this->render('project/pabout.html.twig');
-    }
 }
