@@ -36,17 +36,13 @@ class PokerControllerTwig extends AbstractController
         SessionInterface $session
     ): Response {
         $die = $session->get("poker") ?? new \App\Poker\Poker();
-
-        // Get sessions if not exists then give the variable a empty array
-        $playerHand = $session->get("playerHand") ?? $die->drawCardToPlayer(2);
-        $dealerHand = $session->get("dealerHand") ?? $die->drawCardToDealer(2);
-        $board = $session->get("board") ?? $die->drawCardToBoard(5);
+        print_r($session->get("dealerHand") ?? []);
 
         $data = [
-            'playerHand' => $playerHand,
+            'playerHand' => $session->get("playerHand") ?? [],
             'playerScore' => "0",
-            'dealerHand' => $dealerHand,
-            'board' => $board,
+            'dealerHand' => $session->get("dealerHand") ?? [],
+            'board' => $session->get("board") ?? [],
             'balance' => "1000",
             'winBalance' => "0"
         ];
@@ -56,7 +52,7 @@ class PokerControllerTwig extends AbstractController
 
     /**
      * @Route(
-     *      "/game/blackjack",
+     *      "/game/poker/start",
      *      name="poker-game-process",
      *      methods={"POST"}
      * )
@@ -66,36 +62,36 @@ class PokerControllerTwig extends AbstractController
         SessionInterface $session
     ): Response {
         // Buttons
-        $hit = $request->request->get('hit');
-        $stand = $request->request->get('stand');
-        $clear = $request->request->get('clear');
+        $ante = $request->request->get('ante');
+        $call = $request->request->get('call');
+        $fold = $request->request->get('fold');
+        $board = $session->get("board") ?? [];
+        $playerHand = $session->get("playerHand") ?? [];
+        $dealerHand = $session->get("dealerHand") ?? [];
 
         // Get the Blackjack sessions if not exists then create new Blackjack
-        $die = $session->get("blackjack") ?? new \App\Card\Blackjack();
-
-        // Get the sessions if not exists then draw cards for both dealer and player
-        $playerHand = $session->get("playerHand") ?? $die->drawCardToPlayer(1);
-        $dealerHand = $session->get("dealerHand") ?? $die->drawCardToDealer(1);
+        $die = $session->get("poker") ?? new \App\Poker\Poker();
 
         // Buttons ( If press hit or stand )
-        if ($hit) {
-            $playerHand = $die->drawCardToPlayer(1);
-        } elseif ($stand) {
-            $dealerHand = $die->drawStandDealer();
-            $session->set("winner", $die->checkWinner($playerHand, $dealerHand));
-            $session->set("stand", true);
+        if ($ante) {
+            $playerHand = $die->drawCardToPlayer(2);
+            $board = $die->drawCardToBoard(3);
+        } elseif ($call) {
+            $dealerHand = $die->drawCardToDealer(2);
+            $board = $die->drawCardToBoard(2);
         }
 
         // Set all the sessions
-        $session->set("playerHand", $playerHand);
+        $session->set("board", $board);
         $session->set("dealerHand", $dealerHand);
-        $session->set("blackjack", $die);
+        $session->set("playerHand", $playerHand);
+        $session->set("poker", $die);
 
-        if ($clear) {
+        if ($fold) {
             $session->clear();
         }
 
-        return $this->redirectToRoute('blackjack-game');
+        return $this->redirectToRoute('poker-game');
     }
 
     /**
