@@ -36,7 +36,11 @@ class PokerControllerTwig extends AbstractController
         SessionInterface $session
     ): Response {
         $die = $session->get("poker") ?? new \App\Poker\Poker();
-        print_r($session->get("dealerHand") ?? []);
+        $rules = new \App\Poker\PokerRules();
+        print_r($rules->checkAllRules($session->get("playerHand") ?? [], $session->get("board") ?? []));
+        //$array = array("size" => "XL", "color" => "gold", "color" => "gold", "color" => "gold");
+        //$test = array_values($session->get("board") ?? []);
+        //print_r($test);
 
         $data = [
             'playerHand' => $session->get("playerHand") ?? [],
