@@ -25,7 +25,17 @@ class PokerDeck
         $this->deck = [];
         foreach ($this->suits as $suit) {
             foreach ($this->values as $value) {
-                $this->deck[] = new PokerCards($value, $suit);
+                $count = $value;
+                if($value === "J") {
+                    $count = 11;
+                } elseif($value === "Q") {
+                    $count = 12;
+                } elseif($value === "K") {
+                    $count = 13;
+                } elseif($value === "A") {
+                    $count = 14;
+                }
+                $this->deck[] = new PokerCards($value, $suit, $count);
             }
         }
     }
