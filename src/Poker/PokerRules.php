@@ -13,31 +13,45 @@ class PokerRules
     public function pushToValueCards($hand, $board) {
         $values = [];
         $suites = [];
+        $pokerValues = [];
         // Hämtar alla values och pushar values i en array
         foreach ($board as $card) {
             $value = $card->get_value();
             $suite = $card->get_suite();
+            $pokerValue = $card->get_pokerValue();
             array_push($values, $value);
             array_push($suites, $suite);
+            array_push($pokerValues, $pokerValue);
         }
 
         // Hämtar alla values och pushar values i en array
         foreach ($hand as $card) {
             $value = $card->get_value();
             $suite = $card->get_suite();
+            $pokerValue = $card->get_pokerValue();
             array_push($values, $value);
             array_push($suites, $suite);
+            array_push($pokerValues, $pokerValue);
         }
 
-        $array = [array_count_values($values), array_count_values($suites)];
+        sort($pokerValues);
+
+        $array = [array_count_values($values), array_count_values($suites), $pokerValues];
 
         return $array;
     }
 
     public function checkAllRules($hand, $board) {
         $cards = $this->pushToValueCards($hand, $board);
+
+        $result = $this->straightFlush($cards, $hand, $board);
+
+        return $result;
+
         if($this->fourOfAKind($cards)) {
             return "Four Of A Kind";
+        } elseif($this->straight($cards)) {
+            return "Straight";
         } elseif($this->fullHouse($cards)) {
             return "Full House";
         } elseif($this->flush($cards)) {
@@ -49,15 +63,7 @@ class PokerRules
         } elseif ($this->pair($cards)) {
             return "Pair";
         }
-        return "Nothing";
-    }
-
-    /**
-     * High Card method
-     * Checks if $hand + $board contains high cards.
-     */
-    public function highCard($hand, $board) {
-
+        return "High Card";
     }
 
     /**
@@ -111,7 +117,25 @@ class PokerRules
      * Checks if $hand + $board contains 5 cards with consecutive value.
      */
     public function straight($fullHand) {
+        $arrayrules = [
+            [10, 11, 12, 13, 14],
+            [9, 10, 11, 12, 13],
+            [8, 9, 10, 11, 12],
+            [7, 8, 9, 10, 11],
+            [6, 7, 8, 9, 10],
+            [5, 6, 7, 8, 9],
+            [4, 5, 6, 7, 8],
+            [3, 4, 5, 6, 7],
+            [2, 3, 4, 5, 6],
+            [14, 2, 3, 4, 5],
+        ];
+        foreach ($arrayrules as $array) {
+            if(!array_diff($array, $fullHand[2])) {
+                return true;
+            }
+        }
 
+        return false;
     }
 
     /**
@@ -134,7 +158,7 @@ class PokerRules
     public function fullHouse($fullHand) {
         $three = false;
         $two = false;
-        $hand = $cards[0];
+        $hand = $fullHand[0];
         foreach ($hand as $key => $value) {
             if($value >= 3) {
                 $three = true;
@@ -173,8 +197,31 @@ class PokerRules
      * Straight Flush method
      * Checks if $hand + $board contains five cards of sequential rank, all of the same suit.
      */
-    public function straightFlush() {
-        
+    public function straightFlush($fullHand, $hand, $board) {
+        $leftOver = [];
+        $arrayrules = [
+            [10, 11, 12, 13, 14],
+            [9, 10, 11, 12, 13],
+            [8, 9, 10, 11, 12],
+            [7, 8, 9, 10, 11],
+            [6, 7, 8, 9, 10],
+            [5, 6, 7, 8, 9],
+            [4, 5, 6, 7, 8],
+            [3, 4, 5, 6, 7],
+            [2, 3, 4, 5, 6],
+            [14, 2, 3, 4, 5],
+        ];
+        foreach ($arrayrules as $array) {
+            if(!array_diff($array, $fullHand[2])) {
+                $leftOver = array_diff($fullHand[2], $array);
+            }
+        }
+
+        foreach ($leftOver as $pokerValue) {
+
+        }
+
+       return "hayas";
     }
 
     /**
