@@ -37,16 +37,15 @@ class PokerControllerTwig extends AbstractController
     ): Response {
         $die = $session->get("poker") ?? new \App\Poker\Poker();
         $rules = new \App\Poker\PokerRules();
-        print_r($rules->checkAllRules($session->get("playerHand") ?? [], $session->get("board") ?? []));
-        //$array = array("size" => "XL", "color" => "gold", "color" => "gold", "color" => "gold");
+        //print_r($rules->checkAllRules($session->get("playerHand"), $session->get("board")));
         //$test = array_values($session->get("board") ?? []);
         //print_r($test);
 
         $data = [
-            'playerHand' => $session->get("playerHand") ?? [],
+            'playerHand' => $die->get_PlayerCards(),
             'playerScore' => "0",
-            'dealerHand' => $session->get("dealerHand") ?? [],
-            'board' => $session->get("board") ?? [],
+            'dealerHand' => $die->get_DealerCards(),
+            'board' => $die->get_BoardCards(),
             'balance' => "1000",
             'winBalance' => "0"
         ];
@@ -69,28 +68,22 @@ class PokerControllerTwig extends AbstractController
         $ante = $request->request->get('ante');
         $call = $request->request->get('call');
         $fold = $request->request->get('fold');
-        $board = $session->get("board") ?? [];
-        $playerHand = $session->get("playerHand") ?? [];
-        $dealerHand = $session->get("dealerHand") ?? [];
 
-        // Get the Blackjack sessions if not exists then create new Blackjack
+        // Get the Poker sessions if not exists then create new Poker
         $die = $session->get("poker") ?? new \App\Poker\Poker();
 
-        // Buttons ( If press hit or stand )
+        // Buttons ( If press ante or call )
         if ($ante) {
-            $playerHand = $die->drawCardToPlayer(2);
-            $board = $die->drawCardToBoard(3);
+            $die->ante();
         } elseif ($call) {
-            $dealerHand = $die->drawCardToDealer(2);
-            $board = $die->drawCardToBoard(2);
+            $die->call();
+            $die->checkWinner();
         }
 
-        // Set all the sessions
-        $session->set("board", $board);
-        $session->set("dealerHand", $dealerHand);
-        $session->set("playerHand", $playerHand);
+        // Set poker session
         $session->set("poker", $die);
 
+        // If fold cleaer poker session
         if ($fold) {
             $session->clear();
         }
