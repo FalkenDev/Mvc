@@ -10,6 +10,19 @@ namespace App\Poker;
 class PokerRules
 {
 
+    public array $arrayrules = [
+        [10, 11, 12, 13, 14],
+        [9, 10, 11, 12, 13],
+        [8, 9, 10, 11, 12],
+        [7, 8, 9, 10, 11],
+        [6, 7, 8, 9, 10],
+        [5, 6, 7, 8, 9],
+        [4, 5, 6, 7, 8],
+        [3, 4, 5, 6, 7],
+        [2, 3, 4, 5, 6],
+        [14, 2, 3, 4, 5],
+    ];
+
     public function pushToValueCards($hand, $board) {
         $values = [];
         $suites = [];
@@ -44,26 +57,22 @@ class PokerRules
     public function checkAllRules($hand, $board) {
         $cards = $this->pushToValueCards($hand, $board);
 
-        $result = $this->straightFlush($cards, $hand, $board);
-
-        return $result;
-
-        if($this->fourOfAKind($cards)) {
-            return "Four Of A Kind";
-        } elseif($this->straight($cards)) {
-            return "Straight";
-        } elseif($this->fullHouse($cards)) {
-            return "Full House";
+        if($this->fourOfAKind($cards)[0]) {
+            return ["Four Of A Kind", $cards[1]];
+        } elseif($this->fullHouse($cards)[0]) {
+            return ["Full House", $cards[1]];
         } elseif($this->flush($cards)) {
-            return "Flush";
-        } elseif ($this->threeOfAKind($cards)) {
-            return "Thee Of A Kind";
-        } elseif ($this->twoPair($cards)) {
-            return "Two Pair";
-        } elseif ($this->pair($cards)) {
-            return "Pair";
+            return ["Flush", "same"];
+        } elseif($this->straight($cards)[0]) {
+            return ["Straight", $cards[1]];
+        } elseif ($this->threeOfAKind($cards)[0]) {
+            return ["Thee Of A Kind", $cards[1]];
+        } elseif ($this->twoPair($cards)[0]) {
+            return ["Two Pair", $cards[1]];
+        } elseif ($this->pair($cards)[0]) {
+            return ["Pair", $cards[1]];
         }
-        return "High Card";
+        return ["High Card", "nothing"];
     }
 
     /**
@@ -71,13 +80,26 @@ class PokerRules
      * Checks if $hand + $board contains 2 cards with same value.
      */
     public function pair($fullHand) {
+        $cardValues = [];
+        $previousValue = 0;
+        $hasPair = false;
         foreach ($fullHand[0] as $key => $value) {
             if($value >= 2) {
-                return true;
+                $hasPair = true;
+                array_push($cardValues, $key);
             }
         }
 
-        return false;
+        if ($hasPair) {
+            foreach($cardValues as $value) {
+                if($value > $previousValue) {
+                    $previousValue = $value;
+                }
+            }
+
+            return [true, $previousValue];
+        }
+        return [false, null];
     }
 
     /**
@@ -85,17 +107,25 @@ class PokerRules
      * Checks if $hand + $board contains 2 pairs of cards with same value.
      */
     public function twoPair($fullHand) {
+        $cardValues = [];
+        $hasPair = false;
         $count = 0;
         foreach ($fullHand[0] as $key => $value) {
             if($value >= 2) {
                 $count += 1;
+                array_push($cardValues, $key);
             }
         }
 
         if ($count >= 2) {
-            return true;
+            if($count >= 3) {
+                sort($cardValues);
+                $arrlength = count($cardValues);
+                return [true, [$cardValues[$arrlength - 1], $cardValues[$arrlength - 2]]];
+            }
+            return [true, $cardValues];
         }
-        return false;
+        return [false, null];
     }
 
     /**
@@ -103,13 +133,28 @@ class PokerRules
      * Checks if $hand + $board contains 3 cards with same value.
      */
     public function threeOfAKind($fullHand) {
+        $cardValues = [];
+        $previousValue = 0;
+        $hasThree = false;
+        $count = 0;
         foreach ($fullHand[0] as $key => $value) {
             if($value >= 3) {
-                return true;
+                array_push($cardValues, $key);
+                $hasThree = true;
+                $count += 1;
             }
         }
 
-        return false;
+        if($hasThree) {
+            if($count >= 2) {
+                sort($cardValues);
+                $arrlength = count($cardValues);
+                return [true, $cardValues[$arrlength - 1]];
+            }
+            return [true, $cardValues[0]];
+        }
+
+        return [false, null];
     }
 
     /**
@@ -117,25 +162,16 @@ class PokerRules
      * Checks if $hand + $board contains 5 cards with consecutive value.
      */
     public function straight($fullHand) {
-        $arrayrules = [
-            [10, 11, 12, 13, 14],
-            [9, 10, 11, 12, 13],
-            [8, 9, 10, 11, 12],
-            [7, 8, 9, 10, 11],
-            [6, 7, 8, 9, 10],
-            [5, 6, 7, 8, 9],
-            [4, 5, 6, 7, 8],
-            [3, 4, 5, 6, 7],
-            [2, 3, 4, 5, 6],
-            [14, 2, 3, 4, 5],
-        ];
-        foreach ($arrayrules as $array) {
+        foreach ($this->arrayrules as $array) {
             if(!array_diff($array, $fullHand[2])) {
-                return true;
+                if ($array[0] === 13) {
+                    return [true, (array_sum($array) - 12)];
+                }
+                return [true, array_sum($array)];
             }
         }
 
-        return false;
+        return [false, null];
     }
 
     /**
@@ -162,6 +198,7 @@ class PokerRules
         foreach ($hand as $key => $value) {
             if($value >= 3) {
                 $three = true;
+                $ThreeValue = $key;
                 unset($hand[$key]);
             }
         }
@@ -169,13 +206,14 @@ class PokerRules
         foreach ($hand as $key => $value) {
             if($value >= 2) {
                 $two = true;
+                $twoValue = $key;
             }
         }
 
         if($three and $two) {
-            return true;
+            return [true, [$ThreeValue, $twoValue]];
         }
-        return false;
+        return [false, null];
         
     }
 
@@ -186,11 +224,11 @@ class PokerRules
     public function fourOfAKind($fullHand) {
         foreach ($fullHand[0] as $key => $value) {
             if($value >= 4) {
-                return true;
+                return [true, $key];
             }
         }
 
-        return false;
+        return [false, null];
     }
 
     /**
@@ -199,19 +237,7 @@ class PokerRules
      */
     public function straightFlush($fullHand, $hand, $board) {
         $leftOver = [];
-        $arrayrules = [
-            [10, 11, 12, 13, 14],
-            [9, 10, 11, 12, 13],
-            [8, 9, 10, 11, 12],
-            [7, 8, 9, 10, 11],
-            [6, 7, 8, 9, 10],
-            [5, 6, 7, 8, 9],
-            [4, 5, 6, 7, 8],
-            [3, 4, 5, 6, 7],
-            [2, 3, 4, 5, 6],
-            [14, 2, 3, 4, 5],
-        ];
-        foreach ($arrayrules as $array) {
+        foreach ($this->arrayrules as $array) {
             if(!array_diff($array, $fullHand[2])) {
                 $leftOver = array_diff($fullHand[2], $array);
             }
@@ -229,6 +255,15 @@ class PokerRules
      * Checks if $hand + $board contains five cards of sequential rank, all of the same suit.
      */
     public function royalFlush() {
-        
+        foreach ($this->arrayrules as $array) {
+            if(!array_diff($array, $fullHand[2])) {
+                $straigth = true;
+                $straigthArray = $array;
+            }
+        }
+
+        if ($straigth) {
+            $leftOver = array_diff($fullHand[2], $array);
+        }
     }
 }
