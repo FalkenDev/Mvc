@@ -9,6 +9,9 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Doctrine\Persistence\ManagerRegistry;
+use App\Entity\Player;
+use App\Repository\PlayerRepository;
 
 class PokerControllerTwig extends AbstractController
 {
@@ -19,8 +22,15 @@ class PokerControllerTwig extends AbstractController
      *      methods={"GET","HEAD"}
      * )
      */
-    public function PokerStart(): Response
+    public function PokerStart(
+        ManagerRegistry $doctrine,
+    ): Response
     {
+        $entityManager = $doctrine->getManager();
+        $player = new Player();
+        $player->setBalance(1000);
+        $entityManager->persist($player);
+        $entityManager->flush();
         return $this->render('project/poker/info.html.twig');
     }
 
@@ -33,21 +43,24 @@ class PokerControllerTwig extends AbstractController
      */
     public function pokerGame(
         Request $request,
-        SessionInterface $session
+        SessionInterface $session,
+        ManagerRegistry $doctrine
     ): Response {
         $die = $session->get("poker") ?? new \App\Poker\Poker();
         $rules = new \App\Poker\PokerRules();
+        $entityManager = $doctrine->getManager();
+        $player = $entityManager->getRepository(Player::class)->find(1);
         //print_r($rules->checkAllRules($session->get("playerHand"), $session->get("board")));
         //$test = array_values($session->get("board") ?? []);
-        //print_r($test);
-
+        print_r($session->get("test") ?? "fel");
+    
         $data = [
             'playerHand' => $die->get_PlayerCards(),
-            'playerScore' => "0",
+            'playerScore' => $rules->checkAllRules($die->get_PlayerCards(), $die->get_BoardCards())[0],
             'dealerHand' => $die->get_DealerCards(),
             'board' => $die->get_BoardCards(),
-            'balance' => "1000",
-            'winBalance' => "0"
+            'balance' => $player->getBalance(),
+            'winBalance' => $session->get("winning") ?? 0
         ];
 
         return $this->render('project/poker/poker.html.twig', $data);
@@ -62,7 +75,8 @@ class PokerControllerTwig extends AbstractController
      */
     public function pokerGamepProcess(
         Request $request,
-        SessionInterface $session
+        SessionInterface $session,
+        ManagerRegistry $doctrine,
     ): Response {
         // Buttons
         $ante = $request->request->get('ante');
@@ -72,20 +86,40 @@ class PokerControllerTwig extends AbstractController
         // Get the Poker sessions if not exists then create new Poker
         $die = $session->get("poker") ?? new \App\Poker\Poker();
 
+        $entityManager = $doctrine->getManager();
+        $player = $entityManager->getRepository(Player::class)->find(1);
+        $balance = $player->getBalance();
+
         // Buttons ( If press ante or call )
         if ($ante) {
+            $player->setBalance($balance - 50);
+            $entityManager->flush();
             $die->ante();
         } elseif ($call) {
+            $player->setBalance($balance - 50);
+            $entityManager->flush();
             $die->call();
-            $die->checkWinner();
+            $check = $die->checkWinner(50);
+            if ($check[0]) {
+                $player->setBalance($balance + $check[2] + 1000);
+                $entityManager->flush();
+                $session->set("winning", $check[2] + 150);
+            } elseif($check[0] === "same") {
+                $player->setBalance($balance + 100);
+                $entityManager->flush();
+                $session->set("winning", 100);
+            }
+            $session->set("test", $check);
         }
 
         // Set poker session
         $session->set("poker", $die);
 
+
         // If fold cleaer poker session
         if ($fold) {
             $session->clear();
+            unset($_SESSION["winning"]);
         }
 
         return $this->redirectToRoute('poker-game');
