@@ -14,6 +14,18 @@ class Poker extends PokerDeck
     private array $dealerHand = [];
     private array $playerHand = [];
     private array $board = [];
+    private array $ruleRanking = [
+        0 => 'High Card',
+        1 => 'Pair',
+        2 => 'Two Pair',
+        3 => 'Thee Of A Kind',
+        4 => 'Straight',
+        5 => 'Flush',
+        6 => 'Full House',
+        7 => 'Four Of A Kind',
+        8 => 'Straight Flush',
+        9 => 'Royal FLush',
+    ];
 
     /**
      * Construct method.
@@ -133,8 +145,29 @@ class Poker extends PokerDeck
         return $this->board;
     }
 
-    public function checkWinner() {
+    public function checkWinner($betAmount) {
+        $ruleClass = new PokerRules;
+        $dealerRule = $ruleClass->checkAllRules($this->dealerHand, $this->board);
+        $playerRule = $ruleClass->checkAllRules($this->playerHand, $this->board);
 
+        if($playerRule[0] === $dealerRule[0]) {
+            if($playerRule[1] > $dealerRule[1]) {
+                $odds = $this->payOdds($betAmount, $playerRule[0]);
+                return [true, $playerRule[0], $odds];
+            } elseif($playerRule[1] === $playerRule[1]) {
+                return ["same", $dealerRule[0]];
+            }
+            return [false, $dealerRule[0]];
+        }
+        
+        $dealerRanking = array_search($dealerRule[0], $this->ruleRanking);
+        $playerRanking = array_search($playerRule[0], $this->ruleRanking);
+
+        if($playerRule > $dealerRule) {
+            $odds = $this->payOdds($betAmount, $playerRule[0]);
+            return [true, $playerRule[0], $odds];
+        }
+        return [false, $dealerRule[0]];
     }
 
     public function payOdds($betAmount, $rule) {
