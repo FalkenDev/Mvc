@@ -17,7 +17,7 @@ class PokerRulesTest extends TestCase
     public function testCreateDeckForBlackjack()
     {
         $die = new Blackjack();
-        $this->assertInstanceOf("\App\Card\Blackjack", $die);
+        $this->assertInstanceOf("\App\Poker\PokerRules", $die);
 
         $res = $die->show_deck();
         $this->assertIsArray($res);
