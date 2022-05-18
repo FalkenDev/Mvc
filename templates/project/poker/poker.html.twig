@@ -78,7 +78,12 @@
                     {% endif %}
                 </div>
                 <div class="button-section">
-                    <input class="button-options" type="submit" name="fold" value="FOLD">
+                    {% if board|length is same as 5 %}
+                        <input class="button-options" type="submit" name="fold" value="Start new game">
+                    {% elseif playerHand|length is same as 2 %}
+                    <input class="button-options" type="submit" name="fold" value="Fold">
+                    {% else %}
+                    {% endif %}
                 </div>
                 </form>
             </div>
