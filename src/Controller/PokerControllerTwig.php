@@ -50,9 +50,7 @@ class PokerControllerTwig extends AbstractController
         $rules = new \App\Poker\PokerRules();
         $entityManager = $doctrine->getManager();
         $player = $entityManager->getRepository(Player::class)->find(1);
-        //print_r($rules->checkAllRules($session->get("playerHand"), $session->get("board")));
-        //$test = array_values($session->get("board") ?? []);
-        print_r($session->get("test") ?? "fel");
+        print_r($die->checkWinner(50));
     
         $data = [
             'playerHand' => $die->get_PlayerCards(),
@@ -100,16 +98,15 @@ class PokerControllerTwig extends AbstractController
             $entityManager->flush();
             $die->call();
             $check = $die->checkWinner(50);
-            if ($check[0]) {
-                $player->setBalance($balance + $check[2] + 1000);
-                $entityManager->flush();
-                $session->set("winning", $check[2] + 150);
-            } elseif($check[0] === "same") {
+            if($check[0] === "same") {
                 $player->setBalance($balance + 100);
                 $entityManager->flush();
                 $session->set("winning", 100);
+            } elseif ($check[0]) {
+                $player->setBalance($balance + $check[2] + 100);
+                $entityManager->flush();
+                $session->set("winning", $check[2] + 100);
             }
-            $session->set("test", $check);
         }
 
         // Set poker session
