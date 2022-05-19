@@ -9,17 +9,58 @@ use PHPUnit\Framework\TestCase;
  */
 class PokerRulesTest extends TestCase
 {
-    /**
-     * Test to construct a deck.
-     *
-     * Look up if $die is an instance of \App\Card\Blackjack and $res is an array.
-     */
-    public function testCreateDeckForPoker()
+    public function testPushtoValueCards()
     {
-        $die = new Blackjack();
-        $this->assertInstanceOf("\App\Poker\PokerRules", $die);
 
-        $res = $die->show_deck();
-        $this->assertIsArray($res);
+    }
+
+    public function checkAllRules()
+    {
+        
+    }
+
+    public function pairRule()
+    {
+        
+    }
+
+    public function twoPairRule()
+    {
+        
+    }
+
+    public function threeOfAKindRule()
+    {
+        
+    }
+
+    public function straightRule()
+    {
+        
+    }
+
+    public function flushRule()
+    {
+        
+    }
+
+    public function fullHouseRule()
+    {
+        
+    }
+
+    public function fourOfAKindRule()
+    {
+        
+    }
+
+    public function straightFlushRule()
+    {
+        
+    }
+
+    public function royalFlushRule()
+    {
+        
     }
 }
