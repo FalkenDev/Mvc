@@ -62,9 +62,9 @@ class Poker extends PokerDeck
     {
         $this->drawCardToDealer(2);
         $this->drawCardToBoard(2);
+        $checkWinner = $this->checkWinner(50);
 
-        // Return dealer and board cards for PokerTest class
-        return [$this->dealerHand, $this->board];
+        return $checkWinner;
     }
 
     /**
@@ -154,7 +154,7 @@ class Poker extends PokerDeck
             if($playerRule[1] > $dealerRule[1]) {
                 $odds = $this->payOdds($betAmount, $playerRule[0]);
                 return [true, $playerRule[0], $odds];
-            } elseif($playerRule[1] === $playerRule[1]) {
+            } elseif($playerRule[1] === $dealerRule[1]) {
                 return ["same", $dealerRule[0]];
             }
             return [false, $dealerRule[0]];
