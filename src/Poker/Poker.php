@@ -163,7 +163,7 @@ class Poker extends PokerDeck
         $dealerRanking = array_search($dealerRule[0], $this->ruleRanking);
         $playerRanking = array_search($playerRule[0], $this->ruleRanking);
 
-        if($playerRule > $dealerRule) {
+        if($playerRanking > $dealerRanking) {
             $odds = $this->payOdds($betAmount, $playerRule[0]);
             return [true, $playerRule[0], $odds];
         }
@@ -173,16 +173,16 @@ class Poker extends PokerDeck
     public function payOdds($betAmount, $rule) {
         $odds = 0;
         switch ($rule) {
-            case "Royal flush":
+            case "Royal Flush":
                 $odds = 100;
                 break;
-            case "Straigth flush":
+            case "Straigth Flush":
                 $odds = 20;
                 break;
-            case "Four of a kind":
+            case "Four Of A Kind":
                 $odds = 10;
                 break;
-            case "Full house":
+            case "Full House":
                 $odds = 4;
                 break;
             case "Flush":
@@ -191,7 +191,7 @@ class Poker extends PokerDeck
             case "Straight":
                 $odds = 2;
                 break;
-            case "Three of a kind":
+            case "Three Of A Kind":
                 $odds = 1;
                 break;
             case "Two Pair":
