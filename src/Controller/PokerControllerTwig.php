@@ -27,10 +27,13 @@ class PokerControllerTwig extends AbstractController
     ): Response
     {
         $entityManager = $doctrine->getManager();
-        $player = new Player();
-        $player->setBalance(1000);
-        $entityManager->persist($player);
-        $entityManager->flush();
+        $player = $entityManager->getRepository(Player::class)->find(1);
+        if (!$player) {
+            $player = new Player();
+            $player->setBalance(1000);
+            $entityManager->persist($player);
+            $entityManager->flush();
+        }
         return $this->render('project/poker/info.html.twig');
     }
 
@@ -51,7 +54,6 @@ class PokerControllerTwig extends AbstractController
         $entityManager = $doctrine->getManager();
         $player = $entityManager->getRepository(Player::class)->find(1);
         print_r($die->checkWinner(50));
-    
         $data = [
             'playerHand' => $die->get_PlayerCards(),
             'playerScore' => $rules->checkAllRules($die->get_PlayerCards(), $die->get_BoardCards())[0],
@@ -76,7 +78,9 @@ class PokerControllerTwig extends AbstractController
         SessionInterface $session,
         ManagerRegistry $doctrine,
     ): Response {
-        // Buttons
+        $entityManager = $doctrine->getManager();
+
+        // Buttons in twig file
         $ante = $request->request->get('ante');
         $call = $request->request->get('call');
         $fold = $request->request->get('fold');
@@ -84,8 +88,10 @@ class PokerControllerTwig extends AbstractController
         // Get the Poker sessions if not exists then create new Poker
         $die = $session->get("poker") ?? new \App\Poker\Poker();
 
-        $entityManager = $doctrine->getManager();
+        // Get Player1
         $player = $entityManager->getRepository(Player::class)->find(1);
+
+        // Get player balance
         $balance = $player->getBalance();
 
         // Buttons ( If press ante or call )
@@ -96,27 +102,25 @@ class PokerControllerTwig extends AbstractController
         } elseif ($call) {
             $player->setBalance($balance - 50);
             $entityManager->flush();
-            $die->call();
-            $check = $die->checkWinner(50);
-            if($check[0] === "same") {
+            $checkWinner = $die->call();
+
+            if($checkWinner[0] === "same") { // If the dealer and player have the same card value
                 $player->setBalance($balance + 100);
                 $entityManager->flush();
                 $session->set("winning", 100);
-            } elseif ($check[0]) {
-                $player->setBalance($balance + $check[2] + 100);
+
+            } elseif ($checkWinner[0]) { // If the player wins
+                $player->setBalance($balance + $checkWinner[2] + 150);
                 $entityManager->flush();
-                $session->set("winning", $check[2] + 100);
+                $session->set("winning", $checkWinner[2] + 150);
             }
         }
-
         // Set poker session
         $session->set("poker", $die);
 
-
-        // If fold cleaer poker session
+        // If press fold / new game (clear all sessions)
         if ($fold) {
             $session->clear();
-            unset($_SESSION["winning"]);
         }
 
         return $this->redirectToRoute('poker-game');
