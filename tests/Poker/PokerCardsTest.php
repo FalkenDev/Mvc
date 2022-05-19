@@ -20,7 +20,7 @@ class PokerCardsTest extends TestCase
     public function testCreateCard()
     {
         $die = new Cards("2", "♥");
-        $this->assertInstanceOf("\App\Card\PokerCards", $die);
+        $this->assertInstanceOf("\App\Poker\PokerCards", $die);
 
         $resValue = $die->get_value();
         $this->assertIsString($resValue);
