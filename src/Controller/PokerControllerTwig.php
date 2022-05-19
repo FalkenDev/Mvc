@@ -53,7 +53,6 @@ class PokerControllerTwig extends AbstractController
         $rules = new \App\Poker\PokerRules();
         $entityManager = $doctrine->getManager();
         $player = $entityManager->getRepository(Player::class)->find(1);
-        print_r($die->checkWinner(50));
         $data = [
             'playerHand' => $die->get_PlayerCards(),
             'playerScore' => $rules->checkAllRules($die->get_PlayerCards(), $die->get_BoardCards())[0],
