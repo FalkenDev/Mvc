@@ -6,6 +6,18 @@
     height: 900px;
     border: 1px solid black;
     text-align: center;
+    display: flex;
+}
+
+.main-poker {
+    order: 2;
+    width: 70%;
+    margin-right: 200px;
+}
+
+.aside-poker {
+    order: 1;
+    width: 30%;
 }
 
 .poker-title {
@@ -19,6 +31,7 @@
 
 .board-section {
     height: 25%;
+    margin-top: 25;
 }
 
 .board {
@@ -128,15 +141,11 @@ input {
     height: 162px;
 }
 .player-section {
-    display: flex;
-}
-/* Player Middle Side */
-.player-middle {
-    order: 2;
-    margin-left: 290px;
+    margin: auto;
 }
 
 .pay-section {
+    margin: auto;
     display: flex;
     flex-direction: row;
     width: 280px;
@@ -173,7 +182,7 @@ input {
 /* Player Left Side */
 .player-left {
     order: 1;
-    margin-left: 20px;
+    margin-top: 140px;
 }
 
 .player-score-board {
@@ -194,8 +203,7 @@ input {
 
 .balanceWinContainer {
     display: flex;
-    width: 350px;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .balance,
@@ -219,15 +227,32 @@ input {
     color: white;
 }
 
-.betsize {
-    position: absolute;
-    top: 940px;
-    left: 170px;
-}
-
 .backside {
     padding-top: 1.5px;
     border: 2px solid black;
     background-image: url("../../img/cardbackside.png");
     background-size: cover;
+}
+
+.odds-board {
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    width: 300px;
+    padding: 20px;
+    margin: auto;
+    margin-top: 50px;
+}
+
+.odds-board tr {
+    color: white;
+}
+
+.odds-board tr th {
+    text-align: left;
+    color: yellow;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
 }
