@@ -58,14 +58,14 @@
                 <form method="POST">
                 <div class="pay-section">
                     {% if board|length is same as 5 %}
-                        <div class="button-pay">
+                        <div class="button-pay-div">
                             <div class="pokerchip blue"></div>
                         </div>
-                        <div class="button-pay">
+                        <div class="button-pay-div">
                             <div class="pokerchip blue"></div>
                         </div>
                     {% elseif playerHand|length is same as 2 %}
-                        <div class="button-pay">
+                        <div class="button-pay-div">
                             <div class="pokerchip blue"></div>
                         </div>
                         <input class="button-pay" type="submit" name="call" value="CALL">
