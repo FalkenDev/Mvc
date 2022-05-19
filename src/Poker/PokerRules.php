@@ -23,6 +23,10 @@ class PokerRules
         [14, 2, 3, 4, 5],
     ];
 
+    /**
+     * Push board and hand to values, suites, poker values and cards into arrays.
+     * Using for the rule classes.
+     */
     public function pushToValueCards($hand, $board) {
         $values = [];
         $suites = [];
@@ -57,8 +61,18 @@ class PokerRules
         return $array;
     }
 
+    /**
+     * Check if player / dealer have a rule.
+     * Starts from the highest rule ranking to the button.
+     * return a array with the rule that player / dealer have and card values for the rule used.
+     * 
+     */
     public function checkAllRules($hand, $board) {
         $cards = $this->pushToValueCards($hand, $board);
+
+        if($hand === []) {
+            return ["Nothing", null];
+        }
 
         if($this->royalFlush($cards)[0]) {
             return ["Royal Flush", $this->royalFlush($cards)[1]];
@@ -88,7 +102,7 @@ class PokerRules
             return ["Pair", $this->pair($cards)[1]];
 
         }
-        return ["High Card", "nothing"];
+        return ["High Card", null];
     }
 
     /**
