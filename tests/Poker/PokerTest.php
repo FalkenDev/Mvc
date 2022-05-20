@@ -11,56 +11,147 @@ class PokerTest extends TestCase
 {
     public function testCreateDeckPoker()
     {
+        $die = new Poker();
+        $this->assertInstanceOf("\App\Poker\Poker", $die);
 
+        $res = $die->show_deck();
+        $this->assertIsArray($res);
     }
 
+    /**
+     * Test Ante method.
+     * Check if ante method returns a array.
+     * Check if the length of the array is 2 in first element ( Player draws 2 cards ) and
+     * the length of the array is 3 in second element ( Board draws 3 cards ).
+     */
     public function testAnte()
     {
+        $die = new Poker();
+        $cards = $die->ante();
+        $arrayLength = count($cards);
 
+        $this->assertIsArray($cards);
+        $this->assertEquals(2, $arrayLength[0]);
+        $this->assertEquals(3, $arrayLength[1]);
     }
 
+    /**
+     * Test Call method.
+     * Check if call method work where it draws 2 more cars to board and 2 cards to dealer and
+     * who the winner is returning from checkWinner method.
+     * 
+     * Check if call method returns a array.
+     * Check if second element in array is a string.
+     */
     public function testCall()
     {
-
+        $die = new Poker();
+        $die->ante();
+        $checkWinner = $die->call();
+        $this->assertIsArray($checkWinner);
+        $this->assertIsString($checkWinner[1]);
     }
 
+    /**
+     * Test get_BoardCards and drawCardToBoard method.
+     * 
+     * Check if array is empty when using get_BoardCards method when no cards are drawn to the board.
+     * 
+     * Using drawCardToBoard method and put in 3 to draw 3 cards then check if cards returning in a array
+     * and arraylength is 3.
+     */
     public function testGet_BoardCards()
     {
+        $die = new Poker();
+        $boardCards = $die->get_BoardCards();
+        $arrayLengthNoDraw = count($boardCards);
+        $this->assertEquals(0, $arrayLengthNoDraw);
 
+        $die->drawCardToBoard(3);
+        $boardCards = $die->get_BoardCards();
+        $arrayLengthDraw = count($boardCards);
+        $this->assertIsArray($boardCards);
+        $this->assertEquals(3, $arrayLengthDraw);
     }
 
+    /**
+     * Test get_PlayerCards and drawCardToPlayer method.
+     * 
+     * Check if array is empty when using get_PlayerCards method when no cards are drawn to the player.
+     * 
+     * Using drawCardToPlayer method and put in 2 to draw 2 cards then check if cards returning in a array
+     * and arraylength is 2.
+     */
     public function testGet_PlayerCards()
     {
+        $die = new Poker();
+        $playerCards = $die->get_PlayerCards();
+        $arrayLengthNoDraw = count($playerCards);
+        $this->assertEquals(0, $arrayLengthNoDraw);
 
+        $die->drawCardToPlayer(2);
+        $playerCards = $die->get_PlayerCards();
+        $arrayLengthDraw = count($playerCards);
+        $this->assertIsArray($playerCards);
+        $this->assertEquals(2, $arrayLengthDraw);
     }
 
+    /**
+     * Test get_DealerCards and drawCardToDealer method.
+     * 
+     * Check if array is empty when using get_DealerCards method when no cards are drawn to the dealer.
+     * 
+     * Using drawCardToDealer method and put in 2 to draw 2 cards then check if cards returning in a array
+     * and arraylength is 2.
+     */
     public function testGet_DealerCards()
     {
+        $die = new Poker();
+        $dealerCards = $die->get_DealerCards();
+        $arrayLengthNoDraw = count($dealerCards);
+        $this->assertEquals(0, $arrayLengthNoDraw);
 
+        $die->drawCardToDealer(2);
+        $dealerCards = $die->get_DealerCards();
+        $arrayLengthDraw = count($dealerCards);
+        $this->assertIsArray($dealerCards);
+        $this->assertEquals(2, $arrayLengthDraw);
     }
 
-    public function testDrawCardToPlayer()
-    {
-
-    }
-
-    public function testDrawCardToDealer()
-    {
-
-    }
-
-    public function testDrawCardToBoard()
-    {
-
-    }
-
+    /**
+     * Test checkWinner method.
+     * Using ante and call method to draw 2 cards to the Player, Dealer and 5 cards to the board.
+     * 
+     * Test if checkwinner is returning a array and test if the first element in array is a boolean.
+     * Test if second element in array is a string and if first element is true = Player winns test if
+     * odds is in element 3 in array and have higher or equal to 50 when put in 50 to checkWinner method.
+     */
     public function testCheckWinner()
     {
+        $die = new Poker();
+        $die->ante();
+        $die->call();
+        $checkWinner = $die->checkWinner(50);
+        $this->assertIsArray($checkWinner);
+        $this->assertIsBoolean('bool', $checkWinner[0]);
+        $this->assertIsString($checkWinner[1]);
+        if($checkWinner[0]) {
+            $this->assertIsInt($checkWinner[2]);
+            $this->assertGreaterThanOrEqual(50, $checkWinner[2]);
+        }
 
     }
 
+    /**
+     * Test payOdds method.
+     * 
+     * Test payOdds method returns a integer with value of 500 when put int 50 in bet amount and rule Four Of A Kind.
+     */
     public function testPayOdds()
     {
-
+        $die = new Poker();
+        $payOdds = $die->payOdds(50, "Four Of A Kind");
+        $this->assertIsInt($payOdds);
+        $this->assertEquals(500, $payOdds);
     }
 }
