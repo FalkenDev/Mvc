@@ -139,13 +139,9 @@ class PokerRules
         }
 
         if ($hasPair) {
-            foreach($cardValues as $value) {
-                if($value > $previousValue) {
-                    $previousValue = $value;
-                }
-            }
-
-            return [true, $previousValue];
+            sort($cardValues);
+            $arrlength = count($cardValues);
+            return [true, $cardValues[$arrlength - 1]];
         }
         return [false, null];
     }
@@ -160,7 +156,6 @@ class PokerRules
      */
     public function twoPair($fullHand) {
         $cardValues = [];
-        $hasPair = false;
         $count = 0;
         foreach ($fullHand[0] as $key => $value) {
             if($value >= 2) {
@@ -190,7 +185,6 @@ class PokerRules
      */
     public function threeOfAKind($fullHand) {
         $cardValues = [];
-        $previousValue = 0;
         $hasThree = false;
         $count = 0;
         foreach ($fullHand[0] as $key => $value) {
@@ -263,6 +257,7 @@ class PokerRules
         $three = false;
         $two = false;
         $hand = $fullHand[0];
+        $ThreeValue = "";
         foreach ($hand as $key => $value) {
             if($value >= 3) {
                 $three = true;
