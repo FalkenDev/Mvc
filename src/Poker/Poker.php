@@ -9,8 +9,6 @@ namespace App\Poker;
  */
 class Poker extends PokerDeck
 {
-
-    private array $deck = [];
     private array $dealerHand = [];
     private array $playerHand = [];
     private array $board = [];
@@ -105,7 +103,8 @@ class Poker extends PokerDeck
     {
         // Draws card to player
         $card = parent::draw($amount);
-        for ($x = 0; $x < count($card); $x++) {
+        $arrayLength = count($card);
+        for ($x = 0; $x < $arrayLength; $x++) {
             array_push($this->playerHand, $card[$x]);
         }
         return $this->playerHand;
@@ -122,7 +121,8 @@ class Poker extends PokerDeck
     {
         // Draws card to dealer
         $card = parent::draw($amount);
-        for ($x = 0; $x < count($card); $x++) {
+        $arrayLength = count($card);
+        for ($x = 0; $x < $arrayLength; $x++) {
             array_push($this->dealerHand, $card[$x]);
         }
         return $this->dealerHand;
@@ -137,9 +137,10 @@ class Poker extends PokerDeck
      */
     public function drawCardToBoard(int $amount)
     {
-        // Draws card to dealer
+        // Draws card to the board
         $card = parent::draw($amount);
-        for ($x = 0; $x < count($card); $x++) {
+        $arrayLength = count($card);
+        for ($x = 0; $x < $arrayLength; $x++) {
             array_push($this->board, $card[$x]);
         }
         return $this->board;
