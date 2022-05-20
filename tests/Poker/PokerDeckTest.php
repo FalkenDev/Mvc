@@ -17,7 +17,7 @@ class PokerDeckTest extends TestCase
      */
     public function testCreateDeck()
     {
-        $die = new Deck();
+        $die = new PokerDeck();
         $this->assertInstanceOf("\App\Poker\PokerDeck", $die);
 
         $res = $die->show_deck();
@@ -33,7 +33,7 @@ class PokerDeckTest extends TestCase
      */
     public function testShuffleDeck()
     {
-        $die = new Deck();
+        $die = new PokerDeck();
 
         $noShuffle = $die->show_deck();
         $shuffle = $die->shuffle_deck();
@@ -47,7 +47,7 @@ class PokerDeckTest extends TestCase
      */
     public function testDrawDeck()
     {
-        $die = new Deck();
+        $die = new PokerDeck();
 
         $res = $die->draw(1);
         $this->assertNotEmpty($res);
