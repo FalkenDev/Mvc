@@ -40,7 +40,7 @@ class Poker extends PokerDeck
     /**
      * If player bets / push Ante button.
      * Draw 2 cards to Player and 3 cards to the board.
-     * @return
+     * @return array ( Player card hand and the board cards)
      */
     public function ante()
     {
@@ -54,7 +54,7 @@ class Poker extends PokerDeck
     /**
      * If player push Calls after Ante.
      * Draw 2 cards to dealer and the last 2 cards to the board.
-     * @return
+     * @return array ( Array with boolean, winning rule and if player winns payout odds to).
      */
     public function call()
     {
@@ -67,7 +67,7 @@ class Poker extends PokerDeck
 
     /**
      * Return all cards from the board (Middle section).
-     * @return board
+     * @return array ( boards card )
      */
     public function get_BoardCards()
     {
@@ -76,7 +76,7 @@ class Poker extends PokerDeck
 
     /**
      * Return all cards from the Players hand (Down section).
-     * @return playerHand
+     * @return array ( Players card hand )
      */
     public function get_PlayerCards()
     {
@@ -85,7 +85,7 @@ class Poker extends PokerDeck
 
     /**
      * Return all cards from the Dealers hand (Upper section).
-     * @return dealerHand
+     * @return array ( Dealers card hand )
      */
     public function get_DealerCards()
     {
@@ -97,7 +97,7 @@ class Poker extends PokerDeck
      * draw method is from Deck class.
      *
      * @param int $amount Amount cards to draw.
-     * @return $this->playerHand
+     * @return array ( Players card hand )
      */
     public function drawCardToPlayer(int $amount)
     {
@@ -115,7 +115,7 @@ class Poker extends PokerDeck
      * draw method is from Deck class.
      *
      * @param int $amount Amount cards to draw.
-     * @return $this->dealerHand
+     * @return array ( Dealers card hand )
      */
     public function drawCardToDealer(int $amount)
     {
@@ -133,7 +133,7 @@ class Poker extends PokerDeck
      * draw method is from Deck class.
      *
      * @param int $amount Amount cards to draw.
-     * @return $this->dealerHand
+     * @return array ( boards card )
      */
     public function drawCardToBoard(int $amount)
     {
@@ -146,6 +146,14 @@ class Poker extends PokerDeck
         return $this->board;
     }
 
+    /**
+     * Check who is the winner ( dealer or player ).
+     * @param int $betAmount (What the player bets in ante / call).
+     * 
+     * If player wins, return true, player rule and how much the payout is.
+     * If dealer wins, return false and dealers rule.
+     * If drawn return same and dealers rule.
+     */
     public function checkWinner($betAmount) {
         $ruleClass = new PokerRules;
         $dealerRule = $ruleClass->checkAllRules($this->dealerHand, $this->board);
@@ -153,14 +161,13 @@ class Poker extends PokerDeck
 
         // If player and dealer have the same rule.
         if($playerRule[0] === $dealerRule[0]) {
-            // If player have higher card value then dealer of the same rule, player winns.
-            // Elseif player and dealer have the same card value of the same rule then it's a draw.
-            if($playerRule[1] > $dealerRule[1]) {
+            // If player and dealer have the same card value of the same rule then it's a draw.
+            // Elseif player have higher card value then dealer of the same rule, player winns.
+            } if($playerRule[1] === $dealerRule[1]) {
+                return ["same", $dealerRule[0]];
+            } elseif($playerRule[1] > $dealerRule[1]) {
                 $odds = $this->payOdds($betAmount, $playerRule[0]);
                 return [true, $playerRule[0], $odds];
-            } elseif($playerRule[1] === $dealerRule[1]) {
-                return ["same", $dealerRule[0]];
-            }
             return [false, $dealerRule[0]];
         }
         
@@ -178,8 +185,8 @@ class Poker extends PokerDeck
 
     /**
      * payOdds method.
-     * @param betAmount
-     * @param rule
+     * @param int ( How much the player bet in ante / call ).
+     * @param string ( The rule that player win against the dealer ).
      * 
      * A switch case method that checks what rule the player had and return the payout of the odds times bet amount.
      * Returns the payout the player should recive.

@@ -25,8 +25,8 @@ class PokerRules
 
     /**
      * pushToValueCards method.
-     * @param hand
-     * @param board
+     * @param array $hand ( The Player or Dealer card hand ).
+     * @param array $board ( The boards cards ).
      *
      * Push board and hand cards with values, suites, poker values and cards into arrays.
      * Using for the rule methods.
@@ -74,8 +74,8 @@ class PokerRules
 
     /**
      * checkAllRules method.
-     * @param hand
-     * @param board
+     * @param array $hand ( The Player or Dealer card hand ).
+     * @param array $board ( The boards cards ).
      * 
      * Check if player / dealer have a rule.
      * Starts from the highest rule ranking to the button.
@@ -121,7 +121,7 @@ class PokerRules
 
     /**
      * Pair method.
-     * @param fullHand
+     * @param array $fullhand (Array from pushToValueCards methods return).
      * 
      * Checks if $hand + $board contains 2 cards with same value.
      * If pair: Returns true and the biggest pair value on the board / hand in a array.
@@ -177,7 +177,7 @@ class PokerRules
 
     /**
      * Three Of A kind method.
-     * @param fullHand
+     * @param array $fullhand (Array from pushToValueCards methods return).
      * 
      * Checks if $hand + $board contains 3 cards with same value.
      * If have 3 of the same card: return true and what card used in a array. 
@@ -209,7 +209,7 @@ class PokerRules
 
     /**
      * Straight method.
-     * @param fullHand
+     * @param array $fullhand (Array from pushToValueCards methods return).
      * 
      * Checks if $hand + $board contains 5 cards with consecutive value.
      * If 5 cards are consecutive value: Returns true and the sum of the array in a array.
@@ -230,7 +230,7 @@ class PokerRules
 
     /**
      * Flush method.
-     * @param fullHand
+     * @param array $fullhand (Array from pushToValueCards methods return).
      * 
      * Checks if $hand + $board contains 5 cards with same suit.
      * If 5 cards contains same suit: Returns true,
@@ -247,7 +247,7 @@ class PokerRules
 
     /**
      * Full House method.
-     * @param fullHand
+     * @param array $fullhand (Array from pushToValueCards methods return).
      * 
      * Checks if $hand + $board contains 3 cards of the same value, and 2 cards of a different, matching value (1 three of a kind and 1 pair).
      * If have 1 Three of a kind and 1 pair: Returns true and the card value of three of a kind and pair used in a array.
@@ -282,7 +282,7 @@ class PokerRules
 
     /**
      * Four Of A Kind method.
-     * @param fullHand
+     * @param array $fullhand (Array from pushToValueCards methods return).
      * 
      * Checks if $hand + $board contains 4 cards with same value.
      * If it contains 4 with same value: Returns true and what card value is used in a array.
@@ -300,7 +300,7 @@ class PokerRules
 
     /**
      * Straight Flush method.
-     * @param fullHand
+     * @param array $fullhand (Array from pushToValueCards methods return).
      * 
      * Checks if $hand + $board contains five cards of sequential rank, all of the same suite.
      * If sequential rank and all of the same suite: Returns true and what straight array is used in a array.
@@ -337,7 +337,7 @@ class PokerRules
 
     /**
      * Three Of A kind method.
-     * @param fullHand
+     * @param array $fullhand (Array from pushToValueCards methods return).
      * 
      * Checks if $hand + $board contains five cards of sequential rank of the highest straight, all of the same suit.
      * If sequential rank of the highest straight and all of the same suite: Returns true and what straight array is used in a array.

@@ -33,7 +33,7 @@ class PokerCards
     /**
      * Gets the card value
      *
-     * @return string $value
+     * @return string $value ( The vard value ).
      */
     public function get_value(): string
     {
@@ -43,7 +43,7 @@ class PokerCards
     /**
      * Gets the card suite
      *
-     * @return string $suite
+     * @return string $suite ( The card suite ).
      */
     public function get_suite(): string
     {
@@ -53,7 +53,7 @@ class PokerCards
     /**
      * Gets the card pokerValue
      *
-     * @return int $pokerValue
+     * @return int $pokerValue (The poker value of the card ).
      */
     public function get_pokerValue(): int
     {

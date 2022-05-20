@@ -43,7 +43,7 @@ class PokerDeck
     /**
      * Show the whole deck (pack of cards).
      *
-     * @return array $deck
+     * @return array $deck ( All cards that are in the deck )
      */
     public function show_deck(): array
     {
@@ -65,7 +65,7 @@ class PokerDeck
      * draw a card from the deck.
      *
      * @param int $numDraw Amount of cards to draw
-     * @return array $card
+     * @return array $card ( Cards that have been drawn in the deck ).
      */
     public function draw(int $numDraw)
     {
