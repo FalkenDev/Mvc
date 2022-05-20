@@ -10,12 +10,12 @@ use PHPUnit\Framework\TestCase;
 class PokerRulesTest extends TestCase
 {
 
-    public array $player;
-    public array $board;
-    public array $dealer;
+    private array $player;
+    private array $board = [];
+    private array $dealer;
 
-    public array $boardHighCard;
-    public array $playerHighCard;
+    private array $boardHighCard;
+    private array $playerHighCard;
 
     /**
      * Test pushToValueCards method.
@@ -23,25 +23,20 @@ class PokerRulesTest extends TestCase
      */
     public function testPushtoValueCards()
     {
-        // Inserting cards for the board.
-        for ($i = 1; $i <= 3; $i++){
-            $this->board[] = new PokerCards("3", "♠", 3);
-        }
-        for ($i = 1; $i <= 2; $i++){
-            $this->board[] = new PokerCards("A", "♦", 14);
-        }
-
-        // Inserting cards for the player.
-        for ($i = 1; $i <= 2; $i++){
-            $this->player[] = new PokerCards("A", "♣", 14);
-        }
-
-        // Inserting cards for the Dealer.
-        for ($i = 1; $i <= 2; $i++){
-            $this->dealer[] = new PokerCards("J", "♣", 14);
-        }
-
         $die = new PokerRules();
+
+        $this->player[] = new PokerCards("2", "♣", 2);
+        $this->player[] = new PokerCards("4", "♦", 4);
+
+        $this->dealer[] = new PokerCards("7", "♣", 7);
+        $this->dealer[] = new PokerCards("4", "♣", 4);
+
+        $this->board[] = new PokerCards("8", "♦", 8);
+        $this->board[] = new PokerCards("J", "♥", 11);
+        $this->board[] = new PokerCards("K", "♦", 13);
+        $this->board[] = new PokerCards("A", "♠", 14);
+        $this->board[] = new PokerCards("9", "♥", 9);
+
         $player = $die->pushToValueCards($this->player, $this->board);
         $dealer = $die->pushToValueCards($this->dealer, $this->board);
         $this->assertIsArray($player);
@@ -52,42 +47,55 @@ class PokerRulesTest extends TestCase
     /**
      * Test checkAllRules method.
      * 
-     * Check if method returns a array and first element returns a string that says Four Of A Kind.
-     * 
-     * Test if checkAllRules returns a array with first element says nogthing if put in 2 empty arrays in the method.
+     * Test if checkAllRules method returns a array and first element returns a string that says Four Of A Kind.
+     * Test if checkAllRules method returns a array with first element says nogthing if put in 2 empty arrays in the method.
+     * Test if checkAllRules method returns a array with first element says High Card when put in cards that have nothing on the rules.
      */
     public function testCheckAllRules()
     {
 
-        // Inserting 3 cards to the board ( 3 cards with value 3, suite ♠ and pokerValue 3).
-        for ($i = 1; $i <= 3; $i++){
-            $this->board[] = new PokerCards("3", "♠", 3);
-        }
+        // When have Four Of A Kind
+        $this->player[] = new PokerCards("2", "♣", 2);
+        $this->player[] = new PokerCards("4", "♦", 4);
 
-        // Inserting 2 more cars to the board ( 2 cards with value A, suite ♦ and pokerValue 14).
-        for ($i = 1; $i <= 2; $i++){
-            $this->board[] = new PokerCards("A", "♦", 14);
-        }
-
-        // Inserting cards to the player ( 2 cards with value A, suite ♣ and pokerValue 14).
-        for ($i = 1; $i <= 2; $i++){
-            $this->player[] = new PokerCards("A", "♣", 14);
-        }
+        $this->board[] = new PokerCards("4", "♠", 4);
+        $this->board[] = new PokerCards("4", "♥", 4);
+        $this->board[] = new PokerCards("4", "♣", 4);
+        $this->board[] = new PokerCards("A", "♠", 14);
+        $this->board[] = new PokerCards("9", "♥", 9);
 
         $die = new PokerRules();
         $rulePlayer = $die->checkAllRules($this->player, $this->board);
         $this->assertStringContainsString('Four Of A Kind', $rulePlayer[0]);
 
+        // When array is empty
         $ruleEmpty = $die->checkAllRules([], []);
         $this->assertStringContainsString('Nothing', $ruleEmpty[0]);
+
+        // When have no rule
+        $this->playerHighCard[] = new PokerCards("2", "♣", 2);
+        $this->playerHighCard[] = new PokerCards("4", "♦", 4);
+
+        $this->boardHighCard[] = new PokerCards("8", "♦", 8);
+        $this->boardHighCard[] = new PokerCards("J", "♥", 11);
+        $this->boardHighCard[] = new PokerCards("K", "♦", 13);
+        $this->boardHighCard[] = new PokerCards("A", "♠", 14);
+        $this->boardHighCard[] = new PokerCards("9", "♥", 9);
         
+        $ruleEmpty = $die->checkAllRules($this->playerHighCard, $this->boardHighCard);
+        $this->assertStringContainsString('High Card', $ruleEmpty[0]);
     }
 
     /**
      * Test Pair method.
+     * Both check when player have pair and not having pair.
+     *
+     * Test if Pair method returns a array and first element returns a boolean that is true when player have pair.
+     * Test if Pair method returns a array and first element returns a boolean that is false when player have no pair.
      */
     public function testPairRule()
     {
+        // Test when have Pair.
         $this->player[] = new PokerCards("A", "♣", 14);
         $this->player[] = new PokerCards("J", "♣", 11);
 
@@ -100,6 +108,7 @@ class PokerRulesTest extends TestCase
         $result = $die->pair($allCards);
         $this->assertTrue($result[0]);
 
+        // Test when not have Pair.
         $this->playerHighCard[] = new PokerCards("2", "♣", 2);
         $this->playerHighCard[] = new PokerCards("4", "♦", 4);
 
@@ -115,8 +124,18 @@ class PokerRulesTest extends TestCase
         
     }
 
+    /**
+     * Test Two Pair method.
+     * Both check when player have and have not 2 pairs.
+     *
+     * Test if twoPair method returns a array and first element returns a boolean that is true when player have two pair.
+     * Test if twoPair method returns a array and first element returns a boolean that is false when player have no two pair.
+     */
     public function testTwoPairRule()
     {
+        $die = new PokerRules();
+
+        // Test when not have Two Pair.
         $this->player[] = new PokerCards("A", "♣", 14);
         $this->player[] = new PokerCards("J", "♣", 11);
 
@@ -124,11 +143,11 @@ class PokerRulesTest extends TestCase
         $this->board[] = new PokerCards("J", "♠", 3);
         $this->board[] = new PokerCards("K", "♠", 13);
 
-        $die = new PokerRules();
         $allCards = $die->pushToValueCards($this->player, $this->board);
         $result = $die->twoPair($allCards);
         $this->assertTrue($result[0]);
 
+        // Test when not have Two Pair.
         $this->playerHighCard[] = new PokerCards("2", "♣", 2);
         $this->playerHighCard[] = new PokerCards("4", "♦", 4);
 
@@ -144,8 +163,19 @@ class PokerRulesTest extends TestCase
         
     }
 
+    /**
+     * Test Three of a kind method.
+     * Both check when player have and have not Three of a kind.
+     *
+     * Test if threeOfAKind method returns a array and first element returns a boolean that is true when player have Three of a kind.
+     * Test if threeOfAKind method returns a array and first element returns a boolean that is false when player have Three of a kind.
+     */
+
     public function testThreeOfAKindRule()
     {
+        $die = new PokerRules();
+
+        // Test when have Three of a kind.
         $this->player[] = new PokerCards("A", "♣", 14);
         $this->player[] = new PokerCards("A", "♠", 14);
 
@@ -153,12 +183,11 @@ class PokerRulesTest extends TestCase
         $this->board[] = new PokerCards("J", "♠", 3);
         $this->board[] = new PokerCards("K", "♠", 13);
 
-        $die = new PokerRules();
         $allCards = $die->pushToValueCards($this->player, $this->board);
         $result = $die->threeOfAKind($allCards);
         $this->assertTrue($result[0]);
 
-
+        // Test when not have Three of a kind.
         $this->playerHighCard[] = new PokerCards("2", "♣", 2);
         $this->playerHighCard[] = new PokerCards("4", "♦", 4);
 
@@ -173,9 +202,19 @@ class PokerRulesTest extends TestCase
         $this->assertFalse($result[0]);
         
     }
-
+    
+    /**
+     * Test Straight method.
+     * Both check when player have and have not Straight.
+     *
+     * Test if straight method returns a array and first element returns a boolean that is true when player have Straight.
+     * Test if straight method returns a array and first element returns a boolean that is false when player have Straight.
+     */
     public function testStraightRule()
     {
+        $die = new PokerRules();
+
+        // Test when have Straight.
         $this->player[] = new PokerCards("A", "♣", 14);
         $this->player[] = new PokerCards("2", "♠", 2);
 
@@ -183,12 +222,11 @@ class PokerRulesTest extends TestCase
         $this->board[] = new PokerCards("4", "♠", 4);
         $this->board[] = new PokerCards("5", "♠", 5);
 
-        $die = new PokerRules();
         $allCards = $die->pushToValueCards($this->player, $this->board);
         $result = $die->straight($allCards);
         $this->assertTrue($result[0]);
 
-
+        // Test when not have Straight.
         $this->playerHighCard[] = new PokerCards("2", "♣", 2);
         $this->playerHighCard[] = new PokerCards("4", "♦", 4);
 
@@ -205,10 +243,17 @@ class PokerRulesTest extends TestCase
     }
 
     /**
-     * Test false outcome
+     * Test Flush method.
+     * Both check when player have and have not flush.
+     * 
+     * Test if flush method returns a boolean that is true when player have Flush.
+     * Test if flush method returns a boolean that is false when player have Flush.
      */
     public function testFlushRule()
     {
+        $die = new PokerRules();
+
+        // Test when have Flush.
         $this->player[] = new PokerCards("A", "♠", 14);
         $this->player[] = new PokerCards("J", "♠", 2);
 
@@ -216,12 +261,11 @@ class PokerRulesTest extends TestCase
         $this->board[] = new PokerCards("K", "♠", 4);
         $this->board[] = new PokerCards("2", "♠", 5);
 
-        $die = new PokerRules();
         $allCards = $die->pushToValueCards($this->player, $this->board);
         $result = $die->flush($allCards);
         $this->assertTrue($result);
 
-
+        // Test when not have Flush.
         $this->playerHighCard[] = new PokerCards("2", "♣", 2);
         $this->playerHighCard[] = new PokerCards("4", "♦", 4);
 
@@ -237,8 +281,18 @@ class PokerRulesTest extends TestCase
         
     }
 
+    /**
+     * Test Full House method.
+     * Both check when player have and have not Full House.
+     * 
+     * Test if fullHouse method returns a array and first element returns a boolean that is true when player have Full House.
+     * Test if fullHouse method returns a array and first element returns a boolean that is false when player have Full House.
+     */
     public function testFullHouseRule()
     {
+        $die = new PokerRules();
+
+        // Test when have Full House.
         $this->player[] = new PokerCards("A", "♦", 14);
         $this->player[] = new PokerCards("5", "♣", 5);
 
@@ -246,12 +300,11 @@ class PokerRulesTest extends TestCase
         $this->board[] = new PokerCards("5", "♥", 5);
         $this->board[] = new PokerCards("5", "♦", 5);
 
-        $die = new PokerRules();
         $allCards = $die->pushToValueCards($this->player, $this->board);
         $result = $die->fullHouse($allCards);
         $this->assertTrue($result[0]);
 
-
+        // Test when not have Full House.
         $this->playerHighCard[] = new PokerCards("2", "♣", 2);
         $this->playerHighCard[] = new PokerCards("4", "♦", 4);
 
@@ -267,8 +320,18 @@ class PokerRulesTest extends TestCase
         
     }
 
+    /**
+     * Test Four Of A Kind method.
+     * Both check when player have and have not Four Of A Kind.
+     * 
+     * Test if fourOfAKind method returns a array and first element returns a boolean that is true when player have Four Of A Kind.
+     * Test if fourOfAKind method returns a array and first element returns a boolean that is false when player have Four Of A Kind.
+     */
     public function testFourOfAKindRule()
     {
+        $die = new PokerRules();
+
+        // Test when have Four Of A Kind.
         $this->player[] = new PokerCards("8", "♦", 8);
         $this->player[] = new PokerCards("8", "♣", 8);
 
@@ -276,12 +339,11 @@ class PokerRulesTest extends TestCase
         $this->board[] = new PokerCards("8", "♥", 8);
         $this->board[] = new PokerCards("8", "♦", 8);
 
-        $die = new PokerRules();
         $allCards = $die->pushToValueCards($this->player, $this->board);
         $result = $die->fourOfAKind($allCards);
         $this->assertTrue($result[0]);
 
-
+        // Test when not have Four Of A Kind.
         $this->playerHighCard[] = new PokerCards("2", "♣", 2);
         $this->playerHighCard[] = new PokerCards("4", "♦", 4);
 
@@ -297,8 +359,18 @@ class PokerRulesTest extends TestCase
         
     }
 
+    /**
+     * Test Straight Flush method.
+     * Both check when player have and have not Straight Flush.
+     * 
+     * Test if straightFlush method returns a array and first element returns a boolean that is true when player have Straight Flush.
+     * Test if straightFlush method returns a array and first element returns a boolean that is false when player have Straight Flush.
+     */
     public function testStraightFlushRule()
     {
+        $die = new PokerRules();
+
+        // Test when have Straight Flush.
         $this->player[] = new PokerCards("4", "♣", 4);
         $this->player[] = new PokerCards("5", "♣", 5);
 
@@ -306,12 +378,11 @@ class PokerRulesTest extends TestCase
         $this->board[] = new PokerCards("7", "♣", 7);
         $this->board[] = new PokerCards("8", "♣", 8);
 
-        $die = new PokerRules();
         $allCards = $die->pushToValueCards($this->player, $this->board);
         $result = $die->straightFlush($allCards);
         $this->assertTrue($result[0]);
 
-
+        // Test when not have Straight Flush.
         $this->playerHighCard[] = new PokerCards("2", "♣", 2);
         $this->playerHighCard[] = new PokerCards("4", "♦", 4);
 
@@ -327,8 +398,18 @@ class PokerRulesTest extends TestCase
         
     }
 
+    /**
+     * Test Royal Flush method.
+     * Both check when player have and have not Straight Flush.
+     * 
+     * Test if royalFlush method returns a array and first element returns a boolean that is true when player have Royal Flush.
+     * Test if royalFlush method returns a array and first element returns a boolean that is false when player have Royal Flush.
+     */
     public function testRoyalFlushRule()
     {
+        $die = new PokerRules();
+
+        // Test when have Royal Flush.
         $this->player[] = new PokerCards("10", "♣", 10);
         $this->player[] = new PokerCards("J", "♣", 11);
 
@@ -336,12 +417,11 @@ class PokerRulesTest extends TestCase
         $this->board[] = new PokerCards("Q", "♣", 13);
         $this->board[] = new PokerCards("A", "♣", 14);
 
-        $die = new PokerRules();
         $allCards = $die->pushToValueCards($this->player, $this->board);
         $result = $die->royalFlush($allCards);
         $this->assertTrue($result[0]);
 
-
+        // Test when not have Royal Flush.
         $this->playerHighCard[] = new PokerCards("2", "♣", 2);
         $this->playerHighCard[] = new PokerCards("4", "♦", 4);
 

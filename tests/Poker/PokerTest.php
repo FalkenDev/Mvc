@@ -28,11 +28,12 @@ class PokerTest extends TestCase
     {
         $die = new Poker();
         $cards = $die->ante();
-        $arrayLength = count($cards);
+        $arrayLengthPlayer = count($cards[0]);
+        $arrayLengthBoard = count($cards[1]);
 
         $this->assertIsArray($cards);
-        $this->assertEquals(2, $arrayLength[0]);
-        $this->assertEquals(3, $arrayLength[1]);
+        $this->assertEquals(2, $arrayLengthPlayer);
+        $this->assertEquals(3, $arrayLengthBoard);
     }
 
     /**
@@ -133,7 +134,7 @@ class PokerTest extends TestCase
         $die->call();
         $checkWinner = $die->checkWinner(50);
         $this->assertIsArray($checkWinner);
-        $this->assertIsBoolean('bool', $checkWinner[0]);
+        $this->assertIsBool($checkWinner[0]);
         $this->assertIsString($checkWinner[1]);
         if($checkWinner[0]) {
             $this->assertIsInt($checkWinner[2]);
