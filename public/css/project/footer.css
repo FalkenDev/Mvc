@@ -1,7 +1,7 @@
 .footer {
     border-top: 1px solid black;
     height: 400px;
-    background-color: white;
+    background: #FFEDCF;
 }
 
 .footer-inner {
@@ -20,6 +20,7 @@
     width: 33%;
     padding-right: 30px;
     padding-left: 30px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 .footer-nav,
