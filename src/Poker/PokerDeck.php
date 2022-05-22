@@ -3,7 +3,7 @@
 namespace App\Poker;
 
 /**
- * Deck Class.
+ * PokerDeck Class.
  *
  * @author Kasper Falk
  * @access private
@@ -16,7 +16,7 @@ class PokerDeck
 
     /**
      * Buiding the deck from the variables insert into the deck
-     * Calling Cards class to build the cards.
+     * Calling PokerCards class to build the cards.
      *
      * @return void
      */
@@ -26,13 +26,13 @@ class PokerDeck
         foreach ($this->suits as $suit) {
             foreach ($this->values as $value) {
                 $count = $value;
-                if($value === "J") {
+                if ($value === "J") {
                     $count = 11;
-                } elseif($value === "Q") {
+                } elseif ($value === "Q") {
                     $count = 12;
-                } elseif($value === "K") {
+                } elseif ($value === "K") {
                     $count = 13;
-                } elseif($value === "A") {
+                } elseif ($value === "A") {
                     $count = 14;
                 }
                 $this->deck[] = new PokerCards($value, $suit, $count);
@@ -45,7 +45,7 @@ class PokerDeck
      *
      * @return array $deck ( All cards that are in the deck )
      */
-    public function show_deck(): array
+    public function showDeck(): array
     {
         return $this->deck;
     }
@@ -55,7 +55,7 @@ class PokerDeck
      *
      * @return array $deck Shuffled deck.
      */
-    public function shuffle_deck(): array
+    public function shuffleDeck(): array
     {
         shuffle($this->deck);
         return $this->deck;
