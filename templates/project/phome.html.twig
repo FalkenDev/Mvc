@@ -1,8 +1,16 @@
 {% include "inc/projheader.html.twig" %}
 <body>
     <section class="project-home">
-    <h1>Projekt laddningsida</h1>
-    <li><a href="{{ path("project-about") }}">Project About sida</a></li>
+    <h1>Mvc Projekt kursmoment 10</h1>
+    <p>Välkommen till mvc projektet</p>
+    <p>Detta är ett slutprojekt för kursen Mvc där jag har valt att göra ett Texas hold'em casino style spel programmerat i objektorienterad PHP.</p>
+    <p>Här kan man läsa om projektet på min about sida men också kan man spela Texas hold'em spelet på poker sidan.</p>
+    <ul>
+        <li><a href="{{ path("project-home") }}">Home</a></li>
+        <li><a href="{{ path("project-about") }}">About</a></li>
+        <li><a href="{{ path("poker-info") }}">Poker</a></li>
+        <li><a href="{{ path("poker-info") }}">Reset Poker</a></li>
+    </ul>
     </section>
     {% include "inc/projfooter.html.twig" %}
 </body>
