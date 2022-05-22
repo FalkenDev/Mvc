@@ -3,7 +3,7 @@
 namespace App\Poker;
 
 /**
- * Cards Class.
+ * PokerCards Class.
  *
  * @author Kasper Falk
  * @access public
@@ -12,10 +12,10 @@ class PokerCards
 {
     public string $value;
     public string $suite;
-    public string $pokerValue;
+    public int $pokerValue;
 
     /**
-     * Constructing card from value and suits
+     * Constructing card from value and suits and pokerValue
      *
      * @param string $value The card value.
      * @param string $suits The card suite.
@@ -35,7 +35,7 @@ class PokerCards
      *
      * @return string $value ( The vard value ).
      */
-    public function get_value(): string
+    public function getValue(): string
     {
         return $this->value;
     }
@@ -45,7 +45,7 @@ class PokerCards
      *
      * @return string $suite ( The card suite ).
      */
-    public function get_suite(): string
+    public function getSuite(): string
     {
         return $this->suite;
     }
@@ -55,7 +55,7 @@ class PokerCards
      *
      * @return int $pokerValue (The poker value of the card ).
      */
-    public function get_pokerValue(): int
+    public function getPokerValue(): int
     {
         return $this->pokerValue;
     }
