@@ -20,14 +20,14 @@ class PokerDeckTest extends TestCase
         $die = new PokerDeck();
         $this->assertInstanceOf("\App\Poker\PokerDeck", $die);
 
-        $res = $die->show_deck();
+        $res = $die->showDeck();
         $this->assertNotEmpty($res);
     }
 
     /**
-     * Test shuffle_deck work.
-     * $shuffle using shuffle_deck method.
-     * $noShuffle using show_deck method.
+     * Test shuffleDeck work.
+     * $shuffle using shuffleDeck method.
+     * $noShuffle using showDeck method.
      *
      * Look up $shuffle is not equal to $noShuffle.
      */
@@ -35,8 +35,8 @@ class PokerDeckTest extends TestCase
     {
         $die = new PokerDeck();
 
-        $noShuffle = $die->show_deck();
-        $shuffle = $die->shuffle_deck();
+        $noShuffle = $die->showDeck();
+        $shuffle = $die->shuffleDeck();
         $this->	assertNotEquals($noShuffle, $shuffle);
     }
 

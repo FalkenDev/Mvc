@@ -14,7 +14,7 @@ class PokerTest extends TestCase
         $die = new Poker();
         $this->assertInstanceOf("\App\Poker\Poker", $die);
 
-        $res = $die->show_deck();
+        $res = $die->showDeck();
         $this->assertIsArray($res);
     }
 
@@ -54,66 +54,66 @@ class PokerTest extends TestCase
     }
 
     /**
-     * Test get_BoardCards and drawCardToBoard method.
+     * Test getBoardCards and drawCardToBoard method.
      * 
-     * Check if array is empty when using get_BoardCards method when no cards are drawn to the board.
+     * Check if array is empty when using getBoardCards method when no cards are drawn to the board.
      * 
      * Using drawCardToBoard method and put in 3 to draw 3 cards then check if cards returning in a array
      * and arraylength is 3.
      */
-    public function testGet_BoardCards()
+    public function testGetBoardCards()
     {
         $die = new Poker();
-        $boardCards = $die->get_BoardCards();
+        $boardCards = $die->getBoardCards();
         $arrayLengthNoDraw = count($boardCards);
         $this->assertEquals(0, $arrayLengthNoDraw);
 
         $die->drawCardToBoard(3);
-        $boardCards = $die->get_BoardCards();
+        $boardCards = $die->getBoardCards();
         $arrayLengthDraw = count($boardCards);
         $this->assertIsArray($boardCards);
         $this->assertEquals(3, $arrayLengthDraw);
     }
 
     /**
-     * Test get_PlayerCards and drawCardToPlayer method.
+     * Test getPlayerCards and drawCardToPlayer method.
      * 
-     * Check if array is empty when using get_PlayerCards method when no cards are drawn to the player.
+     * Check if array is empty when using getPlayerCards method when no cards are drawn to the player.
      * 
      * Using drawCardToPlayer method and put in 2 to draw 2 cards then check if cards returning in a array
      * and arraylength is 2.
      */
-    public function testGet_PlayerCards()
+    public function testGetPlayerCards()
     {
         $die = new Poker();
-        $playerCards = $die->get_PlayerCards();
+        $playerCards = $die->getPlayerCards();
         $arrayLengthNoDraw = count($playerCards);
         $this->assertEquals(0, $arrayLengthNoDraw);
 
         $die->drawCardToPlayer(2);
-        $playerCards = $die->get_PlayerCards();
+        $playerCards = $die->getPlayerCards();
         $arrayLengthDraw = count($playerCards);
         $this->assertIsArray($playerCards);
         $this->assertEquals(2, $arrayLengthDraw);
     }
 
     /**
-     * Test get_DealerCards and drawCardToDealer method.
+     * Test getDealerCards and drawCardToDealer method.
      * 
-     * Check if array is empty when using get_DealerCards method when no cards are drawn to the dealer.
+     * Check if array is empty when using getDealerCards method when no cards are drawn to the dealer.
      * 
      * Using drawCardToDealer method and put in 2 to draw 2 cards then check if cards returning in a array
      * and arraylength is 2.
      */
-    public function testGet_DealerCards()
+    public function testGetDealerCards()
     {
         $die = new Poker();
-        $dealerCards = $die->get_DealerCards();
+        $dealerCards = $die->getDealerCards();
         $arrayLengthNoDraw = count($dealerCards);
         $this->assertEquals(0, $arrayLengthNoDraw);
 
         $die->drawCardToDealer(2);
-        $dealerCards = $die->get_DealerCards();
+        $dealerCards = $die->getDealerCards();
         $arrayLengthDraw = count($dealerCards);
         $this->assertIsArray($dealerCards);
         $this->assertEquals(2, $arrayLengthDraw);

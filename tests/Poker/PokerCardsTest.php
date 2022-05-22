@@ -15,20 +15,20 @@ class PokerCardsTest extends TestCase
      *
      * Look up if $die is an instance of \App\Poker\PokerCards.
      * Look up if $resValue $resSuite is a string and $resPokerValue is a int
-     * from get_value, get_suite and get_pokerValue method.
+     * from getValue, getSuite and getPokerValue method.
      */
     public function testCreatePokerCard()
     {
         $die = new PokerCards("2", "♥", 2);
         $this->assertInstanceOf("\App\Poker\PokerCards", $die);
 
-        $resValue = $die->get_value();
+        $resValue = $die->getValue();
         $this->assertIsString($resValue);
 
-        $resSuite = $die->get_suite();
+        $resSuite = $die->getSuite();
         $this->assertIsString($resSuite);
 
-        $resPokerValue = $die->get_pokerValue();
+        $resPokerValue = $die->getPokerValue();
         $this->assertIsString($resSuite);
     }
 }
