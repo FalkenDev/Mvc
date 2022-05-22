@@ -63,7 +63,8 @@ class Blackjack extends Deck
      *
      * @return $this->dealerHand
      */
-    public function drawStandDealer() {
+    public function drawStandDealer()
+    {
         $dealerScore = $this->getOneScore($this->returnScore($this->dealerHand));
         while ($dealerScore < 17) {
             $card = parent::draw(1);
@@ -128,19 +129,18 @@ class Blackjack extends Deck
      * If both score in array is over 21 then return 1
      * @param array $score The hands totalpoints in array.
      */
-    public function getOneScore($score) {
+    public function getOneScore($score)
+    {
         if ($score[0] === $score[1]) {
             if ($score[0] > 21) {
                 return 1;
             }
 
             return $score[0];
-
         } elseif ($score[0] <= 21) {
             return $score[0];
-
         } else {
-            if($score[1] > 21) {
+            if ($score[1] > 21) {
                 return 1;
             } else {
                 return $score[1];
