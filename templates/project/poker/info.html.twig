@@ -1,17 +1,21 @@
-{% include "inc/header.html.twig" %}
-<body class="body-bj-color">
-    <section class="blackjack-info">
-        <h2>Welcome to Poker<h2>
-        <p>The goal of blackjack is to beat the dealer's hand without going over 21.</p>
-        <p>Face cards are worth 10. Aces are worth 1 or 11, whichever makes a better hand.</p>
-        <p>You starts with two cards, one of the dealer's cards is hidden until the end.</p>
-        <p>To 'Hit' is to ask for another card. To 'Stand' is to hold your total and end your turn.</p>
-        <p>If you go over 21 you bust, and the dealer wins regardless of the dealer's hand.</p>
-        <p>If you both get the same value ("push"), dealer wins automatically.</p>
-        <p>Dealer will hit until the dealers cards total is 17 or higher.</p>
+{% include "inc/projheader.html.twig" %}
+<body class="body-pr-color">
+    <section class="poker-info">
+        <h2>Welcome to Poker Texas Hold'Em Casino Style<h2>
+        <p>You are against the dealer in this game.</p>
+        <p>You start with 1000 credits, every bet size is 50 credits and if you want to play the whole
+        game the bet size is total 100 credits.</p>
+        <p>The game starts when you press the "Ante" button.</p>
+        <p>You automatically deposit 50 coins.
+        Two cards are drawn to you and three cards to the table while the dealer's cards are hidden.</p>
+        <p>You can then choose to continue with the round by pressing the call button or press fold to not continue the game and the dealer takes the 50 credits you bet.</p>
+        <p>If you press "Call" button you automatically bet 50 credits again and then 2 cards are drawn to the board and the dealer shows his cards.</p>
+        <p>You win by having the best hand against the dealer. If both dealer and you have high cards or have the same card it will be a push and you get your 100 credits back otherwise dealer winns.</p>
+        <p>If you win, you get paid out your bet and ante times the payout odds. The list of payout for ante you can find to the right of the game.</p>
+        <p>To see what rule you have, you can look on the left side under the payout odds. You can also see how much credtis you have and what the total payout is if you win</p>
 
         <a class="startbtn" href="{{ path("poker-game") }}">Start Game</a>
     </section>
 
-    {% include "inc/footer.html.twig" %}
+    {% include "inc/projfooter.html.twig" %}
 </body>
