@@ -1,3 +1,11 @@
+body {
+    margin: 0px;
+}
+
+.project-home {
+    height: 650px;
+}
+
 .project-about {
     width: 1600px;
     margin: auto;
