@@ -27,8 +27,8 @@ class Poker extends PokerDeck
 
     /**
      * Construct method.
-     * Creating pack of cards for Blackjack game.
-     * Using Deck class construction.
+     * Creating pack of cards for Poker game.
+     * Using PokerDeck class construction.
      *
      * @return void
      */
@@ -69,7 +69,7 @@ class Poker extends PokerDeck
      * Return all cards from the board (Middle section).
      * @return array ( boards card )
      */
-    public function get_BoardCards()
+    public function getBoardCards()
     {
         return $this->board;
     }
@@ -78,7 +78,7 @@ class Poker extends PokerDeck
      * Return all cards from the Players hand (Down section).
      * @return array ( Players card hand )
      */
-    public function get_PlayerCards()
+    public function getPlayerCards()
     {
         return $this->playerHand;
     }
@@ -87,14 +87,14 @@ class Poker extends PokerDeck
      * Return all cards from the Dealers hand (Upper section).
      * @return array ( Dealers card hand )
      */
-    public function get_DealerCards()
+    public function getDealerCards()
     {
         return $this->dealerHand;
     }
 
     /**
      * Draws card to player.
-     * draw method is from Deck class.
+     * Draw method is from PokerDeck class.
      *
      * @param int $amount Amount cards to draw.
      * @return array ( Players card hand )
@@ -112,7 +112,7 @@ class Poker extends PokerDeck
 
     /**
      * Draws card to dealer.
-     * draw method is from Deck class.
+     * Draw method is from PokerDeck class.
      *
      * @param int $amount Amount cards to draw.
      * @return array ( Dealers card hand )
@@ -130,7 +130,7 @@ class Poker extends PokerDeck
 
     /**
      * Draws card to the board.
-     * draw method is from Deck class.
+     * Draw method is from PokerDeck class.
      *
      * @param int $amount Amount cards to draw.
      * @return array ( boards card )
@@ -149,34 +149,36 @@ class Poker extends PokerDeck
     /**
      * Check who is the winner ( dealer or player ).
      * @param int $betAmount (What the player bets in ante / call).
-     * 
+     *
      * If player wins, return true, player rule and how much the payout is.
      * If dealer wins, return false and dealers rule.
      * If drawn return same and dealers rule.
      */
-    public function checkWinner($betAmount) {
-        $ruleClass = new PokerRules;
+    public function checkWinner($betAmount)
+    {
+        $ruleClass = new PokerRules();
         $dealerRule = $ruleClass->checkAllRules($this->dealerHand, $this->board);
         $playerRule = $ruleClass->checkAllRules($this->playerHand, $this->board);
 
         // If player and dealer have the same rule.
-        if($playerRule[0] === $dealerRule[0]) {
+        if ($playerRule[0] === $dealerRule[0]) {
             // If player and dealer have the same card value of the same rule then it's a draw.
             // Elseif player have higher card value then dealer of the same rule, player winns.
-            } if($playerRule[1] === $dealerRule[1]) {
-                return ["same", $dealerRule[0]];
-            } elseif($playerRule[1] > $dealerRule[1]) {
-                $odds = $this->payOdds($betAmount, $playerRule[0]);
-                return [true, $playerRule[0], $odds];
+        }
+        if ($playerRule[1] === $dealerRule[1]) {
+            return ["same", $dealerRule[0]];
+        } elseif ($playerRule[1] > $dealerRule[1]) {
+            $odds = $this->payOdds($betAmount, $playerRule[0]);
+            return [true, $playerRule[0], $odds];
             return [false, $dealerRule[0]];
         }
-        
+
         // Get what rule ranking the dealer and player have.
         $dealerRanking = array_search($dealerRule[0], $this->ruleRanking);
         $playerRanking = array_search($playerRule[0], $this->ruleRanking);
 
         // If player have higher rule ranking, player winns else loss.
-        if($playerRanking > $dealerRanking) {
+        if ($playerRanking > $dealerRanking) {
             $odds = $this->payOdds($betAmount, $playerRule[0]);
             return [true, $playerRule[0], $odds];
         }
@@ -187,11 +189,12 @@ class Poker extends PokerDeck
      * payOdds method.
      * @param int ( How much the player bet in ante / call ).
      * @param string ( The rule that player win against the dealer ).
-     * 
+     *
      * A switch case method that checks what rule the player had and return the payout of the odds times bet amount.
-     * Returns the payout the player should recive.
+     * Returns one of the payout the player should recive.
      */
-    public function payOdds($betAmount, $rule) {
+    public function payOdds($betAmount, $rule)
+    {
         $odds = 0;
         switch ($rule) {
             case "Royal Flush":
