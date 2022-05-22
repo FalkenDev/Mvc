@@ -22,10 +22,9 @@ class PokerControllerTwig extends AbstractController
      *      methods={"GET","HEAD"}
      * )
      */
-    public function PokerStart(
+    public function pokerStart(
         ManagerRegistry $doctrine,
-    ): Response
-    {
+    ): Response {
         $entityManager = $doctrine->getManager();
         $player = $entityManager->getRepository(Player::class)->find(1);
         if (!$player) {
@@ -36,6 +35,7 @@ class PokerControllerTwig extends AbstractController
         }
         return $this->render('project/poker/info.html.twig');
     }
+
 
     /**
      * @Route(
@@ -54,10 +54,10 @@ class PokerControllerTwig extends AbstractController
         $entityManager = $doctrine->getManager();
         $player = $entityManager->getRepository(Player::class)->find(1);
         $data = [
-            'playerHand' => $die->get_PlayerCards(),
+            'playerHand' => $die->getPlayerCards(),
             'playerScore' => $rules->checkAllRules($die->get_PlayerCards(), $die->get_BoardCards())[0],
-            'dealerHand' => $die->get_DealerCards(),
-            'board' => $die->get_BoardCards(),
+            'dealerHand' => $die->getDealerCards(),
+            'board' => $die->getBoardCards(),
             'balance' => $player->getBalance(),
             'winBalance' => $session->get("winning") ?? 0
         ];
@@ -103,16 +103,25 @@ class PokerControllerTwig extends AbstractController
             $entityManager->flush();
             $checkWinner = $die->call();
 
-            if($checkWinner[0] === "same") { // If the dealer and player have the same card value
-                $player->setBalance($balance + 100);
+            if ($checkWinner[0] === "same") { // If the dealer and player have the same card value
+                $pushBalance = 100;
+                $player->setBalance($pushBalance + $balance);
                 $entityManager->flush();
+                $this->addFlash("Push", "Push! You and dealer got the same rule. You won $pushBalance credits back ");
                 $session->set("winning", 100);
-
             } elseif ($checkWinner[0]) { // If the player wins
-                $player->setBalance($balance + $checkWinner[2] + 150);
+                $winnerBalance = $checkWinner[2] + 150;
+                $player->setBalance($winnerBalance + $balance);
                 $entityManager->flush();
-                $session->set("winning", $checkWinner[2] + 150);
+                $this->addFlash("Winner", "You won against the dealer! You won $winnerBalance credits");
+                $session->set("winning", $winnerBalance);
+            } elseif ($checkWinner[0] === false) {
+                $this->addFlash("Winner", "You Loss. Dealer won against you with $checkWinner[1]");
             }
+        }
+
+        if ($player->getBalance() === 0) {
+            $player->setBalance(1000);
         }
         // Set poker session
         $session->set("poker", $die);
@@ -132,8 +141,21 @@ class PokerControllerTwig extends AbstractController
      *      methods={"GET","HEAD"}
      * )
      */
-    public function resetDatabase(): Response
-    {
-        return $this->render('project/pabout.html.twig');
+    public function resetDatabase(
+        ManagerRegistry $doctrine,
+    ): Response {
+        $entityManager = $doctrine->getManager();
+        $player = $entityManager->getRepository(Player::class)->find(1);
+        if (!$player) {
+            $player = new Player();
+            $player->setBalance(1000);
+            $entityManager->persist($player);
+            $entityManager->flush();
+        } else {
+            $player->setBalance(1000);
+            $entityManager->persist($player);
+            $entityManager->flush();
+        }
+        return $this->redirectToRoute('poker-game');
     }
 }
