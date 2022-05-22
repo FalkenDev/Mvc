@@ -1,21 +1,26 @@
 /*Navbar*/
+
 .Nav{
-    height: 100px;
-    background-color: white;
+    display: flex;
+    flex-direction: column;
+    height: 130px;
+    background: #FFEDCF;
 }
 
 header {
-    background: #ffff;
     border-bottom: 1px solid black;
 }
 
 header ul{
+    order: 2;
     list-style-type: none;
     float: right;
     display: grid;
     grid-auto-flow: column;
     margin-right: 100px;
-    margin-top: 40px;
+    margin-top: 34px;
+    width: 300px;
+    margin: auto;
 }
 
 
@@ -24,6 +29,7 @@ header ul li a{
     color: black;
     font-size: 25px;
     margin-right: 60px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 header ul li a:hover {
@@ -31,8 +37,8 @@ header ul li a:hover {
 }
 
 .logo{
+    order: 1;
     padding-top: 0px;
-    margin-left: 50px;
-    width: 149px;
-    height: 62px;
+    margin: auto;
+    padding-left: 50px;
 }
