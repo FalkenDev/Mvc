@@ -129,6 +129,7 @@ class PokerRulesTest extends TestCase
      * Both check when player have and have not 2 pairs.
      *
      * Test if twoPair method returns a array and first element returns a boolean that is true when player have two pair.
+     * Test if when it's 3 pairs on the board, the method returns the 2 highest pairs value.
      * Test if twoPair method returns a array and first element returns a boolean that is false when player have no two pair.
      */
     public function testTwoPairRule()
@@ -142,10 +143,16 @@ class PokerRulesTest extends TestCase
         $this->board[] = new PokerCards("A", "♦", 14);
         $this->board[] = new PokerCards("J", "♠", 3);
         $this->board[] = new PokerCards("K", "♠", 13);
+        $this->board[] = new PokerCards("K", "♣", 13);
+        $this->board[] = new PokerCards("3", "♥", 3);
 
         $allCards = $die->pushToValueCards($this->player, $this->board);
         $result = $die->twoPair($allCards);
         $this->assertTrue($result[0]);
+
+        // Test when it's 3 pairs on the board, the method returns the 2 highest pairs value.
+        $this->assertEquals("14", $result[1][0]);
+        $this->assertEquals("13", $result[1][1]);
 
         // Test when not have Two Pair.
         $this->playerHighCard[] = new PokerCards("2", "♣", 2);
@@ -168,6 +175,7 @@ class PokerRulesTest extends TestCase
      * Both check when player have and have not Three of a kind.
      *
      * Test if threeOfAKind method returns a array and first element returns a boolean that is true when player have Three of a kind.
+     * Test if when it's 2 Three of a kind on board, see if it returns the highest card.
      * Test if threeOfAKind method returns a array and first element returns a boolean that is false when player have Three of a kind.
      */
 
@@ -181,11 +189,15 @@ class PokerRulesTest extends TestCase
 
         $this->board[] = new PokerCards("A", "♦", 14);
         $this->board[] = new PokerCards("J", "♠", 3);
-        $this->board[] = new PokerCards("K", "♠", 13);
+        $this->board[] = new PokerCards("6", "♠", 6);
+        $this->board[] = new PokerCards("6", "♣", 6);
+        $this->board[] = new PokerCards("6", "♥", 6);
 
         $allCards = $die->pushToValueCards($this->player, $this->board);
         $result = $die->threeOfAKind($allCards);
         $this->assertTrue($result[0]);
+        // Test when it's 2 Three of a kind on board, see if it returns the highest card.
+        $this->assertEquals("14", $result[1]);
 
         // Test when not have Three of a kind.
         $this->playerHighCard[] = new PokerCards("2", "♣", 2);
