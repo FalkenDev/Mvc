@@ -28,15 +28,15 @@ class PokerRules
      * @param array $hand ( The Player or Dealer card hand ).
      * @param array $board ( The boards cards ).
      *
-     * Push board and hand cards with values, suites, poker values and cards into arrays.
+     * Push board and hand cards with suites, poker values and cards into arrays.
      * Using for the rule methods.
      *
-     * $array[0] = values
-     * $array[1] = suites
+     * $array[0] = Counts all the values of poker values
+     * $array[1] = Counts all the values of suites
      * $array[2] = poker values
-     * $array[3] = cards
+     * $array[3] = board + hand cards
      *
-     * Returns in a array with all the arrays.
+     * @return array $array ( Returns in a array with all the arrays ).
      */
     public function pushToValueCards($hand, $board)
     {
@@ -46,10 +46,8 @@ class PokerRules
         $allCards = [];
         // Get all the values from the board and push it into arrays
         foreach ($board as $card) {
-            $value = $card->getValue();
             $suite = $card->getSuite();
             $pokerValue = $card->getPokerValue();
-            array_push($values, $value);
             array_push($suites, $suite);
             array_push($pokerValues, $pokerValue);
             array_push($allCards, $card);
@@ -57,10 +55,8 @@ class PokerRules
 
         // Get all the values from the hand and push it into arrays
         foreach ($hand as $card) {
-            $value = $card->getValue();
             $suite = $card->getSuite();
             $pokerValue = $card->getPokerValue();
-            array_push($values, $value);
             array_push($suites, $suite);
             array_push($pokerValues, $pokerValue);
             array_push($allCards, $card);
@@ -68,7 +64,7 @@ class PokerRules
 
         sort($pokerValues);
 
-        $array = [array_count_values($values), array_count_values($suites), $pokerValues, $allCards];
+        $array = [array_count_values($pokerValues), array_count_values($suites), $pokerValues, $allCards];
 
         return $array;
     }
@@ -166,7 +162,7 @@ class PokerRules
             if ($count >= 3) {
                 sort($cardValues);
                 $arrlength = count($cardValues);
-                return [true, [$cardValues[$arrlength - 1], $cardValues[$arrlength - 2]]];
+                return [true, [$cardValues[$arrlength - 1], $cardValues[$arrlength - 2]], $cardValues];
             }
             return [true, $cardValues];
         }
