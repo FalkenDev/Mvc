@@ -164,12 +164,12 @@ class Poker extends PokerDeck
         if ($playerRule[0] === $dealerRule[0]) {
             // If player and dealer have the same card value of the same rule then it's a draw.
             // Elseif player have higher card value then dealer of the same rule, player winns.
-        }
-        if ($playerRule[1] === $dealerRule[1]) {
-            return ["same", $dealerRule[0]];
-        } elseif ($playerRule[1] > $dealerRule[1]) {
-            $odds = $this->payOdds($betAmount, $playerRule[0]);
-            return [true, $playerRule[0], $odds];
+            if ($playerRule[1] === $dealerRule[1]) {
+                return ["same", $dealerRule[0]];
+            } elseif ($playerRule[1] > $dealerRule[1]) {
+                $odds = $this->payOdds($betAmount, $playerRule[0]);
+                return [true, $playerRule[0], $odds];
+            }
             return [false, $dealerRule[0]];
         }
 
@@ -187,8 +187,8 @@ class Poker extends PokerDeck
 
     /**
      * payOdds method.
-     * @param int ( How much the player bet in ante / call ).
-     * @param string ( The rule that player win against the dealer ).
+     * @param int $betAmount ( How much the player bet in ante / call ).
+     * @param string $rule ( The rule that player win against the dealer ).
      *
      * A switch case method that checks what rule the player had and return the payout of the odds times bet amount.
      * Returns one of the payout the player should recive.
