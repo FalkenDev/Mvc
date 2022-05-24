@@ -11,7 +11,6 @@ namespace App\Card;
  */
 class Blackjack extends Deck
 {
-    private array $deck = [];
     private array $dealerHand = [];
     private array $playerHand = [];
 
@@ -32,7 +31,7 @@ class Blackjack extends Deck
      * draw method is from Deck class.
      *
      * @param int $amount Amount cards to draw.
-     * @return $this->playerHand
+     * @return array $this->playerHand
      */
     public function drawCardToPlayer(int $amount)
     {
@@ -47,7 +46,7 @@ class Blackjack extends Deck
      * draw method is from Deck class.
      *
      * @param int $amount Amount cards to draw.
-     * @return $this->dealerHand
+     * @return array $this->dealerHand
      */
     public function drawCardToDealer(int $amount)
     {
@@ -61,7 +60,7 @@ class Blackjack extends Deck
      * Draws cards to dealer if player pushed stand button.
      * Draws cards until dealer have 17 or more in score
      *
-     * @return $this->dealerHand
+     * @return array $this->dealerHand
      */
     public function drawStandDealer()
     {
