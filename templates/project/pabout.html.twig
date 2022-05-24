@@ -7,22 +7,12 @@
             <div class="about-game">
                 <h2>Projekt</h2>
 
-                <p>Jag har vallt att göra spelet Texas hold'em poker med stilen live casino.</p>
-
-                <p>När spelaren första gången går in på poker så kommer spelaren få 2500 mynt att börja med.</p>
-
-                <p>Varje spel börjar med att spelaren placerar ett bet (”ante”).  Man kan endast lägga in 50 mynt i ante per runda. (Saldot spelaren har kan hittas längst ner i vänsta hörnet.</p>
-
-                <p>Dealer ger två kort till spelaren och 1 kort till sig själv medans dealerns sista kort kommer i slutet av spelet.</p>
-
-                <p>Tre gemensamma kort - som kan användas av både spelaren och dealerns hand  - placeras sedan mitt på bordet som används för att bilda den bästa femkortshanden.</p>
-
-                <p>Sedan lägger dealern en insats som motsvarar den dubbla summan av spelarens ante (50 mynt), och spelare har då alternativen <strong>fold</strong> - d.v.s.
-                lägga sig och ge upp anten och inte längre delta i handen - eller <strong>call</strong>, d.v.s. matcha dealerns insats (50 mynt till, sammanlagt 100 mynt) för att syna.
-                Om en spelare synar så delar dealern ut ytterligare två gemensamma kort och därefter tar dealern ett till kort till sin hand (sammanlagt 2 kort på dealerns hand). Sedan vinner den bästa femkortshanden.</p>
-
-                <p>Dealern måste ha <strong>minst par i fyror</strong> för att ha en kvalificerande hand Om dealern inte kvalificerar sig, får du tillbaka insatsen för din syn. Du vinner om din femkortshand slår dealerns hand.
-                Synade satsningar betalas 1 mot 1, även kallat “jämna pengar”). Ante utbetalas enligt olika odds beroende på spelarens vinnande hand, enligt följande:</p>
+                <p>Jag har vallt att göra Casino med kortspel (poker) som slutprojekt där man spelar Texas hold'em poker med stilen live casino</p>
+                <p>Spelaren börjar med 1000 credits och möter dealern / banken. För att starta ett spel måste spelaren klicka på ante och autmotiskt lägger in 50 credits. Två kort dras till spelaren och tre kort till bordet medans dealerns kort är gömda</p>
+                <p>Spelaren kan då välja att fortsätta spela genom att trycka på call knappen men då automatiskt lägger in 50 credits till. Om spelaren väljer att betala / calla så dras två kort till bordet till och dealern visar sina kort.</p>
+                <p>Den som har högst kort på handen / bordet vinner och om båda har "High Card" regeln så är det lika och spelaren får tillbaks sina pengar</p>
+                <p>Spelaren kan också välja att lägga sig och då vinner dealern spealrens bet på ante och ett nytt spel startas när spelaren betallar call igen</p>
+                <p>Om spelaren vinner så får spelaren tillbaks sin call pengar på 50 credits och ante betalar gånger vad för regel spelaren får som visas i en tabell nedan.</p>
                 <table>
                     <tr>
                         <th>Hand</th>
@@ -42,22 +32,36 @@
                     </tr>
                     <tr>
                         <td>Kåk</td>
-                        <td>3 mot 1</td>
+                        <td>4 mot 1</td>
                     </tr>
                     <tr>
                         <td>Färg</td>
+                        <td>3 mot 1</td>
+                    </tr>
+                    <tr>
+                        <td>Stege</td>
                         <td>2 mot 1</td>
                     </tr>
                     <tr>
-                        <td>Stege eller mindre</td>
+                        <td>Tre av en sort eller mindre</td>
                         <td>1 mot 1</td>
                     </tr>
                 </table>
             </div>
+            <div class="code-quality">
+            <h2>Kod kvalitet</h2>
+            <p>Jag har använt mig mycket av scrutinizer för att kvalitetssäkra projektet och dess kodkvalitet
+            Ett exempel på detta är att mina metoder i PokerRules samt Poker klassen hade för mycket kod komplexitet.
+            Med detta tänkte jag då hur jag skulle ändra om min metod för att göra kod komplexiteten mindre samt dela upp
+            koden i fler metoder som jag kunde använda mig utav i andra metoder med. Men samtidigt få mina metoder att funka så som jag vill att de ska göra. Efter att jag hade ändrat om mina metoder och delade upp koden mer gjorde att komplexiteten blev mindre för varje metod.
+            Jag har dock väldigt mycket kod komplexitet för hela klassen PokerRules men behövs dessvärre vara så för att mina metoder ska funka pågrund av att
+            mina regler ska funka så bra som möjligt och att inga buggar ska ske under spelets gång. Jag kollade en del inne på issues i scrutinizer med best practice och bug för ta bort de mesta som
+            var onödiga eller inte tillrcäkligt definerade så att ett bugg skulle kunna ske. Även var jag inne på unusedcode för att säkertställ att jag inte tar upp ngåot minne som jag inte använder mig utav.</p>
+            </div>
         </div>
         <div class="aside">
             <h2>Länkar</h2>
-            <li><a href="{{ path("project-about") }}">Länk till dokumentationen phpdoc</a></li>
+            <li><a href="https://github.com/FalkenDev/Mvc">Länk till dokumentationen phpdoc</a></li>
             <li><a href="{{ path("project-about") }}">Länk till rapporten från phpmetrics</a></li>
             <li><a href="https://github.com/FalkenDev/Mvc">Länk till ditt GitHub</a></li>
             <li><a href="https://scrutinizer-ci.com/g/FalkenDev/Mvc/">Länk till Scrutinizer</a></li>
