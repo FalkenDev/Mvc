@@ -67,9 +67,9 @@ class CardControllerTwig extends AbstractController
      * @Route("/card/deck/draw/{numDraw}", name="drawSelected", methods={"GET","HEAD"})
      */
     public function drawSelected(
-        int $numDraw = 1,
         Request $request,
-        SessionInterface $session
+        SessionInterface $session,
+        int $numDraw = 1,
     ): Response {
         $die = $session->get("deck") ?? new \App\Card\Deck();
         if (count($die->show_deck()) < $numDraw) {
@@ -112,10 +112,10 @@ class CardControllerTwig extends AbstractController
      * @Route("/card/deck/deal/{players}/{numCards}", name="deal")
      */
     public function deal(
-        int $players = 1,
-        int $numCards = 1,
         Request $request,
-        SessionInterface $session
+        SessionInterface $session,
+        int $players = 1,
+        int $numCards = 1
     ): Response {
         $die = new \App\Card\Deck();
         $pHands = [];
