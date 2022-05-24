@@ -3,11 +3,14 @@ body {
 }
 
 .project-home {
-    height: 650px;
+    min-height: 850px;
+    width: 1200px;
+    margin: auto;
 }
 
 .project-about {
     width: 1600px;
+    min-height: 1000px;
     margin: auto;
 }
 
@@ -32,6 +35,7 @@ body {
     width: 300px;
     margin-left: 20px;
     border: 1px solid black;
+    height: 200px;
 }
 
 .aside h2 {
