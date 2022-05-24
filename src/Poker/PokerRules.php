@@ -40,7 +40,6 @@ class PokerRules
      */
     public function pushToValueCards($hand, $board)
     {
-        $values = [];
         $suites = [];
         $pokerValues = [];
         $allCards = [];
