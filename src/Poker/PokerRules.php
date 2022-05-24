@@ -6,6 +6,7 @@ namespace App\Poker;
  * PokerRules Class.
  *
  * @author Kasper Falk
+ * @SuppressWarnings
  */
 class PokerRules
 {
@@ -113,20 +114,19 @@ class PokerRules
 
     /**
      * Pair method.
-     * @param array $fullhand (Array from pushToValueCards methods return).
-     *
+     * @param array $boardHandCards (Array from pushToValueCards methods return).
      * Checks if $hand + $board contains 2 cards with same value.
      * If pair: Returns true and the biggest pair value on the board / hand in a array.
      * Else: return false and null in a array.
      *
      * @return array (boolean, what cards used)
      */
-    public function pair($fullHand)
+    public function pair($boardHandCards)
     {
         $cardValues = [];
         $previousValue = 0;
         $hasPair = false;
-        foreach ($fullHand[0] as $key => $value) {
+        foreach ($boardHandCards[0] as $key => $value) {
             if ($value >= 2) {
                 $hasPair = true;
                 array_push($cardValues, $key);
@@ -143,7 +143,7 @@ class PokerRules
 
     /**
      * Two Pair method
-     * @param fullHand
+     * @param array $boardHandCards (Array from pushToValueCards methods return).
      *
      * Checks if $hand + $board contains 2 pairs of cards with same value.
      * If have 2 pairs: return the true and the pairs card values used in the rule.
@@ -151,11 +151,11 @@ class PokerRules
      *
      * @return array (boolean, what cards used for the both pairs)
      */
-    public function twoPair($fullHand)
+    public function twoPair($boardHandCards)
     {
         $cardValues = [];
         $count = 0;
-        foreach ($fullHand[0] as $key => $value) {
+        foreach ($boardHandCards[0] as $key => $value) {
             if ($value >= 2) {
                 $count += 1;
                 array_push($cardValues, $key);
@@ -175,7 +175,7 @@ class PokerRules
 
     /**
      * Three Of A kind method.
-     * @param array $fullhand (Array from pushToValueCards methods return).
+     * @param array $boardHandCards (Array from pushToValueCards methods return).
      *
      * Checks if $hand + $board contains 3 cards with same value.
      * If have 3 of the same card: return true and what card used in a array.
@@ -183,12 +183,12 @@ class PokerRules
      *
      * @return array (boolean, what cards used)
      */
-    public function threeOfAKind($fullHand)
+    public function threeOfAKind($boardHandCards)
     {
         $cardValues = [];
         $hasThree = false;
         $count = 0;
-        foreach ($fullHand[0] as $key => $value) {
+        foreach ($boardHandCards[0] as $key => $value) {
             if ($value >= 3) {
                 array_push($cardValues, $key);
                 $hasThree = true;
@@ -210,7 +210,7 @@ class PokerRules
 
     /**
      * Straight method.
-     * @param array $fullhand (Array from pushToValueCards methods return).
+     * @param array $boardHandCards (Array from pushToValueCards methods return).
      *
      * Checks if $hand + $board contains 5 cards with consecutive value.
      * If 5 cards are consecutive value: Returns true and the sum of the array in a array.
@@ -218,10 +218,10 @@ class PokerRules
      *
      * @return array (boolean, what cards used)
      */
-    public function straight($fullHand)
+    public function straight($boardHandCards)
     {
         foreach ($this->arrayrules as $array) {
-            if (!array_diff($array, $fullHand[2])) {
+            if (!array_diff($array, $boardHandCards[2])) {
                 if ($array[0] === 13) {
                     return [true, (array_sum($array) - 12)];
                 }
@@ -234,7 +234,7 @@ class PokerRules
 
     /**
      * Flush method.
-     * @param array $fullhand (Array from pushToValueCards methods return).
+     * @param array $boardHandCards (Array from pushToValueCards methods return).
      *
      * Checks if $hand + $board contains 5 cards with same suit.
      * If 5 cards contains same suit: Returns true,
@@ -242,9 +242,9 @@ class PokerRules
      *
      * @return boolean (boolean if player / dealer have the rule or not).
      */
-    public function flush($fullHand)
+    public function flush($boardHandCards)
     {
-        foreach ($fullHand[1] as $key => $value) {
+        foreach ($boardHandCards[1] as $key => $value) {
             if ($value >= 5) {
                 return true;
             }
@@ -254,7 +254,7 @@ class PokerRules
 
     /**
      * Full House method.
-     * @param array $fullhand (Array from pushToValueCards methods return).
+     * @param array $boardHandCards (Array from pushToValueCards methods return).
      *
      * Checks if $hand + $board contains 3 cards of the same value, and 2 cards of a different,
      * matching value (1 three of a kind and 1 pair).
@@ -266,12 +266,13 @@ class PokerRules
      *
      * @return array (boolean, what cards used for three of a kind, what cards used for pair).
      */
-    public function fullHouse($fullHand)
+    public function fullHouse($boardHandCards)
     {
         $three = false;
         $two = false;
-        $hand = $fullHand[0];
+        $hand = $boardHandCards[0];
         $ThreeValue = "";
+        $twoValue = "";
         foreach ($hand as $key => $value) {
             if ($value >= 3) {
                 $three = true;
@@ -295,7 +296,7 @@ class PokerRules
 
     /**
      * Four Of A Kind method.
-     * @param array $fullhand (Array from pushToValueCards methods return).
+     * @param array $boardHandCards (Array from pushToValueCards methods return).
      *
      * Checks if $hand + $board contains 4 cards with same value.
      * If it contains 4 with same value: Returns true and what card value is used in a array.
@@ -303,9 +304,9 @@ class PokerRules
      *
      * @return array (boolean, what cards used)
      */
-    public function fourOfAKind($fullHand)
+    public function fourOfAKind($boardHandCards)
     {
-        foreach ($fullHand[0] as $key => $value) {
+        foreach ($boardHandCards[0] as $key => $value) {
             if ($value >= 4) {
                 return [true, $key];
             }
@@ -316,7 +317,7 @@ class PokerRules
 
     /**
      * Straight Flush method.
-     * @param array $fullhand (Array from pushToValueCards methods return).
+     * @param array $boardHandCards (Array from pushToValueCards methods return).
      *
      * Checks if $hand + $board contains five cards of sequential rank, all of the same suite.
      * If sequential rank and all of the same suite: Returns true and what straight array is used in a array.
@@ -324,21 +325,22 @@ class PokerRules
      *
      * @return array (boolean, what cards used)
      */
-    public function straightFlush($fullHand)
+    public function straightFlush($boardHandCards)
     {
         $ifStr = false;
         $strSuite = "";
         $count = 0;
+        $strArr = [];
 
         foreach ($this->arrayrules as $array) {
-            if (!array_diff($array, $fullHand[2])) {
+            if (!array_diff($array, $boardHandCards[2])) {
                 $strArr = $array;
                 $ifStr = true;
             }
         }
 
         if ($ifStr) {
-            foreach ($fullHand[3] as $card) {
+            foreach ($boardHandCards[3] as $card) {
                 $value = $card->getPokerValue();
                 $suite = $card->getSuite();
                 $inStraight = in_array($value, $strArr);
@@ -357,7 +359,7 @@ class PokerRules
 
     /**
      * Three Of A kind method.
-     * @param array $fullhand (Array from pushToValueCards methods return).
+     * @param array $boardHandCards (Array from pushToValueCards methods return).
      *
      * Checks if $hand + $board contains five cards of sequential rank of the highest straight, all of the same suit.
      * If sequential rank of the highest straight and all of the same suite: Returns true and what
@@ -367,14 +369,14 @@ class PokerRules
      *
      * @return array (boolean, what cards used)
      */
-    public function royalFlush($fullHand)
+    public function royalFlush($boardHandCards)
     {
         $suiteControll = "";
         $count = 0;
         $royalStraightRule = [10, 11, 12, 13, 14];
 
-        if (!array_diff($royalStraightRule, $fullHand[2])) {
-            foreach ($fullHand[3] as $card) {
+        if (!array_diff($royalStraightRule, $boardHandCards[2])) {
+            foreach ($boardHandCards[3] as $card) {
                 $cardValue = $card->getPokerValue();
                 $cardSuite = $card->getSuite();
                 $inStraight = in_array($cardValue, $royalStraightRule);
