@@ -13,12 +13,12 @@
                     {% endfor %}
                 {% else %}
                     {% for card in dealerHand %}
-                        <div class="card-display {{card.get_suite}}">
-                            <div class="value-left left-card">{{ card.get_value() }}</div>
-                            <div class="suite-left left-card">{{ card.get_suite() }}</div>
-                            <div class="suite-main main-{{ card.get_suite }} main-card">{{ card.get_suite() }}</div>
-                            <div class="suite-right right-card">{{ card.get_suite() }}</div>
-                            <div class="value-right right-card">{{ card.get_value() }}</div>
+                        <div class="card-display {{card.getSuite}}">
+                            <div class="value-left left-card">{{ card.getValue() }}</div>
+                            <div class="suite-left left-card">{{ card.getSuite() }}</div>
+                            <div class="suite-main main-{{ card.getSuite }} main-card">{{ card.getSuite() }}</div>
+                            <div class="suite-right right-card">{{ card.getSuite() }}</div>
+                            <div class="value-right right-card">{{ card.getValue() }}</div>
                         </div>
                     {% endfor %}
                 {% endif %}
@@ -27,12 +27,12 @@
         <div class="board-section">
             <div class="dealer-cards poker-div-card deck poker-card board">
                 {% for card in board %}
-                    <div class="card-display {{card.get_suite}}">
-                        <div class="value-left left-card">{{ card.get_value() }}</div>
-                        <div class="suite-left left-card">{{ card.get_suite() }}</div>
-                        <div class="suite-main main-{{ card.get_suite }} main-card">{{ card.get_suite() }}</div>
-                        <div class="suite-right right-card">{{ card.get_suite() }}</div>
-                        <div class="value-right right-card">{{ card.get_value() }}</div>
+                    <div class="card-display {{card.getSuite}}">
+                        <div class="value-left left-card">{{ card.getValue() }}</div>
+                        <div class="suite-left left-card">{{ card.getSuite() }}</div>
+                        <div class="suite-main main-{{ card.getSuite }} main-card">{{ card.getSuite() }}</div>
+                        <div class="suite-right right-card">{{ card.getSuite() }}</div>
+                        <div class="value-right right-card">{{ card.getValue() }}</div>
                     </div>
                 {% endfor %}
                 {% if board|length is same as 3 %}
@@ -49,12 +49,12 @@
             <div class="player-middle">
                 <div class="player-cards poker-div-card deck poker-card">
                     {% for card in playerHand %}
-                        <div class="card-display {{card.get_suite}}">
-                            <div class="value-left left-card">{{ card.get_value() }}</div>
-                            <div class="suite-left left-card">{{ card.get_suite() }}</div>
-                            <div class="suite-main main-{{ card.get_suite }} main-card">{{ card.get_suite() }}</div>
-                            <div class="suite-right right-card">{{ card.get_suite() }}</div>
-                            <div class="value-right right-card">{{ card.get_value() }}</div>
+                        <div class="card-display {{card.getSuite}}">
+                            <div class="value-left left-card">{{ card.getValue() }}</div>
+                            <div class="suite-left left-card">{{ card.getSuite() }}</div>
+                            <div class="suite-main main-{{ card.getSuite }} main-card">{{ card.getSuite() }}</div>
+                            <div class="suite-right right-card">{{ card.getSuite() }}</div>
+                            <div class="value-right right-card">{{ card.getValue() }}</div>
                         </div>
                     {% endfor %}
                 </div>
