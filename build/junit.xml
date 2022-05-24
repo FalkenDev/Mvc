@@ -1,25 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="" tests="13" assertions="20" errors="0" warnings="0" failures="0" skipped="0" time="0.040675">
-    <testsuite name="Project Test Suite" tests="13" assertions="20" errors="0" warnings="0" failures="0" skipped="0" time="0.040675">
-      <testsuite name="App\Card\BlackjackTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Blackjack\BlackjackTest.php" tests="9" assertions="13" errors="0" warnings="0" failures="0" skipped="0" time="0.029216">
-        <testcase name="testCreateDeckForBlackjack" class="App\Card\BlackjackTest" classname="App.Card.BlackjackTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Blackjack\BlackjackTest.php" line="17" assertions="2" time="0.014594"/>
-        <testcase name="testPlayerGetsCards" class="App\Card\BlackjackTest" classname="App.Card.BlackjackTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Blackjack\BlackjackTest.php" line="31" assertions="1" time="0.003606"/>
-        <testcase name="testDealerGetsCards" class="App\Card\BlackjackTest" classname="App.Card.BlackjackTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Blackjack\BlackjackTest.php" line="43" assertions="1" time="0.000697"/>
-        <testcase name="testDrawStandDealerWorks" class="App\Card\BlackjackTest" classname="App.Card.BlackjackTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Blackjack\BlackjackTest.php" line="59" assertions="4" time="0.005103"/>
-        <testcase name="testReturnScoreAceWorks" class="App\Card\BlackjackTest" classname="App.Card.BlackjackTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Blackjack\BlackjackTest.php" line="80" assertions="1" time="0.001458"/>
-        <testcase name="testReturnScoreWorks" class="App\Card\BlackjackTest" classname="App.Card.BlackjackTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Blackjack\BlackjackTest.php" line="98" assertions="1" time="0.000673"/>
-        <testcase name="testGetOneScore" class="App\Card\BlackjackTest" classname="App.Card.BlackjackTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Blackjack\BlackjackTest.php" line="112" assertions="1" time="0.000586"/>
-        <testcase name="testCheckBustWorks" class="App\Card\BlackjackTest" classname="App.Card.BlackjackTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Blackjack\BlackjackTest.php" line="126" assertions="1" time="0.001163"/>
-        <testcase name="testCheckWinnerRetrurnsString" class="App\Card\BlackjackTest" classname="App.Card.BlackjackTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Blackjack\BlackjackTest.php" line="140" assertions="1" time="0.001337"/>
+  <testsuite name="" tests="36" assertions="75" errors="0" warnings="0" failures="0" skipped="0" time="0.087154">
+    <testsuite name="Project Test Suite" tests="36" assertions="75" errors="0" warnings="0" failures="0" skipped="0" time="0.087154">
+      <testsuite name="App\Card\BlackjackTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Blackjack\BlackjackTest.php" tests="9" assertions="13" errors="0" warnings="0" failures="0" skipped="0" time="0.028664">
+        <testcase name="testCreateDeckForBlackjack" class="App\Card\BlackjackTest" classname="App.Card.BlackjackTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Blackjack\BlackjackTest.php" line="17" assertions="2" time="0.014650"/>
+        <testcase name="testPlayerGetsCards" class="App\Card\BlackjackTest" classname="App.Card.BlackjackTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Blackjack\BlackjackTest.php" line="31" assertions="1" time="0.003540"/>
+        <testcase name="testDealerGetsCards" class="App\Card\BlackjackTest" classname="App.Card.BlackjackTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Blackjack\BlackjackTest.php" line="43" assertions="1" time="0.000681"/>
+        <testcase name="testDrawStandDealerWorks" class="App\Card\BlackjackTest" classname="App.Card.BlackjackTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Blackjack\BlackjackTest.php" line="59" assertions="4" time="0.004666"/>
+        <testcase name="testReturnScoreAceWorks" class="App\Card\BlackjackTest" classname="App.Card.BlackjackTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Blackjack\BlackjackTest.php" line="80" assertions="1" time="0.001231"/>
+        <testcase name="testReturnScoreWorks" class="App\Card\BlackjackTest" classname="App.Card.BlackjackTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Blackjack\BlackjackTest.php" line="98" assertions="1" time="0.000634"/>
+        <testcase name="testGetOneScore" class="App\Card\BlackjackTest" classname="App.Card.BlackjackTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Blackjack\BlackjackTest.php" line="112" assertions="1" time="0.000589"/>
+        <testcase name="testCheckBustWorks" class="App\Card\BlackjackTest" classname="App.Card.BlackjackTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Blackjack\BlackjackTest.php" line="126" assertions="1" time="0.001176"/>
+        <testcase name="testCheckWinnerRetrurnsString" class="App\Card\BlackjackTest" classname="App.Card.BlackjackTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Blackjack\BlackjackTest.php" line="140" assertions="1" time="0.001497"/>
       </testsuite>
-      <testsuite name="App\Card\CardsTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Blackjack\CardsTest.php" tests="1" assertions="3" errors="0" warnings="0" failures="0" skipped="0" time="0.000441">
-        <testcase name="testCreateCard" class="App\Card\CardsTest" classname="App.Card.CardsTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Blackjack\CardsTest.php" line="19" assertions="3" time="0.000441"/>
+      <testsuite name="App\Card\CardsTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Blackjack\CardsTest.php" tests="1" assertions="3" errors="0" warnings="0" failures="0" skipped="0" time="0.000459">
+        <testcase name="testCreateCard" class="App\Card\CardsTest" classname="App.Card.CardsTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Blackjack\CardsTest.php" line="19" assertions="3" time="0.000459"/>
       </testsuite>
-      <testsuite name="App\Card\DeckTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Blackjack\DeckTest.php" tests="3" assertions="4" errors="0" warnings="0" failures="0" skipped="0" time="0.011018">
-        <testcase name="testCreateDeck" class="App\Card\DeckTest" classname="App.Card.DeckTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Blackjack\DeckTest.php" line="18" assertions="2" time="0.000568"/>
-        <testcase name="testShuffleDeck" class="App\Card\DeckTest" classname="App.Card.DeckTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Blackjack\DeckTest.php" line="34" assertions="1" time="0.009782"/>
-        <testcase name="testDrawDeck" class="App\Card\DeckTest" classname="App.Card.DeckTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Blackjack\DeckTest.php" line="48" assertions="1" time="0.000668"/>
+      <testsuite name="App\Card\DeckTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Blackjack\DeckTest.php" tests="3" assertions="4" errors="0" warnings="0" failures="0" skipped="0" time="0.011596">
+        <testcase name="testCreateDeck" class="App\Card\DeckTest" classname="App.Card.DeckTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Blackjack\DeckTest.php" line="18" assertions="2" time="0.000607"/>
+        <testcase name="testShuffleDeck" class="App\Card\DeckTest" classname="App.Card.DeckTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Blackjack\DeckTest.php" line="34" assertions="1" time="0.010368"/>
+        <testcase name="testDrawDeck" class="App\Card\DeckTest" classname="App.Card.DeckTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Blackjack\DeckTest.php" line="48" assertions="1" time="0.000621"/>
+      </testsuite>
+      <testsuite name="App\Poker\PokerCardsTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Poker\PokerCardsTest.php" tests="1" assertions="4" errors="0" warnings="0" failures="0" skipped="0" time="0.001483">
+        <testcase name="testCreatePokerCard" class="App\Poker\PokerCardsTest" classname="App.Poker.PokerCardsTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Poker\PokerCardsTest.php" line="20" assertions="4" time="0.001483"/>
+      </testsuite>
+      <testsuite name="App\Poker\PokerDeckTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Poker\PokerDeckTest.php" tests="3" assertions="4" errors="0" warnings="0" failures="0" skipped="0" time="0.017854">
+        <testcase name="testCreateDeck" class="App\Poker\PokerDeckTest" classname="App.Poker.PokerDeckTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Poker\PokerDeckTest.php" line="18" assertions="2" time="0.001686"/>
+        <testcase name="testShuffleDeck" class="App\Poker\PokerDeckTest" classname="App.Poker.PokerDeckTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Poker\PokerDeckTest.php" line="34" assertions="1" time="0.015355"/>
+        <testcase name="testDrawDeck" class="App\Poker\PokerDeckTest" classname="App.Poker.PokerDeckTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Poker\PokerDeckTest.php" line="48" assertions="1" time="0.000814"/>
+      </testsuite>
+      <testsuite name="App\Poker\PokerRulesTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Poker\PokerRulesTest.php" tests="11" assertions="26" errors="0" warnings="0" failures="0" skipped="0" time="0.012509">
+        <testcase name="testPushtoValueCards" class="App\Poker\PokerRulesTest" classname="App.Poker.PokerRulesTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Poker\PokerRulesTest.php" line="24" assertions="2" time="0.003373"/>
+        <testcase name="testCheckAllRules" class="App\Poker\PokerRulesTest" classname="App.Poker.PokerRulesTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Poker\PokerRulesTest.php" line="54" assertions="3" time="0.001936"/>
+        <testcase name="testPairRule" class="App\Poker\PokerRulesTest" classname="App.Poker.PokerRulesTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Poker\PokerRulesTest.php" line="96" assertions="2" time="0.001361"/>
+        <testcase name="testTwoPairRule" class="App\Poker\PokerRulesTest" classname="App.Poker.PokerRulesTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Poker\PokerRulesTest.php" line="135" assertions="4" time="0.000918"/>
+        <testcase name="testThreeOfAKindRule" class="App\Poker\PokerRulesTest" classname="App.Poker.PokerRulesTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Poker\PokerRulesTest.php" line="182" assertions="3" time="0.000708"/>
+        <testcase name="testStraightRule" class="App\Poker\PokerRulesTest" classname="App.Poker.PokerRulesTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Poker\PokerRulesTest.php" line="225" assertions="2" time="0.000714"/>
+        <testcase name="testFlushRule" class="App\Poker\PokerRulesTest" classname="App.Poker.PokerRulesTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Poker\PokerRulesTest.php" line="264" assertions="2" time="0.000615"/>
+        <testcase name="testFullHouseRule" class="App\Poker\PokerRulesTest" classname="App.Poker.PokerRulesTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Poker\PokerRulesTest.php" line="303" assertions="2" time="0.000663"/>
+        <testcase name="testFourOfAKindRule" class="App\Poker\PokerRulesTest" classname="App.Poker.PokerRulesTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Poker\PokerRulesTest.php" line="342" assertions="2" time="0.000598"/>
+        <testcase name="testStraightFlushRule" class="App\Poker\PokerRulesTest" classname="App.Poker.PokerRulesTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Poker\PokerRulesTest.php" line="381" assertions="2" time="0.000679"/>
+        <testcase name="testRoyalFlushRule" class="App\Poker\PokerRulesTest" classname="App.Poker.PokerRulesTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Poker\PokerRulesTest.php" line="420" assertions="2" time="0.000944"/>
+      </testsuite>
+      <testsuite name="App\Poker\PokerTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Poker\PokerTest.php" tests="8" assertions="21" errors="0" warnings="0" failures="0" skipped="0" time="0.014589">
+        <testcase name="testCreateDeckPoker" class="App\Poker\PokerTest" classname="App.Poker.PokerTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Poker\PokerTest.php" line="12" assertions="2" time="0.004442"/>
+        <testcase name="testAnte" class="App\Poker\PokerTest" classname="App.Poker.PokerTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Poker\PokerTest.php" line="27" assertions="3" time="0.001571"/>
+        <testcase name="testCall" class="App\Poker\PokerTest" classname="App.Poker.PokerTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Poker\PokerTest.php" line="47" assertions="2" time="0.001708"/>
+        <testcase name="testGetBoardCards" class="App\Poker\PokerTest" classname="App.Poker.PokerTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Poker\PokerTest.php" line="64" assertions="3" time="0.000825"/>
+        <testcase name="testGetPlayerCards" class="App\Poker\PokerTest" classname="App.Poker.PokerTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Poker\PokerTest.php" line="86" assertions="3" time="0.000797"/>
+        <testcase name="testGetDealerCards" class="App\Poker\PokerTest" classname="App.Poker.PokerTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Poker\PokerTest.php" line="108" assertions="3" time="0.000807"/>
+        <testcase name="testCheckWinner" class="App\Poker\PokerTest" classname="App.Poker.PokerTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Poker\PokerTest.php" line="130" assertions="3" time="0.002869"/>
+        <testcase name="testPayOdds" class="App\Poker\PokerTest" classname="App.Poker.PokerTest" file="C:\Users\kaspe\dbwebb-kurser\mvc\me\report\tests\Poker\PokerTest.php" line="151" assertions="2" time="0.001570"/>
       </testsuite>
     </testsuite>
   </testsuite>

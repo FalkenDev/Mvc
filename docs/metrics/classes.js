@@ -100,11 +100,11 @@ var classes = [
         "number_operators_unique": 11,
         "number_operands_unique": 24,
         "cloc": 75,
-        "loc": 171,
-        "lloc": 96,
-        "mi": 77.08,
-        "mIwoC": 34.32,
-        "commentWeight": 42.76,
+        "loc": 170,
+        "lloc": 95,
+        "mi": 77.26,
+        "mIwoC": 34.42,
+        "commentWeight": 42.84,
         "kanDefect": 1.17,
         "relativeStructuralComplexity": 25,
         "relativeDataComplexity": 2.5,
@@ -117,6 +117,7 @@ var classes = [
         "afferentCoupling": 1,
         "efferentCoupling": 1,
         "instability": 0.5,
+        "numberOfUnitTests": 9,
         "violations": {}
     },
     {
@@ -187,6 +188,7 @@ var classes = [
         "afferentCoupling": 2,
         "efferentCoupling": 0,
         "instability": 0,
+        "numberOfUnitTests": 1,
         "violations": {}
     },
     {
@@ -268,6 +270,7 @@ var classes = [
         "afferentCoupling": 4,
         "efferentCoupling": 1,
         "instability": 0.2,
+        "numberOfUnitTests": 3,
         "violations": {}
     },
     {
@@ -340,6 +343,7 @@ var classes = [
         "afferentCoupling": 1,
         "efferentCoupling": 2,
         "instability": 0.67,
+        "numberOfUnitTests": 0,
         "violations": {}
     },
     {
@@ -486,6 +490,7 @@ var classes = [
         "afferentCoupling": 0,
         "efferentCoupling": 7,
         "instability": 1,
+        "numberOfUnitTests": 0,
         "violations": {}
     },
     {
@@ -620,6 +625,7 @@ var classes = [
         "afferentCoupling": 0,
         "efferentCoupling": 7,
         "instability": 1,
+        "numberOfUnitTests": 0,
         "violations": {}
     },
     {
@@ -713,6 +719,7 @@ var classes = [
         "afferentCoupling": 0,
         "efferentCoupling": 3,
         "instability": 1,
+        "numberOfUnitTests": 0,
         "violations": {}
     },
     {
@@ -812,6 +819,7 @@ var classes = [
         "afferentCoupling": 0,
         "efferentCoupling": 6,
         "instability": 1,
+        "numberOfUnitTests": 0,
         "violations": {}
     },
     {
@@ -877,6 +885,7 @@ var classes = [
         "afferentCoupling": 0,
         "efferentCoupling": 4,
         "instability": 1,
+        "numberOfUnitTests": 0,
         "violations": {}
     },
     {
@@ -886,7 +895,7 @@ var classes = [
         "final": false,
         "methods": [
             {
-                "name": "PokerStart",
+                "name": "pokerStart",
                 "role": null,
                 "public": true,
                 "private": false,
@@ -952,24 +961,24 @@ var classes = [
         ],
         "implements": [],
         "lcom": 2,
-        "length": 201,
-        "vocabulary": 49,
-        "volume": 1128.56,
-        "difficulty": 13.25,
-        "effort": 14953.38,
+        "length": 204,
+        "vocabulary": 50,
+        "volume": 1151.35,
+        "difficulty": 13.19,
+        "effort": 15181.71,
         "level": 0.08,
         "bugs": 0.38,
-        "time": 831,
-        "intelligentContent": 85.17,
+        "time": 843,
+        "intelligentContent": 87.32,
         "number_operators": 42,
-        "number_operands": 159,
+        "number_operands": 162,
         "number_operators_unique": 7,
-        "number_operands_unique": 42,
+        "number_operands_unique": 43,
         "cloc": 37,
         "loc": 120,
         "lloc": 83,
-        "mi": 72.91,
-        "mIwoC": 35.01,
+        "mi": 72.85,
+        "mIwoC": 34.95,
         "commentWeight": 37.9,
         "kanDefect": 0.57,
         "relativeStructuralComplexity": 361,
@@ -983,6 +992,7 @@ var classes = [
         "afferentCoupling": 0,
         "efferentCoupling": 9,
         "instability": 1,
+        "numberOfUnitTests": 0,
         "violations": {}
     },
     {
@@ -1004,19 +1014,37 @@ var classes = [
                 "public": true,
                 "private": false,
                 "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "metrics",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
+            },
+            {
+                "name": "phpdoc",
+                "role": null,
+                "public": true,
+                "private": false,
+                "_type": "Hal\\Metric\\FunctionMetric"
             }
         ],
-        "nbMethodsIncludingGettersSetters": 2,
-        "nbMethods": 2,
+        "nbMethodsIncludingGettersSetters": 4,
+        "nbMethods": 4,
         "nbMethodsPrivate": 0,
-        "nbMethodsPublic": 2,
+        "nbMethodsPublic": 4,
         "nbMethodsGetter": 0,
         "nbMethodsSetters": 0,
-        "wmc": 2,
+        "wmc": 4,
         "ccn": 1,
         "ccnMethodMax": 1,
         "externals": [
             "Symfony\\Bundle\\FrameworkBundle\\Controller\\AbstractController",
+            "Symfony\\Component\\HttpFoundation\\Response",
+            "Symfony\\Component\\Routing\\Annotation\\Route",
+            "Symfony\\Component\\HttpFoundation\\Response",
+            "Symfony\\Component\\Routing\\Annotation\\Route",
             "Symfony\\Component\\HttpFoundation\\Response",
             "Symfony\\Component\\Routing\\Annotation\\Route",
             "Symfony\\Component\\HttpFoundation\\Response",
@@ -1027,37 +1055,38 @@ var classes = [
         ],
         "implements": [],
         "lcom": 1,
-        "length": 6,
-        "vocabulary": 4,
-        "volume": 12,
-        "difficulty": 0.67,
-        "effort": 8,
-        "level": 1.5,
-        "bugs": 0,
-        "time": 0,
-        "intelligentContent": 18,
-        "number_operators": 2,
-        "number_operands": 4,
+        "length": 12,
+        "vocabulary": 6,
+        "volume": 31.02,
+        "difficulty": 0.8,
+        "effort": 24.82,
+        "level": 1.25,
+        "bugs": 0.01,
+        "time": 1,
+        "intelligentContent": 38.77,
+        "number_operators": 4,
+        "number_operands": 8,
         "number_operators_unique": 1,
-        "number_operands_unique": 3,
-        "cloc": 14,
-        "loc": 26,
-        "lloc": 12,
-        "mi": 114.13,
-        "mIwoC": 68.77,
-        "commentWeight": 45.36,
+        "number_operands_unique": 5,
+        "cloc": 28,
+        "loc": 48,
+        "lloc": 20,
+        "mi": 107.33,
+        "mIwoC": 61.04,
+        "commentWeight": 46.29,
         "kanDefect": 0.15,
         "relativeStructuralComplexity": 1,
-        "relativeDataComplexity": 1,
-        "relativeSystemComplexity": 2,
-        "totalStructuralComplexity": 2,
-        "totalDataComplexity": 2,
-        "totalSystemComplexity": 4,
+        "relativeDataComplexity": 2,
+        "relativeSystemComplexity": 3,
+        "totalStructuralComplexity": 4,
+        "totalDataComplexity": 8,
+        "totalSystemComplexity": 12,
         "package": "App\\Controller\\",
         "pageRank": 0.02,
         "afferentCoupling": 0,
         "efferentCoupling": 3,
         "instability": 1,
+        "numberOfUnitTests": 0,
         "violations": {}
     },
     {
@@ -1156,6 +1185,7 @@ var classes = [
         "afferentCoupling": 2,
         "efferentCoupling": 0,
         "instability": 0,
+        "numberOfUnitTests": 0,
         "violations": {}
     },
     {
@@ -1224,6 +1254,7 @@ var classes = [
         "afferentCoupling": 2,
         "efferentCoupling": 0,
         "instability": 0,
+        "numberOfUnitTests": 0,
         "violations": {}
     },
     {
@@ -1302,6 +1333,7 @@ var classes = [
         "afferentCoupling": 1,
         "efferentCoupling": 0,
         "instability": 0,
+        "numberOfUnitTests": 0,
         "violations": {}
     },
     {
@@ -1358,6 +1390,7 @@ var classes = [
         "afferentCoupling": 0,
         "efferentCoupling": 1,
         "instability": 1,
+        "numberOfUnitTests": 0,
         "violations": {}
     },
     {
@@ -1388,17 +1421,17 @@ var classes = [
                 "_type": "Hal\\Metric\\FunctionMetric"
             },
             {
-                "name": "get_BoardCards",
+                "name": "getBoardCards",
                 "role": "getter",
                 "_type": "Hal\\Metric\\FunctionMetric"
             },
             {
-                "name": "get_PlayerCards",
+                "name": "getPlayerCards",
                 "role": "getter",
                 "_type": "Hal\\Metric\\FunctionMetric"
             },
             {
-                "name": "get_DealerCards",
+                "name": "getDealerCards",
                 "role": "getter",
                 "_type": "Hal\\Metric\\FunctionMetric"
             },
@@ -1487,6 +1520,7 @@ var classes = [
         "afferentCoupling": 1,
         "efferentCoupling": 2,
         "instability": 0.67,
+        "numberOfUnitTests": 8,
         "violations": {}
     },
     {
@@ -1503,17 +1537,17 @@ var classes = [
                 "_type": "Hal\\Metric\\FunctionMetric"
             },
             {
-                "name": "get_value",
+                "name": "getValue",
                 "role": "getter",
                 "_type": "Hal\\Metric\\FunctionMetric"
             },
             {
-                "name": "get_suite",
+                "name": "getSuite",
                 "role": "getter",
                 "_type": "Hal\\Metric\\FunctionMetric"
             },
             {
-                "name": "get_pokerValue",
+                "name": "getPokerValue",
                 "role": "getter",
                 "_type": "Hal\\Metric\\FunctionMetric"
             }
@@ -1562,6 +1596,7 @@ var classes = [
         "afferentCoupling": 1,
         "efferentCoupling": 0,
         "instability": 0,
+        "numberOfUnitTests": 136,
         "violations": {}
     },
     {
@@ -1578,12 +1613,12 @@ var classes = [
                 "_type": "Hal\\Metric\\FunctionMetric"
             },
             {
-                "name": "show_deck",
+                "name": "showDeck",
                 "role": "getter",
                 "_type": "Hal\\Metric\\FunctionMetric"
             },
             {
-                "name": "shuffle_deck",
+                "name": "shuffleDeck",
                 "role": null,
                 "public": true,
                 "private": false,
@@ -1643,6 +1678,7 @@ var classes = [
         "afferentCoupling": 1,
         "efferentCoupling": 1,
         "instability": 0.5,
+        "numberOfUnitTests": 3,
         "violations": {}
     },
     {
@@ -1743,36 +1779,37 @@ var classes = [
         "implements": [],
         "lcom": 1,
         "length": 508,
-        "vocabulary": 68,
-        "volume": 3092.43,
-        "difficulty": 28.22,
-        "effort": 87269.45,
+        "vocabulary": 70,
+        "volume": 3113.68,
+        "difficulty": 27.15,
+        "effort": 84528.64,
         "level": 0.04,
-        "bugs": 1.03,
-        "time": 4848,
-        "intelligentContent": 109.58,
-        "number_operators": 138,
-        "number_operands": 370,
+        "bugs": 1.04,
+        "time": 4696,
+        "intelligentContent": 114.69,
+        "number_operators": 140,
+        "number_operands": 368,
         "number_operators_unique": 9,
-        "number_operands_unique": 59,
-        "cloc": 121,
-        "loc": 341,
+        "number_operands_unique": 61,
+        "cloc": 127,
+        "loc": 347,
         "lloc": 220,
-        "mi": 57.2,
-        "mIwoC": 17.33,
-        "commentWeight": 39.87,
+        "mi": 57.61,
+        "mIwoC": 17.31,
+        "commentWeight": 40.3,
         "kanDefect": 4.82,
-        "relativeStructuralComplexity": 169,
-        "relativeDataComplexity": 2.44,
-        "relativeSystemComplexity": 171.44,
-        "totalStructuralComplexity": 1859,
-        "totalDataComplexity": 26.86,
-        "totalSystemComplexity": 1885.86,
+        "relativeStructuralComplexity": 144,
+        "relativeDataComplexity": 2.63,
+        "relativeSystemComplexity": 146.63,
+        "totalStructuralComplexity": 1584,
+        "totalDataComplexity": 28.92,
+        "totalSystemComplexity": 1612.92,
         "package": "App\\Poker\\",
         "pageRank": 0.04,
         "afferentCoupling": 2,
         "efferentCoupling": 0,
         "instability": 0,
+        "numberOfUnitTests": 11,
         "violations": {}
     },
     {
@@ -1854,6 +1891,7 @@ var classes = [
         "afferentCoupling": 1,
         "efferentCoupling": 3,
         "instability": 0.75,
+        "numberOfUnitTests": 0,
         "violations": {}
     },
     {
@@ -1935,6 +1973,7 @@ var classes = [
         "afferentCoupling": 0,
         "efferentCoupling": 3,
         "instability": 1,
+        "numberOfUnitTests": 0,
         "violations": {}
     },
     {
@@ -2016,6 +2055,7 @@ var classes = [
         "afferentCoupling": 0,
         "efferentCoupling": 3,
         "instability": 1,
+        "numberOfUnitTests": 0,
         "violations": {}
     }
 ]
