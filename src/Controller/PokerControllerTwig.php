@@ -110,7 +110,7 @@ class PokerControllerTwig extends AbstractController
                 $this->addFlash("Push", "Push! You and dealer got the same rule: $checkWinner[1]. You won $pushBalance credits back ");
                 $session->set("winning", 100);
             } elseif ($checkWinner[0]) { // If the player wins
-                $winnerBalance = $checkWinner[2] + 150;
+                $winnerBalance = $checkWinner[2] + 100;
                 $player->setBalance($winnerBalance + $balance);
                 $entityManager->flush();
                 $this->addFlash("Winner", "You won against the dealer! You won $winnerBalance credits");
@@ -121,7 +121,7 @@ class PokerControllerTwig extends AbstractController
         }
 
         if ($player->getBalance() === 0) {
-            $player->setBalance(1000);
+            return $this->redirectToRoute('project-reset-database');
         }
         // Set poker session
         $session->set("poker", $die);
