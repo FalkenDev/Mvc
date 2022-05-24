@@ -119,7 +119,6 @@ class PokerRules
     public function pair($boardHandCards)
     {
         $cardValues = [];
-        $previousValue = 0;
         $hasPair = false;
         foreach ($boardHandCards[0] as $key => $value) {
             if ($value >= 2) {
