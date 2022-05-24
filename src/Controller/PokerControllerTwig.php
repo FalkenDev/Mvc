@@ -55,7 +55,7 @@ class PokerControllerTwig extends AbstractController
         $player = $entityManager->getRepository(Player::class)->find(1);
         $data = [
             'playerHand' => $die->getPlayerCards(),
-            'playerScore' => $rules->checkAllRules($die->get_PlayerCards(), $die->get_BoardCards())[0],
+            'playerScore' => $rules->checkAllRules($die->getPlayerCards(), $die->getBoardCards())[0],
             'dealerHand' => $die->getDealerCards(),
             'board' => $die->getBoardCards(),
             'balance' => $player->getBalance(),
@@ -107,7 +107,7 @@ class PokerControllerTwig extends AbstractController
                 $pushBalance = 100;
                 $player->setBalance($pushBalance + $balance);
                 $entityManager->flush();
-                $this->addFlash("Push", "Push! You and dealer got the same rule. You won $pushBalance credits back ");
+                $this->addFlash("Push", "Push! You and dealer got the same rule: $checkWinner[1]. You won $pushBalance credits back ");
                 $session->set("winning", 100);
             } elseif ($checkWinner[0]) { // If the player wins
                 $winnerBalance = $checkWinner[2] + 150;
