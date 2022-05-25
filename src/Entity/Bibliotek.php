@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\BibliotekRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+/** @SuppressWarnings(PHPMD) */
 #[ORM\Entity(repositoryClass: BibliotekRepository::class)]
 class Bibliotek
 {

@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Bibliotek;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Repository\BibliotekRepository;
-
+/** @SuppressWarnings(PHPMD) */
 class BibliotekController extends AbstractController
 {
     #[Route('/bibliotek/app', name: 'app_bibliotek')]

@@ -65,21 +65,22 @@ class PokerDeck
      * draw a card from the deck.
      *
      * @param int $numDraw Amount of cards to draw
-     * @return array $card ( Cards that have been drawn in the deck ).
+     * @return array $cards ( Cards that have been drawn in the deck ).
      */
     public function draw(int $numDraw)
     {
-        $random_card = array_rand($this->deck, $numDraw);
+        $cards = [];
+        $randomCard = array_rand($this->deck, $numDraw);
         for ($i = 1; $i <= $numDraw; $i++) {
-            if (is_array($random_card)) {
-                $card[] = $this->deck[$random_card[$i - 1]];
-                unset($this->deck[$random_card[$i - 1]]);
+            if (is_array($randomCard)) {
+                $cards[] = $this->deck[$randomCard[$i - 1]];
+                unset($this->deck[$randomCard[$i - 1]]);
             } else {
-                $card[] = $this->deck[$random_card];
-                unset($this->deck[$random_card]);
+                $cards[] = $this->deck[$randomCard];
+                unset($this->deck[$randomCard]);
             }
         }
 
-        return $card ?? [];
+        return $cards;
     }
 }

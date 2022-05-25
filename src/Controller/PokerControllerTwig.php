@@ -12,6 +12,8 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\Player;
 use App\Repository\PlayerRepository;
+use App\Poker\Poker;
+use App\Poker\PokerRules;
 
 class PokerControllerTwig extends AbstractController
 {
@@ -45,12 +47,11 @@ class PokerControllerTwig extends AbstractController
      * )
      */
     public function pokerGame(
-        Request $request,
         SessionInterface $session,
         ManagerRegistry $doctrine
     ): Response {
-        $die = $session->get("poker") ?? new \App\Poker\Poker();
-        $rules = new \App\Poker\PokerRules();
+        $die = $session->get("poker") ?? new Poker();
+        $rules = new PokerRules;
         $entityManager = $doctrine->getManager();
         $player = $entityManager->getRepository(Player::class)->find(1);
         $data = [
@@ -85,7 +86,7 @@ class PokerControllerTwig extends AbstractController
         $fold = $request->request->get('fold');
 
         // Get the Poker sessions if not exists then create new Poker
-        $die = $session->get("poker") ?? new \App\Poker\Poker();
+        $die = $session->get("poker") ?? new Poker();
 
         // Get Player1
         $player = $entityManager->getRepository(Player::class)->find(1);
@@ -148,14 +149,10 @@ class PokerControllerTwig extends AbstractController
         $player = $entityManager->getRepository(Player::class)->find(1);
         if (!$player) {
             $player = new Player();
-            $player->setBalance(1000);
-            $entityManager->persist($player);
-            $entityManager->flush();
-        } else {
-            $player->setBalance(1000);
-            $entityManager->persist($player);
-            $entityManager->flush();
         }
+        $player->setBalance(1000);
+        $entityManager->persist($player);
+        $entityManager->flush();
         return $this->redirectToRoute('poker-game');
     }
 }

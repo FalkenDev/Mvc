@@ -7,6 +7,7 @@ namespace App\Card;
  *
  * @author Kasper Falk
  * @access private
+ * @SuppressWarnings(PHPMD)
  */
 class Deck
 {

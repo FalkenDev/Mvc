@@ -10,7 +10,7 @@ use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @extends ServiceEntityRepository<Bibliotek>
- *
+ * @SuppressWarnings(PHPMD)
  * @method Bibliotek|null find($id, $lockMode = null, $lockVersion = null)
  * @method Bibliotek|null findOneBy(array $criteria, array $orderBy = null)
  * @method Bibliotek[]    findAll()

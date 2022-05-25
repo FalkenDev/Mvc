@@ -8,6 +8,7 @@ namespace App\Card;
  * Inherits from Deck class.
  * @author Kasper Falk
  * @access private
+ * @SuppressWarnings(PHPMD)
  */
 class Blackjack extends Deck
 {

@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
-
+/** @SuppressWarnings(PHPMD) */
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 class Product
 {

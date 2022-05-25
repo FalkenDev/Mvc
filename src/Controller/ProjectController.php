@@ -31,28 +31,4 @@ class ProjectController extends AbstractController
     {
         return $this->render('project/pabout.html.twig');
     }
-
-    /**
-     * @Route(
-     *      "/proj/metrics",
-     *      name="project-metrics",
-     *      methods={"GET","HEAD"}
-     * )
-     */
-    public function metrics(): Response
-    {
-        return $this->render('metrics/index.html');
-    }
-
-    /**
-     * @Route(
-     *      "/proj/phpdoc",
-     *      name="project-phpdoc",
-     *      methods={"GET","HEAD"}
-     * )
-     */
-    public function phpdoc(): Response
-    {
-        return $this->render('../docs/api/index.html');
-    }
 }

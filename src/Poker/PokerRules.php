@@ -265,12 +265,12 @@ class PokerRules
         $three = false;
         $two = false;
         $hand = $boardHandCards[0];
-        $ThreeValue = "";
+        $threeValue = "";
         $twoValue = "";
         foreach ($hand as $key => $value) {
             if ($value >= 3) {
                 $three = true;
-                $ThreeValue = $key;
+                $threeValue = $key;
                 unset($hand[$key]);
             }
         }
@@ -283,7 +283,7 @@ class PokerRules
         }
 
         if ($three and $two) {
-            return [true, [$ThreeValue, $twoValue]];
+            return [true, [$threeValue, $twoValue]];
         }
         return [false, null];
     }

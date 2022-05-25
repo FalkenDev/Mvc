@@ -7,6 +7,7 @@ namespace App\Card;
  *
  * @author Kasper Falk
  * @access public
+ * @SuppressWarnings(PHPMD)
  */
 class Cards
 {
