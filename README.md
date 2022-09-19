@@ -1,5 +1,5 @@
 # Mvc
-![alt text](https://github.com/FalkenDev/Mvc/blob/master/mvc.png?raw=true)
+![alt text](https://github.com/FalkenDev/Mvc/blob/main/mvc.png?raw=true)
 Kursen Mvc Dbwebb 2022.
 Handlar om att lära oss att programmera webbapplikationer på ett objektorienterat sätt med fokus på det arkitekturella designmönstret MVC. Där vi använder oss utav ramverket Symfony som är ett av de mer kända ramverken inom PHP.
 <br>
